@@ -1,0 +1,91 @@
+\lecture{30}{wed 4 jan '22}{}
+
+\begin{thm}[Mean Value -- Integrals] \label{thm:mvt int}
+    Let $f$ be a continuous function on $[a,b]$.  Then there exists a
+    number $c$ in $[a,b]$ such that \[
+        f(c) = \frac{1}{b - a} \int_{a}^{b} f(x) \dd x.
+    \]
+\end{thm}
+\begin{proof}
+    By the extreme value theorem, $f$ attains a minimum $m$ at $a$ and a maximum $M$ at $b$. Thus
+    \begin{align*}
+        m &\leq f(x) \leq M \\
+        \int_{a}^{b} m \dd x &\leq \int_{a}^{b} f(x) \dd x \leq \int_{a}^{b} M \dd x \\
+        (b - a) m &\leq \int_{a}^{b} f(x) \dd x \leq (b - a) M \\
+        m &\leq \frac{1}{b - a} \int_{a}^{b} f(x) \dd x \leq M
+    \end{align*}
+    By the IVT, there exists a number $c$ in $[a,b]$ (or $[b, a]$) such that $f(c) = \frac{1}{b - a} \int_{a}^{b} f(x) \dd x$
+\end{proof}
+
+\begin{thm}[The First Fundamental Theorem of Calculus] \label{thm:integration:IFTOC}
+    Let $f : [a, b] \to \R$ be Riemann integrable. Let \[
+        F(x) = \int_{a}^{x} f(t) \dd t \qquad \forall\; x \in [a, b].
+    \] Then $F$ is continuous on $[a, b]$. Moreover, if $f$ is continuous at some $p \in (a, b)$, then $F$ is differentiable at $p$ with $F'(p) = f(p)$.
+\end{thm}
+\begin{rem} \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item If $f$ is not continuous at some $p \in (a, b)$, then $F$ may still be differentiable at $p$. For example 
+        \begin{enumerate}[label=(\roman*)]
+            \item \[
+                f(x) = \begin{cases}
+                    0 & x \neq 0 \\
+                    1 & x = 0
+                \end{cases}
+            \] Then $F(x) = 0$ is differentiable at $x = 0$.
+            \item \[
+                f(x) = \begin{cases}
+                    0 & -1 \leq x  0 \\
+                    1 & 0 \leq x \leq 1
+                \end{cases}
+            \] Then \[
+                F(x) = \begin{cases}
+                    0 & -1 \leq x < 0 \\
+                    x & 0 \leq x \leq 1
+                \end{cases}
+            \] is not differentiable at $x = 0$.
+        \end{enumerate}
+
+        \item $F(x) = \int_{a}^{x} f(t) \dd t$ is called an \emph{indefinite integral} of $f$. (see Apostol Section 2.18) 
+    \end{enumerate}
+\end{rem}
+
+\begin{proof}
+    We know that $f$ is Riemann integrable on $[a, b]$. We show that $F$ is continuous on $[a, b]$.
+
+    Let $x, y \in [a, b]$ be such that $x \leq y$.
+    \begin{align*}
+        F(y) - F(x) &= \int_{a}^{y} f(t) \dd t - \int_{a}^{x} f(t) \dd t \\
+        &= \int_{x}^{y} f(t) \dd t
+    \end{align*}
+
+    Since $f$ is bounded on $[a, b]$, there exists $M \in \R$ such that $-M \leq f(x) \leq M \;\forall\; x \in [a, b]$. Thus 
+    \begin{align*}
+        \int_{x}^{y} -M \dd t &\leq \int_{x}^{y} f(t) \dd t \leq \int_{x}^{y} M \dd t \\
+        -M(y - x) &\leq F(y) - F(x) \leq M(y - x)
+    \end{align*}
+    Thus \[
+        \abs{F(y) - F(x)} \leq M(y - x)
+    \] If $y < x$, we get \[
+        \abs{F(y) - F(x)} \leq M(x - y)
+    \] If $x = y$, we have \[
+        \abs{F(y) - F(x)} = 0 \leq M(y - x)
+    \] Such a function is called Lipschitz function and this condition implies (\emph{uniform}) continuity and if $F$ is differentiable, it gives boundedness of derivative of $F$.
+    (Since we have a closed interval, uniform continuity is implied by continuity, but this holds even for open or unbounded intervals).
+
+    Now assume that $f$ is continuous at $p \in (a, b)$. Let $h \in \R$ such that $p + h \in (a, b)$.
+    \begin{align*}
+        \frac{F(p + h) - F(p)}{h} &= \frac{1}{h} \paren{\int_{a}^{p + h} f(t) \dd t - \int_{a}^{p} f(t) \dd t} \\
+        &= \frac{1}{h} \int_{p}^{p + h} f(t) \dd t \\
+        &= \frac{1}{h} \int_{p}^{p+h} (f(t) - f(p) + f(p)) \dd t \\
+        &= f(p) + \frac{1}{h} \int_{p}^{p+h} (f(t) - f(p)) \dd t
+    \end{align*}
+    Let $\varepsilon > 0$. Then there exists $\delta > 0$ such that $0 < \abs{t - p} < \delta \implies \abs{f(t) - f(p)} < \varepsilon$.
+    Let $\abs{h} < \delta$. Then
+    \begin{align*}
+        \abs{\frac{F(p + h) - F(p)}{h} - f(p)} &= \abs{\frac{1}{h} \int_{p}^{p + h} (f(t) - f(p)) \dd t} \\
+        &\leq \frac{1}{h} \int_{p}^{p + h} \abs{f(t) - f(p)} \dd t \\
+        &\leq \frac{1}{h} \cdot \varepsilon h \\
+        &= \varepsilon \qedhere
+    \end{align*}
+\end{proof}
+

@@ -1,0 +1,213 @@
+\documentclass[12pt]{article}
+\input{preamble}
+
+\title{Assignment 07}
+\author{Naman Mishra}
+\date{15 Dec 2022}
+
+\begin{document}
+\maketitle
+
+\section*{Problem 1}
+(a) is just $h$ replaced with $-h$.
+Since $h$ could take any real values, including negative ones, it doesn't make any difference to negate it.
+Since we are replacing $h$ with $-h$, what we have is a composition.
+The usual difference quotient ($\Delta y / \Delta x$) is composed with $f(x) = -x$.
+We have two properties which let us compute the limit of $g \circ f$ given the limits of $g$ and $f$.
+
+If $\lim_{x \to a} f(x) = L$ and $\lim_{y \to L} g(y) = M$, then $\lim_{x \to a} g(f(x)) = M$ if:
+\begin{enumerate}[label=(\roman*)]
+    \item $g$ is continuous.
+    \item $f$ does not equal $L$ anywhere `around' $a$ (in a sufficiently small neighbourhood).
+\end{enumerate}
+Here, $f(x) = -x$, which clearly does not equal 0 anywhere except at 0. We will use the second condition to conclude that the limit exists (and is equal to the derivative).
+
+In part (b), however, the points that we are checking are limited in two ways: only very few fixed points around $c$, as well as only points to the right.
+We can construct a counterexample exploiting either of these limitations.
+\begin{enumerate}[label=(\alph*)]
+    \item True. Let $g(x) = -x$ and $G(x) = \dfrac{f(c) - f(c - x)}{x} \;\forall\; x \in (a - c, 0) \cup (0, b - c)$. We have
+    \begin{align*}
+        \lim_{x \to 0} g(x) &= 0 & & & \lim_{x \to 0} G(x) &:= L \\
+        && g(x) \neq 0 \;\forall\; x \neq 0
+    \end{align*}
+    Thus by limit of compositions, we have
+    \begin{align*}
+        L &= \lim_{x \to 0} G(g(x)) \\
+        &= \lim_{x \to 0} \frac{f(c) - f(c - (-x))}{-x} \\
+        &= \lim_{x \to 0} \frac{f(c + x) - f(c)}{x} \\
+        &= f'(c)
+    \end{align*}
+    Thus $f'(c)$ exists and is equal to $L$.
+
+    \item False. Let $f: (-1, 1) \to \R$ such that \[
+        f(x) = 
+        \begin{cases}
+            0 & x \geq 0 \\
+            1 & x < 0
+        \end{cases}
+    \] Then the given limit exists for $c = 0$ as $n \paren{f\paren{\frac{1}{n}} - f(0)} = n - n = 0 \;\forall\; n \in \N$.
+    However, $f$ is not differentiable at 0 as it is not continuous at 0.
+    
+    Alternatively, consider $f: (-1, 1) \to \R$ such that \[
+        f(x) = 
+        \begin{cases}
+            0 & x \in \Q \\
+            1 & x \in \R \setminus \Q
+        \end{cases}
+    \]
+\end{enumerate}
+
+\section*{Problem 2}
+Since $\sin, x^{3}$ and $f$ are differentiable, we have by the chain rule and addition rule:
+\begin{enumerate}[label=(\alph*)]
+    \item 
+    \begin{align*}
+        g'(x) &= f'(x^{3}) (x^{3})' + \sin'(f(x)) f'(x) \\
+        &= 3x^{2} f'(x^{3}) + \cos(f(x)) f'(x)
+    \end{align*}
+
+    \item 
+    \begin{align*}
+        g'(x) = f'(f(x)) f'(x)
+    \end{align*}
+\end{enumerate}
+
+\section*{Problem 3}
+\[
+    \frac{f(0 + h) - f(0)}{h} = h^{-2/3} \;\forall\; h \neq 0
+\]
+We need to prove that this does not have a limit at 0. This is simple Archimedean,OR direct $\varepsilon-\delta$ contradiction similar to $(-1)^{n}$. I have given the Archimedean proof, you try $\varepsilon-\delta$. (Hint: Let $\varepsilon = 1$. Consider $x = \pm\min \set{\dfrac{\delta}{2}, 1}$.)
+
+Consider the sequence $\set{\frac{1}{n}}_{n \in \P}$.
+For any $R \in \R$, there exists $N \in \N$ such that $N \cdot 1 > R^{3/2} \implies N^{2/3} > R \implies \paren{\frac{1}{n}}^{-2/3} > R \;\forall\; n \geq N$.
+Thus, $\set{\frac{1}{n}}$ converges to 0 as $n \to \infty$ but $\set{\paren{\frac{1}{n}}^{-2/3}}$ is unbounded $\implies$ divergent.
+Thus limit of $h^{-2/3}$ does not exist at 0.
+
+\section*{Problem 4}
+We want two things:
+\begin{enumerate}[label=(\roman*)]
+    \item $f'(c) = 0 \implies g$ is differentiable at $c$.
+    \item $g$ is differentiable at $c \implies f'(c) = 0$.
+\end{enumerate}
+Let us think about modulus. If $\lim_{x \to a} f(x)$ is known, can we say anything about $\lim_{x \to a} \abs{f(x)}$? The answer is yes, we have $\lim_{x \to a} \abs{f(x)} = \abs{\lim_{x \to a} f(x)}$. Here is a short proof.
+\begin{proof}
+    $\lim_{x \to a} f(x) = L \implies \;\forall\; \varepsilon > 0 \;\exists\; \delta > 0$ such that $\abs{f(x) - L} < \varepsilon$. But by the triangle inequality, $\abs{\abs{f(x)} - \abs{L}} < \abs{f(x) - L} < \varepsilon$. Thus the limit of $\abs{f(x)} = \abs{L}$ as $x \to a$.
+\end{proof}
+
+\emph{However}, can we determine $\lim_{x \to a} f(x)$ from $\lim_{x \to a} \abs{f(x)}$? Let's attempt a similar proof.
+\begin{proof}[Attempt]
+    $\lim_{x \to a} \abs{f(x)} = \abs{L} \implies \;\forall\; \varepsilon > 0 \;\exists\; \delta > 0$ such that $\abs{\abs{f(x)} - \abs{L}} < \varepsilon$.
+    But by the triangle inequality, $\abs{f(x) - L} \;\textcolor{red}{>}\; \abs{\abs{f(x)} - \abs{L}} \;\textcolor{red}{<}\; \varepsilon$.
+    The signs of inequality are not helpful to us anymore.
+\end{proof}
+Your first thought might be that $f$ can have limit either $L$ or $-L$, but it may not have a limit at all. As an example, consider signum, with limit of $\abs{\mathrm{signum}} = 1$ at 0.
+
+The \emph{essence} of why this is happening is that modulus is not an invertible function. We lose \emph{information} on passing a number through modulus. There is only one special case where we do NOT lose information. What is it? \[
+    \vdots
+\] \[
+    \vdots
+\] $\abs{x} = 0 \implies x = 0$ with full certainty!  This is why the given statement is true, and this is how we will prove it. 
+We will use the fact that $\lim_{x \to a} f(x) = 0 \iff \lim_{x \to a} \abs{f(x)} = 0$, which we will prove right now.
+\begin{proof}
+    \begin{align*}
+        \lim_{x \to a} f(x) &= 0 \\
+        \iff &\big(\;\forall\; \varepsilon > 0 \;\exists\; \delta > 0 \text{such that} \abs{x - a} < \delta \implies \abs{f(x) - 0} < \varepsilon \big) \\
+        \iff &\big(\;\forall\; \varepsilon > 0 \;\exists\; \delta > 0 \text{such that} \abs{x - a} < \delta \implies \abs{\abs{f(x)} - 0} < \varepsilon \big) \\
+        &\iff \lim_{x \to a} \abs{f(x)} = 0. \qedhere
+    \end{align*}
+\end{proof}
+
+Note that the difference quotients of $f$ and $g$ have the same absolute value. Thus if the limit of either is zero, the limit of the other must also be zero.
+Thus,
+\begin{enumerate}[label=(\roman*)]
+    \item $f'(c) = 0 \implies$ \textcolor{red!80!black}{$g'(c) = 0$}.
+    \item \textcolor{red!80!black}{$g'(c) = 0$} $\implies f'(c) = 0$.
+\end{enumerate}
+Can you argue why $g'(c) = 0 \iff g$ is differentiable at $c$ to complete the proof?
+
+\section*{Problem 5}
+We know $f(x) = x^{n} \implies f'(x) = n x^{n-1}$.
+
+Let $g = f^{-1} \implies g(x) = x^{\frac{1}{n}}$.
+
+Then $f(p) = q \implies g'(q) = \frac{1}{f'(p)}$. \[
+    g'(q) = \frac{1}{f'(q^{\frac{1}{n}})} = \frac{1}{n q^{1 - \frac{1}{n}}} = \frac{1}{n} q^{\frac{1}{n} - 1}.
+\] Now let $F(x) = x^{\frac{1}{n}} - 1 - (x - 1)^{\frac{1}{n}}, x \in [1, a/b]$.
+Clearly, $F(1) = 0$. \[
+    F'(x) = \frac{1}{n} x^{\frac{1}{n} - 1} - 0 - \frac{1}{n} (x - 1)^{\frac{1}{n} - 1} = \frac{1}{n} \paren{x^{\frac{1}{n}} - (x - 1)^{\frac{1}{n}}}.
+\] $x \geq 1 \implies x > x - 1 > 0$.
+$n \geq 2 \implies \frac{1}{n} \leq \frac{1}{2} \implies \frac{1}{n} - 1 < 0$.
+Thus $x^{\frac{1}{n} - 1} < (x - 1)^{\frac{1}{n} - 1} \implies F'(x) < 0$.
+Now suppose $F(a / b) \geq 0$.
+By MVT, there exists a $c \in (1, a/b)$ such that $F'(c) = \dfrac{F(x_{0}) - F(1)}{x_{0} - 1} \geq 0$, a contradiction. Thus,
+\begin{align*}
+    F(a / b) &< 0 \\
+    \implies \paren{\frac{a}{b}}^{\frac{1}{n}} - 1 &< \paren{\frac{a}{b} - 1}^{\frac{1}{n}} \\
+    \implies a^{\frac{1}{n}} - b^{\frac{1}{n}} &< (a - b)^{\frac{1}{n}}
+\end{align*}
+
+\section*{Problem 6}
+\[
+    f(x) = 
+    \begin{cases}
+        - nx + \sum_{j = 1}^{n} a_{j} & x < a_{1} \\
+        (2k - n) x - \sum_{j = 1}^{k} a_{j} + \sum_{j = k + 1}^{n} a_{j} & a_{k} \leq x < a_{k+1} \\
+        nx - \sum_{j = 1}^{n} a_{j} & a_{n} \leq x
+    \end{cases}
+\]
+We first prove that a global minimum exists.
+
+Consider $f$ restricted to $[a, b]$.
+By the extreme value theorem, there exists a $c \in [a, b]$ such that $f(c) \leq f(x) \;\forall\; x \in [a, b]$. Moreover, \begin{align*}
+    x < a_{1} &\implies -nx > -n a_{1} \implies f(x) > f(a_{1}) \\
+    x > a_{n} &\implies nx > na_{n} \implies f(x) > f(a_{n})
+\end{align*}
+Thus, $f(c) \leq f(x) \;\forall\; x \in \R$.
+
+For $x \neq a_{j}$ for some $j \in [1 .. n]$, $f(x)$ is differentiable with \[
+    f'(x) =
+    \begin{cases}
+        -n & x < a_{1} \\
+        2k - n & a_{k} < x < a_{k+1} \\
+        n & a_{n} < x
+    \end{cases}
+\] Thus the potential points of global minimum are $\set{a_{1}, a_{2}, \dots, a_{n}} \cup (a_{k}, a_{k+1})_{2k = n}$.
+
+Note that $f$ is continuous everywhere.
+
+Thus for $2k < n$, we have $f'(x) < 0 \;\forall\; x \in (a_{k}, a_{k + 1}) \implies f(a_{k + 1}) < f(a_{k}) \implies a_{k}$ is not a global minimum.
+
+For $2k > n$, we have $f'(x) > 0 \;\forall\; x \in (a_{k}, a_{k+1}) \implies f(a_{k}) < f(a_{k + 1}) \implies a_{k+1}$ is not a global minimum.
+
+If $n$ is odd, the only potential point of global minimum is thus $x = a_{\frac{n + 1}{2}}$.
+
+If $n$ is even the potential points of global minimum are $\set{a_{\frac{n}{2}}, a_{\frac{n}{2} + 1}} \cup (a_{\frac{n}{2}}, a_{\frac{n}{2} + 1}) = [a_{\frac{n}{2}}, a_{\frac{n}{2} + 1}]$.
+Note that the value of $f$ is the same at all these points.
+
+\section*{Problem 7}
+We consider: \[
+    \frac{f^{-1}(q + k) - f^{-1}(q)}{k}.
+\] Let $h(k) = f^{-1}(q + k) - f^{-1}(q) = f^{-1}(q + k) - p$ wherever defined. Thus
+\begin{align*}
+    h(k) + p &= f^{-1}(q + k) \\
+    f(h(k) + p) &= q + k \\
+    k &= f(h(k) + p) - q \\
+    &= f(h(k) + p) - f(p)
+\end{align*}
+Note that since $f$ is continuous, $f^{-1}$ is continuous.
+Thus as $k \to 0$, $h(k) \to 0$.
+
+If $k \neq 0$, then $h(k) \neq 0$. By the composition theorem,
+\begin{align*}
+    \lim_{k \to 0} \frac{f^{-1}(q + k) - f^{-1}(q)}{k} &= \lim_{k \to 0} \frac{h}{f(h(k) + p) - f(p)} \\
+    &= \lim_{k \to 0} F(h(k))
+\end{align*}
+where $F(x) = \frac{x}{f(p + x) - f(p)}$. Since $k \neq 0 \implies h(k) \neq 0$,
+
+
+\end{document}
+
+
+
+
+

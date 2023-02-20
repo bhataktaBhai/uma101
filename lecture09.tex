@@ -1,0 +1,94 @@
+\lecture{9}{mon 7 nov 2022}{Series and Convergence}
+\vskip 5pt
+\begin{thm}[Tao Theorem 6.1.19] \label{thm:sequence:reciprocal_limit}
+    Suppose $\set{b_{n}}$ converges to $b \neq 0$ (and $\exists\; M \in \N$ such that $b_{n} \neq 0 \;\forall\; n \geq M$.) \\
+    Then $\set{\frac{1}{b}}_{n \geq M} \to \frac{1}{b}$ as $n \to \infty$.
+\end{thm}
+\begin{proof}[``Proof'']
+    Given $\varepsilon > 0$, find $N \in \N$ such that \[
+        \abs{\frac{1}{b_{n}} - \frac{1}{b}} < \varepsilon \;\forall\; n \geq N
+    \] 
+    This is equivalent to \[
+        \frac{\abs{b - b_{n}}}{\abs{b \cdot b_{n}}} < \varepsilon
+    \]
+    Since $b_{n} \to b$, there exists $M$ such that $\abs{b_{n} - b} < b/2$ for all $n \geq M$. Thus for all $n \geq M$,
+    \begin{alignat*}{2}
+        \frac{b}{2} &<& b_{n} &< \frac{3b}{2} \\
+        \frac{1}{2}\abs{b} &<& \abs{b_{n}} &< \frac{3}{2}\abs{b} \\
+        \frac{2}{3\abs{b}} &<& \frac{1}{\abs{b_{n}}} &< \frac{2}{\abs{b}}
+    \end{alignat*}
+    Now, for any $\varepsilon > 0$, there exists $M'$ such that $\abs{b_{n} - b} <  \dfrac{2}{\abs{b}^{2}} \varepsilon$ for all $n \geq M'$. Thus, \[
+        \abs{\frac{1}{b_{n}} - \frac{1}{b}} \frac{\abs{b_{n} - b}}{\abs{b \cdot b_{n}}} < \frac{2 \abs{b_{n} - b}}{\abs{b}^{2}} < \varepsilon
+    \] for all $n \geq M.$
+\end{proof}
+
+\subsection{Infinite series}
+\begin{defn} \label{defn:series}
+    An infinite series is a \emph{formal expression} of the form \[
+        a_{0} + a_{1} + a_{2} + \dots, \text{ or}, \sum_{n=0}^{\infty} a_{n}
+    \]
+    Given $\sum_{n=0}^{\infty} a_{n}$, its sequence of partial sums (sops) is $\set{s_{n}}_{n=0}^{\infty}$ where
+    \begin{align*}
+        s_{0} &= a_{0} \\
+        s_{1} &= a_{0} + a_{1} \\
+        &\;\;\vdots \\
+        s_{n} &= a_{0} + a_{1} + \dots a_{n}
+    \end{align*}
+    We say that $\sum a_{n}$ is \emph{convergent} with sum $s$ if $\lim_{n \to \infty} s_{n} = s$. Otherwise, we say that $\sum a_{n}$ is divergent.
+\end{defn}
+
+\begin{example} \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item (Harmonic series) $\sum_{n=1}^{\infty} \frac{1}{n}$ is divergent.
+        \begin{proof}
+            $\set{s_{n}}$ is a monotonically increasing sequence.
+            \begin{align*}
+                s_{1} &= 1 \\
+                s_{2} &= 1 + \frac{1}{2} \\
+                s_{4} &= 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} > 1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{4} \\
+                s_{8} &= 1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{8} \\
+                   &> 1 + \frac{1}{2} + 2 \cdot \frac{1}{4} + 4 \cdot \frac{1}{8} \\
+                s_{2^{k}} &= 1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{2^{k}} \\
+                   &> 1 + \frac{1}{2} + 2 \cdot \frac{1}{4} + \dots + 2^{k-1} \cdot \frac{1}{2^{k}} \\
+                   &= 1 + \frac{k}{2}
+            \end{align*}
+            Thus, given any $R \in \R, \;\exists\; k \in \N$ such that $s_{2^{k}} > R$. \\
+            $\implies \set{s_{n}}$ is divergent as it is unbounded (\cref{thm:sequence:convergent=>bounded}).
+        \end{proof}
+        \item $\sum_{n=1}^{\infty} \frac{1}{n^{2}}$ is convergent.
+        \begin{proof}
+            \begin{align*}
+                s_{1} &= 1 \\
+                s_{n} &= 1 + \sum_{k=2}^{n} \frac{1}{k^{2}} \\
+                &< 1 + \sum_{k=2}^{n} \frac{1}{k(k-1)} \\
+                &= 1 + \sum_{k=2}^{n} \paren{\frac{1}{k-1} - \frac{1}{k}} \\
+                &= 1 + 1 - \frac{1}{n} \\
+                &< 2 \;\forall\; n \in \N
+            \end{align*}
+            So $\set{s_{n}}$ is a monotonically increasing sequence that is bounded above. \\
+            $\implies \set{s_{n}}$ is convergent.
+        \end{proof}
+    \end{enumerate}
+\end{example}
+
+\begin{rem}
+    (Telescoping sum)
+\end{rem}
+
+\begin{thm} \label{thm:series:convergent=>limit=0}
+    Suppose $\sum a_{n}$ is convergent. Then \[
+        \lim_{n \to \infty} a_{n} = 0
+    \]
+\end{thm}
+\begin{proof}
+    Suppose $\sum a_{n}$ converges to limit $L$.
+
+    Then $\forall\; \varepsilon > 0 \;\exists\; N \in \N$ such that for all $n \geq N$, $\abs{s_{n} - L} < \frac{\varepsilon}{2}$. Now
+    \begin{align*}
+        \abs{a_{n}} &= \abs{s_{n+1} - s_{n}} \\
+        &= \abs{s_{n+1} - L + L - s_{n}} \\
+        &\leq \abs{s_{n+1} - L} + \abs{s_{n} - L} \\
+        &< \varepsilon
+    \end{align*}
+    for all $n \geq N$, which implies $a_{n} \to 0$.
+\end{proof}

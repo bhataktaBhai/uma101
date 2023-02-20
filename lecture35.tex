@@ -1,0 +1,45 @@
+\lecture{35}{Mon 16 Jan '23}{}
+
+\begin{rem}
+    We will notate vector spaces as follows: \[
+        (V, +, \cdot) \text{ over } (F, \oplus, \odot)
+    \] where $V$ is the vector space with $+$ vector addition, $(F, \oplus, \odot)$ is the field, and $\cdot$ is scalar multiplication.
+\end{rem}
+
+The addive identity is unique, as $e_{1} = e_{1} + e_{2} = e_{2}$.
+
+\begin{example}
+    \begin{enumerate}[label=(\alph*)]
+        \item $(\R, +, \cdot)$ is a vector space over $(\R, +, \cdot)$. In fact, \emph{any} field is a vector space over itself.
+        \item $(\C, +, \cdot)$ is a vector space over $(\R, +, \cdot)$. 
+        \begin{proof} \leavevmode
+            \begin{enumerate}[label=(V\arabic*)]
+                \item $(a + ib) + (c + id) = (a + c) + i (b + d)$.
+                \item $((a + ib) + (c + id)) + (e + if) = (a + c + e) + i (b + d + f) = (a + ib) + ((c + id) + (e + if))$.
+                \item $0 + i 0 \in \C$ is an additive identity.
+                \item $-a + i(-b)$ is an additive inverse of $a + ib$.
+                \item $(a \cdot b) \cdot (c + id) = (abc) + i(abd) = a \cdot (b \cdot (c + id))$.
+                \item $1 \cdot (a + ib) = a + ib$.
+                \item $(a + b) \cdot (c + id) = (ac + bc) + i(ad + bd) = a \cdot (c + id) + b \cdot (c + id)$.
+                \item $a \cdot ((b + ic) + (d + ie)) = (ab + ad) + i(ac + ae) = a \cdot (b + ic) + a \cdot (d + ie)$. \qedhere
+            \end{enumerate}
+        \end{proof}
+        \item $(\R, +, \cdot)$ is a vector space over $(\Q, +, \cdot)$ with \[
+            r \cdot v = rv \in \R \;\forall\; r \in \Q, v \in \R.
+        \]
+        \item In general, $\R^{n}$ is a vector space over $\R$, with addition given by \[
+            (x_{1}, \dots, x_{n}) + (y_{1}, \dots, y_{n}) = (x_{1} + y_{1}, \dots, x_{n} + y_{n})
+        \] and scalar multiplication given by \[
+            \lambda (x_{1}, \dots, x_{n}) = (\lambda x_{1}, \dots, \lambda x_{n})
+        \] for $\lambda \in \R$.
+        \item The set of all sequences in $\R$ is a vector space over $\R$ with addition and scalar multiplication defined as for $\R^{n}$.
+        \item The set of all polynomials with real coefficients, $\mathcal{P}$, is a vector space over $\R$ with addition and scalar multiplication defined as they usually are for functions. \[
+            \mathcal{P} = \set{f \colon \R \to \R \mid f(x) = a_{0} + a_{1} x + \dots + a_{m} x^{m}, m \in \N, (a_{0}, a_{1}, \dots, a_{m}) \in \R^{n}}
+        \]
+        \item Let $\mathcal{P}_{d}$ be the set of polynomials (over $\R$) with degree \emph{at most} $d$. Then $\mathcal{P}_{d}$ is a vector space over \R.
+        \item The set of all continuous functions on a set $A \subseteq \R$ is a vector space over \R, denoted by $\mathscr{C}(A ; \R) = \mathscr{C}(A)$.
+        \item The set of all continuous functions on \R\ (or on [0, 1]) that are expressible as an infinite series is a vector space over \R. \[
+            f(x) = \sum_{j = 0}^{\infty} a_{j} x^{j} \quad \;\forall\; x \in \R.
+        \]
+    \end{enumerate}
+\end{example}

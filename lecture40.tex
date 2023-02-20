@@ -1,0 +1,113 @@
+\lecture{40}{Fri 27 Jan '23}{}
+
+\begin{cor}[Finite Basis of FDVS] \label{cor:finite basis}
+    Every basis of a finite dimensional vector space is finite.
+\end{cor}
+\begin{proof}
+    A finite dimensional vector space, by definiton, has a finite spanning set $S$. 
+\end{proof}
+
+We will now prove the theorem. The idea is:
+
+Assume $L$ is finite.
+\begin{align*}
+    S &= \set{w_{1}, \dots, w_{m}} \\
+    L &= \set{v_{1}, \dots, v_{n}}
+\end{align*}
+We will repeatedly substitute a vector in $S$ with a vector in $L$ such that it remains a spanning set at every iteration.
+We will run out of $v$s before we run out of $w$s, so we will have a $n \leq m$.
+
+\begin{rem}
+    The list $v_{1}, \dots, v_{k}$ will be written as $(v_{1}, \dots, v_{k})$ (allowing repetition) v/s the set $\set{v_{1}, \dots, v_{k}}$.
+\end{rem}
+
+\begin{proof} \leavevmode
+    \begin{enumerate}[label=(Case \arabic*)]
+        \item $L$ is finite.
+        Let
+        \begin{align*}
+            S &= \set{w_{1}, \dots, w_{m}} \\
+            L &= \set{v_{1}, \dots, v_{n}}
+        \end{align*}
+        Let $P(l)$ be that there exists for all $l < n$, a list $\tilde{S}_{l}$ such that $\# \tilde{S}_{l} = m$ containing $l$ distinct elements from $L$, and the rest from $S$, and that $l < m$.
+
+        $P(0)$ is true: Let $0 < n$.
+        Suppose $m = 0$.
+        This is possible only if $V = \set{0}$ and $S = \O$.
+        In this case, $L = \O$, contradicting that $\# L > 0$.
+        Thus $P(0)$ is vacuously true.
+
+        $P(1)$ is true. Let $1 < n = \# L$.
+        Since $\spann(S) = V$, the list $(v_{1}, w_{1}, \dots, w_{m})$ is linearly dependent.
+        By the linear independence of $L$, $v_{1} \neq 0$.
+        Thus we must have a nontrivial relation between $v_{1}, w_{1}, \dots, w_{m}$ such that \[
+            c_{0} v_{1} + c_{1} w_{1} + \dots + c_{m} w_{m} = 0
+        \] where one of the $c_{j}'s$ must be non-zero.
+        Assume WLOG that it is $c_{1}$.
+        Then we can write \[
+            w_{1} = - \frac{c_{0}}{c_{1}} v_{1} - \frac{c_{2}}{c_{1}} w_{2} - \dots - \frac{c_{m}}{c_{1}} w_{m}
+        \] Let \[
+            \tilde{S}_{1} = \set{v_{1}, w_{2}, \dots, w_{m}}
+        \] and note that $w_{1} \in \spann(\tilde{S}_{1})$.
+        Thus $\spann(\tilde{S}_{1}) = \spann(S) = V$. \textcolor{red!70!black}{TODO: Prove this.}
+
+        Now if $1 < n$, then there exists a $v_{2}$ in $L$ independent from $v_{1}$.
+        Since $v_{2} \in \spann(\tilde{S}_{1})$, $\tilde{S}_{1}$ cannot be just $(v_{1})$.
+        Thus $\# \tilde{S}_{1} = m > l = 1$.
+
+        Now suppose inductively that $P(l)$ is true.
+        If $l + 1 \geq n$, then $P(l + 1)$ is vacuously true.
+        Thus we assume $l + 1 < n$.
+        Since $P(l)$ is true, we have a list $\tilde{S}_{l} = (v_{1}, \dots, v_{l}, w_{l + 1}, \dots, w_{m})$ such that $\# \tilde{S}_{l} = m$ and $l < m$.
+        Consider the list \[
+            (v_{1}, \dots, v_{l}, v_{l + 1}, w_{l + 1}, w_{l + 2}, \dots, w_{m}).
+        \] Since $v_{l + 1} \in \spann(\tilde{S}_{l})$, we have that the above list is linearly dependent.
+        By the linear independence of $L$, all $v_{j}$'s are non-zero.
+        Again by the linear independence of $L$, there is a non-trivial relation on the above list with at least one of the $w_{j}$'s coefficients being non-zero.
+        Assume WLOG that it is $w_{l + 1}$.
+        Thus letting \[
+            \tilde{S}_{l + 1} = (v_{1}, \dots, v_{l}, v_{l + 1}, w_{l + 2}, \dots, w_{m})
+        \] we get that $\spann(\tilde{S}_{l + 1}) = \spann(S) = V$.
+
+        Now, if $l + 1 = m$, then $\tilde{S}_{l + 1} = (v_{1}, \dots, v_{l}, v_{l + 1})$.
+        But $l + 1 < n \implies \;\exists\; v_{l + 2} \in L$ which must be in the span of $\tilde{S}_{l + 1}$, contradicting the linear independence of $L$.
+        Thus $l + 1 < m$.
+
+        \item $L$ is infinite.
+        Since $V$ is a finite dimensional vector space, it has a finite spanning set $S$, say of size $m$.
+        Since $L$ is infinite, there exists an $L' \subseteq L$ such that $L'$ is finite and $\#L' > m$. \textcolor{red!70!black}{How?}
+        This contradicts the first case. \qedhere
+    \end{enumerate}
+\end{proof}
+
+\begin{defn}[Dimension] \label{defn:dimension}
+    Let $V$ be a finite dimensional vector space.
+    We define the length of any of its bases to be the \emph{dimension} of $V$.
+\end{defn}
+
+\begin{prop}[] \label{prop:}
+    Let $V$ be a finite dimensional vector space.
+    Let $W$ be a subspace of $V$.
+    Then $W$ is finite dimensional and $\dim(W) \leq \dim(V)$.
+\end{prop}
+\begin{proof}
+    \textcolor{red!70!black}{TODO: Formulate induction}.
+
+    Let $n = \dimn(V)$.
+    If $W = \set{0}$, the statement is true.
+    Now assume there exists a non-zero element $w_{1}$ in $W$.
+    Let $S_{1} = \set{w_{1}}$.
+    If $\spann(S_{1}) = W$, we are done (asuuming $n \geq 1$).
+    Otherwise, there exists a non-zero $w_{2}$ in $W \setminus \spann(S_{1})$ and by some earlier proposition, \[
+        S_{2} = S_{1} \cup \set{w_{2}}
+    \] is linearly independent in $V$.
+    Repeat to get $S_{j}$.
+    This must terminate since a linearly independent set in $V$ can have at most $n$ vectors.
+
+    Thus we get some basis of $W$ ($W \setminus \spann(S_{j})$ is empty) which is finite.
+    Since $W$ is finite dimensional, it has a finite basis $B$.
+    Since $B$ is linearly independent in $V$ and every basis of $V$ is a spanning set, we have \[
+        \dimn(W) = \#B \leq \dimn(V). \qedhere
+    \]
+\end{proof}
+

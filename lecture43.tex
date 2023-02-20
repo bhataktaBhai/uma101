@@ -1,0 +1,72 @@
+\lecture{43}{Fri 03 Feb '23}{}
+
+\begin{prop}[] \label{prop:}
+    Let $T \in \mathscr{L}(V, W)$. Then $N(T) = \set{0}$ iff $T$ is an injective transformation.
+\end{prop}
+\begin{proof}
+    If $T$ is injective, then for any $v \in N(T)$, we have that \begin{align*}
+        T(v) &= 0_{W} = T(0_{V}) \\
+        \implies v &= 0_{V} \\
+        \implies N(T) \subseteq \set{0_{V}}
+    \end{align*}
+\end{proof}
+
+\begin{thm}[Rank-Nullity Theorem] \label{thm:rank nullity}
+    Let $T \in \mathscr{L}(V, W)$, where $V$ is a finite-dimensional vector space. Then \[
+        \dimn(N(T)) + \dimn(R(T)) = \dimn(V).
+    \]
+\end{thm}
+\begin{proof}
+\end{proof}
+
+\begin{cor}[] \label{cor:}
+    If $\dimn W < \dimn V$, then there is no injective linear transformation from $V$ to $W$.
+\end{cor}
+\begin{proof}
+    \[
+        \dimn R(T) \leq \dimn W < \dimn V \implies \dimn N(T) > 0. \qedhere
+    \]
+\end{proof}
+\begin{rem}
+    Thus a linear transformation from $V$ to $W$ can be bijective iff $\dimn W = \dimn V$.
+\end{rem}
+
+\begin{cor}[] \label{cor:}
+    Let $T \in \mathscr{L}(V, W)$ where $\dimn V = \dimn W$. Then the following are equivalent:
+    \begin{enumerate}[label=(\alph*)]
+        \item $T$ is surjective.
+        \item $T$ is injective.
+        \item $T$ is invertible \emph{as a linear transformation}. That is, there exists $T^{-1} \in \mathscr{L}(W, V)$ such that $T^{-1}T = I_{W}$ and $TT^{-1} = I_{V}$.
+    \end{enumerate}
+\end{cor}
+
+\begin{example} \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item Let $V = \mathscr{S}$. Consider the following maps from $\mathscr{S}$ to $\mathscr{S}$:
+            \begin{align*}
+                T_{b} : \set{x_{j}}_{j \in \N} &\mapsto \set{x_{j+1}}_{j \in \N} \\
+                T_{f} : \set{x_{j}}_{j \in \N} &\mapsto \set{0, x_{0}, x_{1}, \dots}
+            \end{align*}
+            \begin{enumerate}[label=(\roman*)]
+                \item $T_{b}$ is surjective, but not injective. Its null space is $\set{\set{a, 0, 0, \dots}, a \in \R}$.
+                \item $T_{f}$ is injective, but not surjective. Its null space is $\set{0}$.
+            \end{enumerate}
+        \item Let $T : P_{\leq 2} \to P_{\leq 2}$ such that $T : f \mapsto f'$.
+        Choosing the basis $\set{1, x, x^{2}}$, we have that $T$ is given by \[
+            M_{T} = \begin{pmatrix}
+                0 & 1 & 0 \\
+                0 & 0 & 2 \\
+                0 & 0 & 0
+            \end{pmatrix}.
+        \] We have that $N(T) = \set{f : f(x) = c, c \in \R}$.
+        Thus the nullity is $1$ and the rank is $2$.
+
+        Suppose we choose the basis $\set{1, x + x^{2}, x^{2}}$. Then $T$ is given by \[
+            M_{T} = \begin{pmatrix}
+                0 & 1 & 0 \\
+                0 & 2 & 2 \\
+                0 & -2 & -2
+            \end{pmatrix}.
+        \] Generally, for $T \in \mathscr{L}(\R^{m}, \R^{n})$, one uses standard bases to write $M_{T}$.
+    \end{enumerate}
+\end{example}

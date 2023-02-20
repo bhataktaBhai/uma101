@@ -1,0 +1,73 @@
+%! TeX root = um101.tex
+\lecture{27}{wed 28 dec '22}{}
+\begin{rem}
+    This definition is meaningful if and only if:
+
+    If $s : [a, b] \to \R$ is a step function corresponding to $P = \set{x_{0} < x_{1} < \dots < x_{m}}$ as well as $Q = \set{y_{0} < y_{1} < \dots < y_{n}}$, then \[
+        \sum_{j = 1}^{m} s_{j} (x_{j} - x_{j - 1}) = \sum_{j = 1}^{n} s_{j} (y_{j} - y_{j - 1}).
+    \]
+\end{rem}
+
+\begin{thm}[Properties] \label{thm:int properties} \hfill
+    \begin{enumerate}[label=(\alph*)]
+        \item $\int_{a}^{b} (c_{1}s(x) + c_{2}t(x)) \dd x = c_{1} \int_{a}^{b} s(x) \dd x + c_{2} \int_{a}^{b} t(x) \dd x$.
+        \item If $s \leq t$ on $[a, b]$, then $\int_{a}^{b} s(x) \dd x \leq \int_{a}^{b} t(x) \dd x$.
+        \item $\int_{ka}^{kb} s(x/k) \dd x = k \int_{a}^{b} s(x) \dd x$.
+    \end{enumerate}
+\end{thm}
+
+\begin{defn}[] \label{defn:}
+    Let $f : [a, b] \to \R$ be a bounded function. Let \[
+        S_{f} = \set{s : [a, b] \to \R : s \text{ is a step function and } s \leq f \text{ on } [a, b]}
+    \] and \[
+        T_{f} = \set{t : [a, b] \to \R : t \text{ is a step function and } t \geq f \text{ on } [a, b]}.
+    \]
+\end{defn}
+
+\begin{lem}[] \label{lem:}
+    Let $f : [a, b] \to \R$ be bounded, \textit{i.e.}, $\exists\; M > 0$ such that \[
+        -M \leq f(x) \leq M \;\forall\; x \in [a, b].
+    \] Then $\sup s_{f}$ and $\inf t_{f}$ exist and \[
+        -M (b - a) \leq \sup s_{f} \leq \inf t_{f} \leq M (b - a)
+    \] where $s_{f} = \set{\int_{a}^{b}s(x) \dd x : s \in S_{f}}$ and $t_{f} = \set{\int_{a}^{b} t(x) \dd x : t \in T_{f}}$.
+\end{lem}
+\begin{proof}
+    Let $g(x) = -M \;\forall\; x \in [a, b]$ and $h(x) = M \;\forall\; x \in [a, b]$.
+
+    Note:
+    \begin{enumerate}[label=(\alph*)]
+        \item $g \in S_{f}$ and $h \in T_{f}$
+        \item $g \leq t \;\forall\; t \in T_{f} \implies -M (b - a) = \int_{a}^{b} g(x) \dd x \leq \int_{a}^{b} t(x) \dd x \;\forall\; t \in T_{f}$.
+        \item $s \leq h \;\forall\; s \in S_{f} \implies \int_{a}^{b} s(x) \dd x \leq \int_{a}^{b} h(x) \dd x = M (b - a) \;\forall\; s \in S_{f}$.
+    \end{enumerate}
+    Thus $s_{f}$ and $t_{f}$ exist and \[
+        -M(b - a) \leq s_{f} \qquad M(b - a) \geq t_{f}.
+    \]
+
+    For all $s \in S_{f}$ and $t \in T_{f}$, \[
+        s \leq f \leq t
+    \] and thus
+    \begin{align*}
+        \int_{a}^{b} s(x) \dd x &\leq \int_{a}^{b} t(x) \dd x \\
+        \implies \int_{a}^{b} s(x) \dd x &\leq t_{f} \\
+        \implies s_{f} &\leq t_{f}.
+    \end{align*}
+\end{proof}
+
+\begin{defn}[] \label{defn:}
+    Given a bounded function $f : [a, b] \to \R$, its \emph{lower integral} is \[
+        \ubar{I}(f) = \sup \set{\int_{a}^{b} s(x) \dd x : s \in S_{f}}
+    \] and its \emph{upper integral} is \[
+        \bar{I}(f) = \inf \set{\int_{a}^{b} s(x) \dd x : s \in T_{f}}.
+    \]
+    A bounded function $f : [a, b] \to \R$ is said to be \emph{Riemann integrable} (not really) if $\ubar{I}(f) = \bar{I}(f)$ and we call this quantity the integral of $f$ over $[a, b]$, denoted by \[
+        \int_{a}^{b} f(x) \dd x.
+    \] We also define \[
+        \int_{b}^{a} f(x) \dd x = -\int_{a}^{b} f(x) \dd x.
+    \]
+\end{defn}
+
+
+
+
+

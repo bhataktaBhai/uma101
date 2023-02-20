@@ -1,0 +1,94 @@
+% lecture20.tex
+\subsection*{Review}
+
+\begin{example}
+    \[
+        \sum_{n=k}^{\infty} \frac{n^{3/2}}{n^{77} - 3n + 2}
+    \]
+\end{example}
+
+\begin{example}
+    \[
+        \frac{3^{n} + (-2)^{n}}{3^{n+1} + (-2)^{n+1}}, n \in \N
+    \]
+    \begin{align*}
+        \lim_{n \to \infty} \frac{3^{n} + (-2)^{n}}{3^{n+1} + (-2)^{n+1}} &= \lim_{n \to \infty} \frac{3^{n}\paren{1 + \paren{-2/3}^{n}}}{3^{n+1} \paren{1 + \paren{\frac{-2}{3}}^{n+1}}} \\
+        &= \frac{1}{3} \lim_{n \to \infty} \frac{\paren{1 + \paren{-2/3}^{n}}}{\paren{1 + \paren{\frac{-2}{3}}^{n+1}}} \\
+        &= \frac{1}{3}
+    \end{align*}
+\end{example}
+
+\begin{example}
+    Let $a, b \in \R$ be fixed. Find all values of $c \in \R$ such that the following function is continuous on $\R$. \[
+        f(x) =
+        \begin{cases}
+            \sin x & x \geq c \\
+            ax + b & x < c
+        \end{cases}
+    \]
+\end{example}
+
+\textbf{General fact}
+Say $f$ is continuous on $(-\infty, a]$ and $g$ is continuous on $[a, \infty)$. Then \[
+    h(x) = \begin{cases}
+        f(x) & x \leq a \\
+        g(x) & x > a
+    \end{cases}
+\] is continuous on $(-\infty, \infty) \iff f(a) = g(a)$.
+\begin{proof}
+    $h$ is continuous for each $x \in (-\infty, a)$ becasue for $\delta = a - x > 0$, we have $h = f$ on $N_{\delta}(x)$. Similarly $h$ is continuous for each $x$ in $(a, \infty)$.
+
+    Let $\varepsilon > 0$. By continuity of $f$ at $a$, there exists a $\delta_{1} > 0$ such that whenever $x \in N_{\delta_{1}}(a) \cap (-\infty, a]$, we have $\abs{ f(x) - f(a) } < \varepsilon$.
+    
+    By continuity of $g$ at $a$, there exists a $\delta_{2} > 0$ such that whenever $x \in N_{\delta_{2}}(a) \cap [a, \infty)$, we have $\abs{ g(x) - g(a) } < \varepsilon$.
+
+    Suppose $f(a) = g(a)$.
+
+    Let $\delta = \min(\delta_{1}, \delta_{2})$. Then if $x \in N_{\delta}(a) \cup \R$, either $a - \delta_{1} < x < a$, or $x = a$, or $a < x < a + \delta_{2}$. Thus we have \[
+        \abs{ h(x) - h(a) } = \begin{cases}
+            \abs{ f(x) - f(a) } & a - \delta_{1} < x < a \\
+            0 & x = a \\
+            \abs{ g(x) - g(a) } & a < x < a + \delta_{2}
+        \end{cases} \qquad < \varepsilon
+    \]
+
+    The converse can be proved using epsilon-delta and contradiction. This proof uses sequential characterisation of continuity.
+
+    Suppose $f(a) \neq g(a)$. By continuity of $f$ at $a$, \[
+        \lim_{n \to \infty} f\paren{a - \frac{1}{n}} = f(a)
+    \] and by continuity of $g$ at $a$, \[
+        \lim_{n \to \infty} g\paren{a + \frac{1}{n}} = g(a).
+    \] Let \[
+        b_{n} = a + \frac{(-1)^{n}}{n}.
+    \] Now, $\set{b_{n}} \subseteq \R$ and $\lim_{n \to \infty} b_{n} = a$. But \[
+        h(b_{n}) = \begin{cases}
+            f(b_{n}) & n \text{ is odd} \\
+            g(b_{n}) & n \text{ is even}
+        \end{cases}
+    \] is not convergent.
+\end{proof}
+
+Coming back to the example. Let $b \in \R$. \[
+    f_{c}(x) = \begin{cases}
+        \sin x & x \geq c \\
+        ax + b & x < c
+    \end{cases}
+\] $f_{c}$ is continuous iff $\sin c = ac + b$.
+\begin{enumerate}[label=(Case \arabic*)]
+    \item $a, b \in \R$ such that there is no such $c$ for which $\sin c = ac + b$.
+    \item $a, b \in \R$ such that there is a $c$ for which $\sin c = ac + b$. Then $f_{c}$ is continuous precisely for $c \in \set{x \in \R: \sin x = ax + b}$.
+\end{enumerate}
+
+\textbf{Sequential Characterisation of Limits.}
+\[
+    f : A = (a, p) \cup (p, b) \to \R
+\] Then $\lim_{x \to p} f(x) = L$ iff for all sequences $\set{x_{n}} \subseteq A$ such that $x_{n} \to p$, we have \[
+    \lim_{n \to \infty} f(x_{n}) = L.
+\]
+
+\textbf{Definition of Trigonometric Functions.}
+Defined on $[0, \pi/2)$ using geometry, extended by identities like $\sin(x + \pi/2) = \cos x$
+
+
+
+

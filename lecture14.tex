@@ -1,0 +1,60 @@
+\lecture{14}{fri 18 nov 2022}{Continuity: Examples and Algebra}
+
+\subsection{Continuity}
+\begin{defn} \label{defn:cont}
+    Let $S \subseteq \R$ be a (nonempty) subset, $f: S \to \R$ and $p \in S$. We say that $f$ is continuous at $p$ iff: \\
+    for every $\varepsilon > 0, \;\exists\; \delta_{\varepsilon} > 0$ such that \[
+        \abs{x - p} < \delta_{\varepsilon} \;\land\; x \in S \implies \abs{f(x) - f(p)} < \varepsilon
+    \] We say that $f$ is continuous on $S$ iff $f$ is continuous at each $p \in S$.
+\end{defn}
+\begin{rem}
+    It is possible that $\exists\; \delta$ such that $N_{\delta}(p) \cup S = \set{p}$. \textit{E.g.}, $S = \N, p = 0, \delta \leq 1$
+\end{rem}
+\begin{rem}
+    If $f$ is defined on some interval $(a, b)$ containing $p$, then this definition is equivalent to \[
+        \lim_{x \to p} f(x) = f(p)
+    \] \textcolor{red!85!black}{How?} For any $\varepsilon > 0$, choose $\delta = \min \set{\delta_{\varepsilon}, b - p, p - a}$. Then $f$ is defined on all points in $N_{\delta}(p)$, and for all $x \in N_{\delta}(p)$, we have $f(x) \in N_{\varepsilon}(f(p))$. Thus \[
+        \lim_{x \to p} f(x) = f(p)
+    \]
+\end{rem}
+
+\begin{thm}[Algebraic laws for continuity] \label{thm:cont:laws}
+    Suppose $f$ and $g$ are continuous at $p \in S$. Then so are $f \pm g, fg$ and if $g(p) \neq 0, f/g$.
+\end{thm}
+\begin{proof}
+    For any $\varepsilon > 0$,
+    \begin{enumerate}[label=(\alph*)]
+        \item[($f \pm g$)] there exist $\delta_{f}, \delta_{g}$ such that for all $\abs{x - p} < \min \set{\delta_{f}, \delta_{g}} \;\land\; x \in S$, we have \[
+            \abs{f(x) - f(p)}, \abs{g(x) - g(p)} < \frac{\varepsilon}{2}.
+        \]
+        Thus we have \[
+            \abs{(f \pm g)(x) - (f \pm g)(p)} \leq \abs{f(x) - f(p)} + \abs{g(x) - g(p)} < \varepsilon.
+        \] 
+        \item[$(fg)$] there exist $\delta_{f}, \delta_{g}$ such that for all $\abs{x - p} < \min \set{\delta_{f}, \delta_{g}} \;\land\; x \in S$ we have \[
+            \abs{f(x) - f(p)}, \abs{g(x) - g(p)} < \min\set{\frac{\varepsilon}{3g(p)}, \frac{\varepsilon}{3f(p)}, \sqrt{\frac{\varepsilon}{3}}}
+        \]
+        (handle $f(p) = 0$ and $g(p) = 0$ separately). Then we have
+        \begin{align*}
+            \abs{fg (x) - fg (p)} &= \abs{(f(p) + f(x) - f(p))(g(p) + g(x) - g(p)) - fg(p)} \\
+            &= \abs{f(p) (g(x) - g(p)) + g(p) (f(x) - f(p)) + (f(x) - f(p))(g(x) - g(p))} \\
+            &\leq \abs{f(p)} \abs{g(x) - g(p)} + \abs{g(p)} \abs{f(x) - f(p)} + \abs{f(x) - f(p)} \abs{g(x) - g(p)} \\
+            &< \frac{\varepsilon}{3} + \frac{\varepsilon}{3} + \frac{\varepsilon}{3} \\
+            &= \varepsilon.
+        \end{align*}
+
+        \item[$(f/g)$] Let $h = \frac{1}{g}$ wherever $g$ is non-zero. Since $g$ is continuous and $g(p) \neq 0$, it is non-zero in some neighbourhood $\delta_{2}$ around it.
+
+        Since $g$ is continuous, $\exists\; \delta_{0}$ such that for all $\abs{x - p} < \delta_{0} \;\land\; x \in S$, we have \[
+            \abs{g(x) - g(p)} < \frac{1}{2} \abs{g(p)} \implies \abs{g(x)} > \frac{1}{2} \abs{g(p)}
+        \] For all $\varepsilon > 0$ there exists $\delta_{1} > 0$ such that for all $\abs{x - p} < \delta_{1} \;\land\; x \in S$, we have \[
+            \abs{g(x) - g(p)} < \frac{1}{2} \abs{g(p)}^{2} \varepsilon.
+        \] Now, choose $\delta = \min \set{\delta_{0},\delta_{1}, \delta_{2}}$. For $\abs{x - p} < \delta$,
+        \begin{align*}
+            \abs{h(x) - h(p)} &= \abs{\frac{1}{g(x)} - \frac{1}{g(p)}} \\
+            &= \frac{\abs{g(x) - g(p)}}{\abs{g(x)} \abs{g(p)}} \\
+            &< \frac{1}{2} \abs{g(p)}^{2} \varepsilon \cdot \frac{1}{\frac{1}{2} \abs{g(p)}^{2}} \\
+            &= \varepsilon.
+        \end{align*}
+        Thus $\frac{1}{h}$ is continuous at $p$ and so is $f \cdot h = f / g$.
+    \end{enumerate}
+\end{proof}

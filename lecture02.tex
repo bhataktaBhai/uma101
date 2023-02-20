@@ -1,0 +1,88 @@
+\lecture{2}{wed 19 oct 2022}{The ZFC Axioms}
+\subsection{The ZFC Axioms} \vskip 5pt
+\begin{defn} \label{defn:set}
+    A \textbf{set} is a well-defined collection of (mathematical) objects, called the \emph{elements} of that set.
+    To say that $a$ is an element of set $A$, we write $a \in A$.
+    Otherwise, we write $a \notin A$.
+
+    Given two sets $A$ and $B$, we say that:
+    \begin{enumerate}[wide]
+        \item[($A \subseteq B$)] $A$ is a subset of $B$, \textit{i.e.}, every element of $A$ is an element of $B$.
+        \item[($A \not\subseteq B$)] $A$ is not a subset of $B$, \textit{i.e.}, there is some element in $A$ which is not an element of $B$.
+        \item[($A \subsetneq B$)] $A$ is a proper subset of $B$, \textit{i.e.}, $A \subseteq B$ but $\exists\; b \in B$ such that $b \notin A$.
+    \end{enumerate}
+\end{defn}
+
+\begin{rem}
+    We need ZFC axioms because not any collection can be called a set.
+    Read up on Russell's paradox.
+\end{rem}
+
+\begin{axiom}[the basic axiom] \label{zfc:basic}
+    Every object is a set.
+\end{axiom}
+
+\begin{axiom}[axiom of extension] \label{zfc:extension}
+    Two sets $A, B$ are equal if they have exactly the same elements.
+    In other words, $A = B \iff A \subseteq B$ and $B \subseteq A$
+\end{axiom}
+\begin{rem}
+    As a consequnce, it doesn't matter whether a set contains multiple copies of an element.
+    \begin{align*}
+        A &= \set{1} \\
+        B &= \set{1, 1, 1}
+    \end{align*}
+    Clearly $A \subseteq B$ and $B \subseteq A$, implying $A = B$.
+\end{rem}
+
+\begin{axiom}[axiom of existence] \label{zfc:existence}
+    There is a set with no elements called the empty set, denoted by the symbol $\varnothing$.
+\end{axiom}
+
+\begin{axiom}[axiom of specification] \label{zfc:specification}
+    Let $A$ be a set. Let $P(a)$ denote a property that applies to every element in $A$, i.e., for each $a \in A$, either $P(a)$ is true or it is false. Then there exists a subset
+    \[
+        B = \set{a \in A: P(a) \text{ is true}}
+    \]
+\end{axiom}
+\begin{rem}
+    We are forced to create sets only as subsets of other sets because of Russell's paradox. \textcolor{red!85!black}{\emph{From MathGarden:} A somewhat surprising result is that the axiom of specification implies for each set $A$ the existence of an element (a set) $x$ such that $x \not\in A$. In other words, there is no set containing all sets of our mathematical universe.}
+\end{rem}
+
+\begin{axiom}[axiom of pairing]\label{zfc:pairing}
+    Given two sets $A, B$, there exists a set which contains precisely $A, B$ as its elements, which we denote by $\set{A, B}$.
+\end{axiom}
+\begin{rem}
+    In particular, by letting $A = B$, we get a set containing only $A$, i.e., $\set{A}$. For example, we can have $\set{\varnothing}$, and $\set{\varnothing, \set{\varnothing}}$, etc.
+\end{rem}
+
+\begin{axiom}[axiom of unions] \label{zfc:unions}
+    Given a set $\mathscr{F}$ of sets, there exists a set called the union of the sets in $\mathscr{F}$, denoted by $\bigcup_{A \in \mathscr{F}} A$, whose elements are precisely the elements of the elements of $\mathscr{F}$.
+    \[
+        a \in \bigcup_{A \in \mathscr{F}} A \iff a \in A \text{ for some } A \in \mathscr{F}
+    \]
+\end{axiom}
+
+\begin{rem}
+    Intersection of a nonempty set of two or more sets and difference between two sets need not be defined as they follow from the previous axioms. (Exercise)
+\end{rem}
+
+\begin{proof}
+    By the \nameref{zfc:specification},
+    \begin{align*}
+        A - B &= \set{a \in A : a \not\in B} \\
+        A \cap B &= \set{a \in A : a \in B}
+    \end{align*}
+\end{proof}
+
+\begin{axiom}[axiom of powers] \label{zfc:powers}
+    Given a set $A$, there exists a set called power set of $A$ denoted $\mathscr{P}(A)$, whose elements are precisely all the subsets of $A$.   
+\end{axiom}
+\begin{rem}
+    This axiom allows us to define ordered pairs as sets (assignment) (\textcolor{red!85!black}{Isn't pairing sufficient?}) and thus direct products, relations and functions. \[
+        A \times B = \set{(a, b) : a \in A, b \in B}
+    \] \textcolor{red!85!black}{How does this set exist?}
+\end{rem}
+
+\textcolor{red!85!black}{How are we able to define $A \times B$, more specifically, ordered pairs?} \\
+\quad \textcolor{green!30!black}{This is problem 3 of assignment 1.} 

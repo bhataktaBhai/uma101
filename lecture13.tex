@@ -1,0 +1,55 @@
+\lecture{13}{wed 16 nov 2022}{Limit Laws for Functions}
+
+        \item For $f(x) = \frac{1}{x}, x \neq 0$, \[
+            \lim_{x \to 0} f(x) \text{ does not exist}
+        \]
+        \begin{proof}
+            Suppose $\exists\; L \in \R$ such that \[
+                \lim_{x \to 0} f(x) = L
+            \] Choose $\varepsilon = \frac{1}{L}$. Then $\exists\; \delta > 0$ such that $ 0 < \abs{ x - 0 } < \delta \implies \abs{ f(x) - L } < 1$. By the Archimedean property, $\exists\; N \in \N$ such that $\frac{1}{N} < \delta$.
+
+            Now $0 < \frac{1}{N+2} < \frac{1}{N} < \delta$. Thus by our hypothesis, $\abs{ N + 2 - L } < 1$ and $\abs{ N - L } < 1 \implies \abs{ 2 } < \abs{ N + 2 - L } + \abs{ N - L } < 1 + 1 = 2$. Contradiction.
+        \end{proof}
+    \end{enumerate}
+\end{example}
+
+\begin{thm}[Limit laws for functions] \label{thm:limit:laws}
+    Suppose $f$ and $g$ are functions such that \[
+        \lim_{x \to p} f(x) = a, \qquad \lim_{x \to p} g(x) = b.
+    \] Then,
+    \begin{align}
+        \lim_{x \to p} (f \pm g)(x) &= a \pm b \\
+        \lim_{x \to p} (f \cdot g)(x) &= a \cdot b \\
+        \lim_{x \to p} (f/g)(x) &= a/b
+    \end{align}
+\end{thm}
+\begin{proof}
+    Scrapwork: $\abs{f(x) g(x) - ab} = \abs{f(x)g(x) - f(x) b + f(x) b - ab} \leq \abs{f(x)} \abs{g(x) - b} + \abs{b} \abs{f(x) - a}$.
+
+    Let $\varepsilon > 0$. Since $\lim_{x \to p} f(x) = a$, corresponding to $\varepsilon_{1} = \frac{\varepsilon}{2(\abs{ b } + 1)} \;\exists\; \delta_{1} > 0 $ such that if $0 < \abs{ x - p } < \delta_{1}$, we have $\abs{ f(x) - a } < \frac{\varepsilon}{2(\abs{ b } + 1)}$. \\
+    Also, \begin{align*}
+        \abs{ f(x) } - \abs{ a} &\leq  \abs{ f(x) - a } \\
+        &< \varepsilon_{1} \\
+        \implies \abs{ f(x) } &< \abs{ a } + \varepsilon_{1} =: M_{\varepsilon} > 0
+    \end{align*}
+    Let $\varepsilon_{2} = \frac{\varepsilon}{2M}$. Since $\lim_{x \to p} g(x) = b$, $\exists\; \delta_{2} > 0$ such that if $0 < \abs{ x - p } < \delta_{2}$, then $\abs{ g(x) - b } < \varepsilon_{2}$.
+
+    Let $\delta = \min\set{\delta_{1}, \delta_{2}}$. Then,
+    \begin{align*}
+        \abs{ f(x) g(x) - ab } &\leq \abs{ f(x) } \abs{ g(x) - b} + \abs{ b } \abs{ f(x) - a } \\
+        &< M_{\varepsilon} \cdot \frac{\varepsilon}{2 M_{\varepsilon}} + \abs{ b } \cdot \frac{\varepsilon}{2(\abs{ b} + 1)} \\
+        &< \varepsilon. \qedhere
+    \end{align*}
+\end{proof}
+\begin{proof}[Mrigank's trick]
+    \begin{align*}
+        \abs{ f(x) g(x) - ab } &= \abs{ (fg - ag - bf + ab) + (ag - ab) + (bf - ab) } \\
+        &\leq \abs{ f(x) - a } \abs{ g(x) - b } + \abs{ a } \abs{ g(x) - b } + \abs{ b }\abs{ f(x) - a }
+    \end{align*}
+    Choose $\delta$ such that $\abs{ g(x) - b }$ and $\abs{ f(x) - b } < \min \set{\sqrt{\frac{\varepsilon}{3}}, \frac{\varepsilon}{3\abs{ a}}, \frac{\varepsilon}{3\abs{ b}}}$. Then
+    \begin{align*}
+        \abs{ f(x) g(x) - ab } &< \sqrt{\frac{\varepsilon}{3}} \sqrt{\frac{\varepsilon}{3}} + \abs{ a } \cdot \frac{\varepsilon}{3\abs{ a}} + \abs{ b} \cdot \frac{\varepsilon}{3 \abs{ b}} \\
+        &= \frac{\varepsilon}{3} + \frac{\varepsilon}{3} + \frac{\varepsilon}{3} \\
+        &= \varepsilon \qedhere
+    \end{align*}
+\end{proof}

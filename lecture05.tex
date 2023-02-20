@@ -1,0 +1,135 @@
+\lecture{5}{fri 28 oct 2022}{Fields, Ordered Sets and Ordered Fields}
+\subsection{Fields, Ordered Sets and Ordered Fields}
+We cannot solve
+\begin{align*}
+    3 + x &= 2 \\
+    3 \cdot x &= 2
+\end{align*}
+\hfill in \N.
+
+\begin{defn} \label{defn:field}
+    A field is a set $F$ with 2 operations $+ : F \times F \to F$ and $\cdot : F \times F \to F$ such that
+    \begin{enumerate}[label=(F\arabic*)]
+        \item \label{defn:field:commutativity}
+            $+$ \& $\cdot$ are commutative on $F$.
+        \item \label{defn:field:associativity}
+            $+$ \& $\cdot$ are associative on $F$.
+        \item \label{defn:field:distributivity}
+            $+$ \& $\cdot$ satisfy distributivity on $F$, \textit{i.e.}, $a \cdot (b + c) = a \cdot b + a \cdot c$ for all $a, b, c \in F$. 
+        \item \label{defn:field:identity}
+            There exist 2 \emph{distinct} elements, called 0 (additive identity) and 1 (multiplicative identity) such that
+            \begin{align*}
+                x + 0 &= x \\
+                x \cdot 1 &= x
+            \end{align*}
+            for all $x \in F$
+        \item \label{defn:field:negative}
+            For every $x \in F, \,\exists\; y \in F$ such that \[
+                x + y = 0
+            \]
+        \item \label{defn:field:reciprocal}
+            For every $x \in F \setminus \set{0}, \,\exists\; z \in F$ such that \[
+                x \cdot z = 1
+            \]
+    \end{enumerate}
+\end{defn}
+\begin{rem}
+    We are tempted to call $y$ in \labelcref{defn:field:negative} ``-x'' and $z$ in \labelcref{defn:field:reciprocal} ``$\frac{1}{x}$'' but $y, z$ haven't been proven to be unique yet.
+    \textcolor{exercise}{Prove this}.
+    \textcolor{solved}{Proved as \cref{thm:field:unique_inverses}}.
+
+    Once we have proven this, we can also define $a - b := a + (-b)$ and $a/b = a \cdot \frac{1}{b}$.
+\end{rem}
+
+\begin{thm} \label{thm:field:0x=0}
+    $(F, +, \cdot)$ is a field. Then for all $x$, \[
+        0 \cdot x = x \cdot 0 = 0
+    \]
+\end{thm}
+\begin{proof}
+    By \labelcref{defn:field:commutativity}, the first equality holds. \\
+    Now by \labelcref{defn:field:identity}, $1 + 0 = 1$. \\
+    By \labelcref{defn:field:distributivity}, $x \cdot (1 + 0) = x \cdot 1 + x \cdot 0$ \\
+    So $x \cdot 1 = x \cdot 1 + x \cdot 0$ or $x = x + x \cdot 0$ \labelcref{defn:field:identity}\\
+    Adding $y$ to both sides where $x + y = 0$ \labelcref{defn:field:negative} and using associativity and commutativity,
+    \begin{align*}
+        x + y &= x + x \cdot 0 + y \\ 
+        0 &= x + y + x \cdot 0 \\
+        &= 0 + x \cdot 0 \\
+        &= x \cdot 0
+    \end{align*}
+    By commutativity, $0 \cdot x = 0$.
+\end{proof}
+
+\begin{defn} \label{defn:order}
+    A set $A$ with a relation $<$ is called an \emph{ordered set} if
+    \begin{enumerate}[label=(O\arabic*)]
+        \newcounter{temp}
+        \item \label{defn:order:trichotomy}
+            (Trichotomy) For every $x, y \in A$, exactly one of the following holds. \[
+                x < y, \quad x = y, \quad y < x
+            \]
+        \item \label{defn:order:transitivity}
+            (Transitivity) If $x < y$ and $y < z$, then $x < z$.
+        \setcounter{temp}{\value{enumi}}
+    \end{enumerate}
+    \textbf{Notation:} $x < y$ is read as ``x is less than y'' \\
+    $x \leq y$ means $x < y$ or $x = y$, read as ``x is less that or equal to y''. \\
+    $x > y$ is read as ``$x$ is greater that $y$'' and equivalent to $y < x$.
+\end{defn}
+\begin{example}
+    $\N$ with $a < b$ iff $b = a + k$ for some non-zero $k$.
+\end{example}
+
+\begin{defn} \label{defn:ordered field}
+    An \emph{ordered field} is a set that admits two operations $+$ and $\cdot$ and relation $<$ so that $(F, +, \cdot)$ is a field and $(F, <)$ is an ordered set and:
+    \begin{enumerate}[label=(O\arabic*)]
+        \setcounter{enumi}{\value{temp}}
+        \item \label{defn:order:sum}
+            For $x, y, z \in F$, if $x < y$ then $x + z < y + z$.
+        \item \label{defn:order:product}
+            For $x, y \in F$, if $0 < x$ and $0 < y$ then $0 < x \cdot y$.
+    \end{enumerate}
+\end{defn}
+
+\begin{lem} \label{thm:field:unique_inverses}
+    Given a field $(F, +, \cdot)$: For any element $a$ in a field $F$, there exists ony one $b$ such that $a + b = 0$. We will denote this $b$ as $-a$. Similarly for any $a$ in $F \setminus \set{0}$ there exists only one $b \in F$ such that $ab = 1$. We will denote this $b$ as $\frac{1}{a}$ or $a^{-1}$.
+\end{lem}
+\begin{proof}
+    Suppose $a + b_{1} = 0$ and $a + b_{2} = 0$. Adding $b_{1}$ to both sides, we get $a + b_{2} + b_{1} = 0 + b_{1} \implies (a + b_{1}) + b_{2} = b_{1} \implies b_{2} = b_{1}$. \\
+    The second part of the proof is analogous.
+\end{proof}
+
+\begin{lem} \label{thm:field:inverse_involution}
+    $-(-a) = a = (a^{-1})^{-1}$
+\end{lem}
+\begin{proof}
+    $a + (-a) = 0$, so the additive inverse of $-a$ is $a$.
+
+    $aa^{-1} = 1$, so the multiplicative inverse of $a^{-1}$ is $a$.
+\end{proof}
+
+\begin{lem} \label{thm:field:(-a)b=-(ab)}
+    For any field $(F, +, \cdot)$, $(-a)b = -(ab)$ and $(-a)(-b) = ab$.
+\end{lem}
+\begin{proof}
+    By the distributive law, we have \[
+        (a + (-a))b = ab + (-a)b \implies 0 = ab + (-a)b \implies (-a)b = -(ab).
+    \]
+    It follows that $(-a)(-b) = -(a(-b)) = -(-(ab)) = ab$.
+\end{proof}
+
+\begin{thm} \label{thm:field:0<1}
+    For any field $(F, +, \cdot)$, $0 < 1$.
+\end{thm}
+\begin{proof}
+    By \cref{defn:order:trichotomy} and \labelcref{defn:field:identity}, either $0 < 1$ or $0 > 1$.
+
+    If $0 < 1$, we are done.
+
+    If $0 > 1$, then on adding $-1$ on both sides, $0 < -1$ by \cref{defn:order:sum}.
+    So $0 < (-1)(-1) \iff 0 < 1$, a contradiction.
+\end{proof}
+\begin{rem}
+    ``a contradiction'' is not necessary to state for the proof to be complete. See \href{https://teams.microsoft.com/l/message/19:5PNDOetYK3gbPZWX5Muk\_KnaEXgulRmRNwNmAHA8dZ81@thread.tacv2/1666960265828?tenantId=6f15cd97-f6a7-41e3-b2c5-ad4193976476&groupId=9cf683b7-9233-4d97-a7eb-1dc0051039a7&parentMessageId=1666960265828&teamName=UM\%20101\%20October\%202022&channelName=General&createdTime=1666960265828&allowXTenantAccess=false}{this discussion} at MS Teams.
+\end{rem}

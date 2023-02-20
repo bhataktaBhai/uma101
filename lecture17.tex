@@ -1,0 +1,28 @@
+\lecture{17}{fri 25 nov 2022}{Global Extrema and Extreme Value Theorem}
+
+\begin{defn} \label{defn:cont:global_extrema}
+    A function $f : S \to \R$ is said to have a \emph{global maximum} on $S$ at a point $p \in S$ if $f(x) \leq f(p) \;\forall\; x \in S$.
+
+    A function $f : S \to \R$ is said to have a \emph{global minimum} on $S$ at a point $p \in S$ if $f(x) \geq f(p) \;\forall\; x \in S$.
+\end{defn}
+
+\begin{thm}[Extreme value theorem] \label{thm:cont:EVT}
+    Let $f : [a, b] \to \R$ be a continuous function. Then $f$ attains both a global maximum and a global minimum in $[a, b]$.
+\end{thm}
+\begin{proof}
+    Since $f$ is bounded on $[a, b]$, \[
+        s = \sup f([a, b])
+    \] exists.
+    Suppose $f(x) < s \;\forall\; x \in [a, b]$. Let \[
+        g(x) := s - f(x)
+    \] on $[a, b]$.
+    Note that $g$ is continuous and positive.
+    Thus (by \textcolor{exercise}{HW 6.2}), there exists a $c > 0$ such that $g(x) \geq c \;\forall\; x \in [a, b] \implies f(x) \leq s - c \;\forall\; x \in [a, b]$.
+    A contradiction.
+\end{proof}
+\begin{cor} \label{thm:cont:EVT:compact->compact}
+    Let $f : [a, b] \to \R$ be continuous.
+    Then (using IVT), \[
+        f([a, b]) = [\min_{[a, b]} f, \max_{[a, b]} f].
+    \]
+\end{cor}

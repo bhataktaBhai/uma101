@@ -1,0 +1,42 @@
+\lecture{37}{Wed 25 Jan '23}{}
+
+\begin{defn}[Span of sets] \label{defn:vector:span:set}
+    Let $S \subseteq V$ be a nonempty set. The \emph{span} of the $S$ is the set \begin{align*}
+        \spann S = \{v \in V : \;\exists\; &a_1, \dots, a_n \in F \\
+        \text{and distinct } &v_1, \dots, v_n \in S \\
+        \text{such that } &v = a_1 v_1 + \cdots + a_n v_n\}.
+    \end{align*}
+    Or \[
+        \spann S = \bigcup_{\O \neq \Lambda \subseteq ^{\mathrm{finite}} S} \spann \Lambda.
+    \]
+    $\spann \O$ is defined to be $\set{0}$.
+\end{defn}
+
+\begin{example}
+    \begin{enumerate}[label=(\alph*)]
+        \item $\spann(0) = \set{0}$.
+        \item Let $V \in \R^{2}$.
+        Let $(a, b) \neq (0, 0)$.
+        Then $\spann (a, b) = \set{(x, y) \in \R^{2} : ay - bx = 0}$.
+
+    \end{enumerate}
+\end{example}
+
+\begin{prop}[Spans are subspaces] \label{thm:vector:span:subspace}
+    Let $S \subseteq V$.
+    Then $\spann S$ is a subspace of $V$.
+    If $W$ is a subspace of $V$ and $S \subseteq W$, then \[
+        \spann S \subseteq W.
+    \]
+\end{prop}
+\begin{proof}
+    
+\end{proof}
+
+\begin{defn}[finite and infinite dimensions] \label{defn:vector:fdvs}
+    Let $V$ be a vector space over $F$.
+    \begin{enumerate}[label=(\alph*)]
+        \item $V$ is \emph{finite-dimensional} if there exists a finite set $S \subseteq V$ such that $V = \spann S$.
+        \item $V$ is \emph{infinite-dimensional} if it is not finite-dimensional.
+    \end{enumerate}
+\end{defn}

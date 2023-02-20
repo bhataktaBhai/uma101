@@ -1,0 +1,53 @@
+\lecture{22}{fri 18 dec '22}{Extreme and Mean Value Theorems}
+
+Assume WLOG that $f$ attains a local maximum at $c$, and is differentiable at $c$.
+Thus there exists a $\delta > 0$ such that $\abs{x - c} < \delta \implies f(x) < f(c)$.
+Let $\set{a_{n}}_{n \geq N}$ be a sequence, $a_{n} = c + \frac{1}{n}$, where $N > \frac{1}{\delta}$. \[
+    \frac{f(a_{n}) - f(c)}{a_{n} - c} = n \cdot (f(a_{n}) - f(c)) < 0
+\] Thus by \nameref{thm:seq:comparison}, $\lim\limits_{n \to \infty} \dfrac{f(a_{n}) - f(c)}{a_{n} - c} \leq 0$.
+By the sequential characterisation of limits, this limit is equal to $\lim\limits_{x \to c} \dfrac{f(x) - f(c)}{x - c} = f'(c)$.
+
+Similarly, considering $b_{n} = c - \frac{1}{n}$, we get $f'(c) \geq 0$.
+
+Combining these results yields $f'(c) = 0$.
+
+\begin{rem}
+    The theorem is most helpful in the following way: to identify \emph{potential} points of local extrema within open intervals where $f$ is differentiable.
+    Thereafter, one needs to do some local analysis at the potential points.
+    For the local analysis, one inspects the sign of the derivative `just a bit before' and `just a bit after' the point.
+\end{rem}
+
+\begin{example}
+    Let $f : \R \to \R$ be given by \[
+        f(x) = (x - 1)^{2} + \abs{x} + x^{3}.
+    \] The potential extrema are at $x = 0, x = -3$ and $x = \sqrt{2} - 1$.
+    We cannot yet say which of these will be a local maximum.
+\end{example}
+
+\begin{thm}[Mean Value Theorem] \label{thm:mvt}
+    Let $f : [a, b] \to \R$ be continuous on $[a, b]$ and differentiable on $(a, b)$.
+    Then there exists a $c \in (a, b)$ such that $f'(c) = \dfrac{f(b) - f(a)}{b - a}$.
+\end{thm}
+
+\begin{proof}
+    \textbf{Case 1 (Rolle's Theorem).}
+    $f(a) = f(b)$.
+    Since the function is continuous on $[a, b]$, it achieves a global maximum at $c_{1}$ and a global minumum at $c_{2}$ by the extreme value theorem.
+    If at least one of $c_{1}$ and $c_{2}$ lies inside $(a, b)$, we have $f'(c_{i}) = 0$.
+    Otherwise, we have $f(a) = f(b) = f(c_{1}) = f(c_{2}) \implies f$ is constant.
+    Thus $f'(c) = 0 \;\forall\; c \in (a, b)$. 
+
+    \textbf{Case 2.}
+    $f(a) \neq f(b)$.
+    Define \[
+        g(x) = f(x) - \frac{f(b) - f(a)}{b - a} \cdot x.
+    \] Since $f$ is continuous on $[a, b]$, $g$ is continuous on $[a, b]$ and $g(a) = g(b)$.
+    Also $g$ is differentiable on $(a, b)$ with \[
+        g'(x) = f'(x) - \frac{f(b) - f(a)}{b - a}.
+    \] By Rolle's theorem $g'(c) = 0$ for some $c$ in $(a, b) \implies f'(c) = \dfrac{f(b) - f(a)}{b - a}$ for some $c \in (a, b)$.
+\end{proof}
+
+
+
+
+

@@ -1,0 +1,56 @@
+\documentclass[12pt]{article}
+\input{preamble}
+
+\title{Assignment 8}
+\author{Naman Mishra}
+\date{23 Dec 2022}
+
+\begin{document}
+\maketitle
+
+\textbf{Problem 1.}
+Let $f : [a, b] \to \R$ be continuous on $[a, b]$ and differentiable on $(a, c) \cup (c, b)$. Show that if $\lim\limits_{x \to c} f'(x) = L$, then $f'(c)$ exists and equals $L$.
+
+\begin{proof}
+    For all $\varepsilon > 0$ there exists a $\delta > 0$ such that $x \in N_{\delta}(c) \setminus \set{c} \implies \abs{ f'(x) - L } < \varepsilon$. \[
+        \lim_{x \to c} \frac{f(x) - f(c)}{x - c} = L
+    \]
+\end{proof}
+
+\section*{Problem 7}
+We define a function $f : \R \to \R$ to be `close' at a point $c \in \R$ if for every $\varepsilon > 0$, there exists an $L \in \R$ and a $\delta > 0$ such that for every $x \in N_{\delta}(c) \setminus \set{c}$, we have that \[
+    \abs{ f(x) - L } < \varepsilon.
+\]
+
+Suppose that $f : \R \to \R$ is close at $c \in \R$.
+Then for every $\varepsilon > 0$, there exists an $L \in \R$ and a $\delta_{\varepsilon} > 0$ such that for every $x \in N_{\delta_{\varepsilon}}(c) \setminus \set{c}$, we have \[
+    \abs{ f(x) - L } < \varepsilon / 2.
+\]
+Consider a sequence $\set{a_{n}} \subset \R \setminus \set{c}$ converging to $c$.
+Then there exists an $n_{0}$ such that for every $n \geq n_{0}$, we have \[
+    \abs{ a_{n} - c } < \delta_{\varepsilon} \implies \abs{ f(a_{n}) - L } < \varepsilon / 2
+\] By the triangle inequality, \[
+    \abs{ f(a_{n}) - f(a_{m}) } \leq \abs{ f(a_{n}) - L } + \abs{ L - f(a_{m}) } < \varepsilon \;\forall\; m, n \geq n_{0}
+\] Thus $\set{f(a_{n})}$ is a Cauchy sequence, and therefore convergent.
+
+Suppose sequences $\set{a_{n}}$ and $\set{b_{n}}$ both converge to (but never equal) $c$, with $\set{f(a_{n})}$ and $\set{f(b_{n})}$ having different limits $L_{1}$ and $L_{2}$. Consider the sequence \[
+    c_{n} = \begin{cases}
+        a_{n} & \text{if } n \text{ is even} \\
+        b_{n} & \text{if } n \text{ is odd}
+    \end{cases}
+\] Clearly $\set{c_{n}}$ converges to $c$, but $\set{f(c_{n})}$ diverges. This is a contradiction.
+
+Thus there exists a unique $L_{0} \in \R$ such that given any sequence $\set{a_{n}}$ converging to $c$, we have that \[
+    \lim_{n \to \infty} f(a_{n}) = L_{0}.
+\]
+
+By the sequential characterization of limits, the limit of $f$ at $c$ exists and equals $L_{0}$.
+
+On the other hand, if it is known that $f$ has a limit $L_{0}$ at $c$, setting $L = L_{0} \;\forall\; \varepsilon$ proves that $f$ is close at $c$.
+
+Thus the two definitions are equivalent.
+\end{document}
+
+
+
+

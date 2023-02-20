@@ -1,0 +1,87 @@
+\lecture{21}{wed 14 dec 2022}{Chain Rule and Extrema}
+
+\begin{thm}[chain rule] \label{thm:diff:chain_rule}
+    Let $f: (a, b) \to \R$ and $g : (c, d) \to \R$ with $f((a, b)) \subseteq (c, d)$ and $f$ differentiable in $(a, b)$. Let $g$ be differentiable at $f(p) := q$. Then $g \circ f : (a, b) \to \R$ is differentiable at $p$ and $(g \circ f)' = g' \circ f \cdot f'$ at $p$.
+\end{thm}
+
+\begin{proof}
+    We consider the limit \[
+        \lim_{k \to 0} \frac{g \circ f (p + k) - g \circ f (p)}{k}.
+    \] \[
+        \frac{g \circ f (p + k) - g \circ f (p)}{k} = \frac{g(f(p + k)) - g(f(p))}{f(p + k) - f(p)} \cdot \frac{f(p + k) - f(p)}{k}
+    \] except $f(p + k) - f(p)$ might be zero even for $k \neq 0$. So we instead define $f(p + k) - f(p) = h_{k}$ and \[
+        G(h) =
+        \begin{cases}
+            \dfrac{g(q + h) - g(q)}{h} & h \neq 0 \\
+            g'(q) & h = 0
+        \end{cases}
+    \]
+    Now $g(f(p + k)) - g(f(p)) = G(h_{k}) h_{k}$ for all $k$, as $G(0) \cdot 0 = 0$. Note that $G$ is continuous at $0$. Also, $\lim_{k \to 0} h_{k} = 0$ and $\lim_{h \to 0} G(h) = g'(q)$. Thus $\lim_{k \to 0} G(h_{k}) = g'(q)$.
+    \begin{align*}
+        \lim_{k \to 0} \frac{g \circ f (p + k) - g \circ f (p)}{k} &= \lim_{k \to 0} \frac{G(h_{k}) h_{k}}{k} \\
+        &= g'(q) \cdot \lim_{k \to 0} \frac{f(p + k) - f(p)}{k} \\
+        &= g'(q) \cdot f'(p) \qedhere
+    \end{align*}
+\end{proof}
+
+\subsection{Local Extrema}
+\begin{defn}[Local Extrema] \label{defn:diff:local_extrema}
+    Let $f : A \to \R$. We say that $f$ attains a local maximum at $a \in A$ iff $\exists\; \delta > 0$ such that \[
+        f(x) \leq f(a) \;\forall\; x \in N_{\delta}(a) \cap A.
+    \] We say that $f$ attains a local minimum at $a \in A$ iff $\exists\; \delta > 0$ such that \[
+        f(x) \geq f(a) \;\forall\; x \in N_{\delta}(a) \cap A.
+    \]
+\end{defn}
+
+\begin{thm}[Extremum $\implies$ Stationary] \label{thm:diff:local_extrema:stationary}
+    Let $f : (a, b) \to \R$.
+    Let $c \in (a, b)$ such that $f$ is differentiable at $c$.
+    If $f$ attains a local extremum at $c$, then $f'(c) = 0$.
+    Points at which the derivative vanishes are called `stationary points' and sometimes `critical points'.
+\end{thm}
+\begin{rem}
+    Say $f : \R \to \R$ is differentiable everywhere.
+    Now, $f_{[a, b]}$ may have local or even global extrema at its end points \emph{w.r.t the new domain $[a, b]$}.
+    Then the derivative of $f$ at the endpoint is not necessarily zero.
+    We cannot comment about the differentiability of $f_{[a, b]}$ at the endpoints.
+
+    \textit{E.g.}, $f(x) = x$ on $[0, 1]$.
+\end{rem}
+\begin{rem}
+    $f$ may have local or global extrema at points where it is simply not differentiable. \textit{E.g.}, \[
+        f(x) = \abs{x}.
+    \]
+\end{rem}
+\begin{rem}
+    The converse is not necessarily true. \textit{E.g.}, $f(x) = x^{3}$ at $x = 0$.
+\end{rem}
+\textcolor{red}{Write a formal proof to say that 0 is neither a point of local maximum nor local minimum for $f$.}
+
+\begin{proof}
+    If $f$ has a local maximum at $c$, $\exists\; \delta > 0$ such that \[
+        f(x) \leq f(c) \;\forall\; x \in N_{\delta}(c) \subseteq (a, b).
+    \] If $f$ has a local minimum at $c$, $\exists\; \delta > 0$ such that \[
+        f(x) \geq f(c) \;\forall\; x \in N_{\delta}(c) \subseteq (a, b).
+    \] In either case, $(f(x_{1}) - f(c))(f(x_{2}) - f(c)) > 0 \;\forall\; x \in N_{\delta}(c) \subseteq (a, b)$.
+    Define \[
+        F(x) =
+        \begin{cases}
+            \dfrac{f(c + x) - f(c)}{x} & x \in (-\delta, 0) \cup (0, \delta) \\
+            f'(c) & x = 0
+        \end{cases}
+    \] $F$ is continous at $0$. Consider the following sequences for $n > \frac{1}{\delta}$.
+    \begin{align*}
+        a_{n} &= \frac{1}{n} & b_{n} &= -\frac{1}{n} \\
+        \lim_{n \to \infty} a_{n} &= 0 & \lim_{n \to \infty} b_{n} &= 0 \\
+    \end{align*}
+    By sequential characterization of continuity, \[
+        \lim_{n \to \infty} F(a_{n}) = \lim_{n \to \infty} F(b_{n}) = F(0) = f'(c)
+    \] By limit laws, \[
+        \lim_{n \to \infty} F(a_{n}) F(b_{n}) = f'(c) f'(c) = f'(c)^{2} \geq 0.
+    \] but \[
+        F(a_{n}) F(b_{n}) = \frac{(f(c - \frac{1}{n}) - f(c))(f(c + \frac{1}{n}) - f(c))}{-\frac{1}{n^{2}}} < 0 \;\forall\; n > \frac{1}{\delta}.
+    \] Thus \[
+        \lim_{n \to \infty} F(a_{n}) F(b_{n}) \leq 0.
+    \]
+    So we have $f'(c)^{2} = 0 \implies f'(c) = 0$.
+\end{proof}

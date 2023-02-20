@@ -1,0 +1,105 @@
+\lecture{36}{Wed 25 Jan '23}{}
+
+\begin{prop}[Vector properties] \label{prop:vector:properties}
+    Let $V$ be a vector space over $F$. Then the following hold:
+    \begin{enumerate}[label=(\alph*)]
+        \item $V$ has a unique additive identity.
+        \item $0_{F} v = 0_{V}$ for all $v \in V$.
+        \item $a 0_{V} = 0_{V}$ for all $a \in F$.
+        \item Each $v \in V$ has a unique additive inverse given by $(-1_{F}) v$.
+        \item If $a v = a w$ for some $a \in F \setminus\set{0}$ and $v, w \in V$, then $v = w$.
+    \end{enumerate}
+\end{prop}
+
+\begin{proof} \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item If $a$ and $b$ are additive identities, then $a = a + b = b$.
+        \item Let $-0_{F} v$ be some additive inverse of $0_{F} v$.
+        Then
+        \begin{align*}
+            0_{F} v &= (0_{F} + 0_{F}) v \\
+            0_{F} v &= 0_{F} v + 0_{F} v \\
+            0_{F} v + (-0_{F} v) &= 0_{F} v + 0_{F} v + (-0_{F} v) \\
+            0_{V} &= 0_{F} v
+        \end{align*}
+        \item Let $-a 0_{V}$ be some additive inverse of $a 0_{V}$.
+        Then
+        \begin{align*}
+            a 0_{V} &= a (0_{V} + 0_{V}) \\
+            a 0_{V} &= a 0_{V} + a 0_{V} \\
+            a 0_{V} + (-a 0_{V}) &= a 0_{V} + a 0_{V} + (-a 0_{V}) \\
+            0_{V} &= a 0_{V}
+        \end{align*}
+        \item Let $-v$ and $-v'$ be two additive inverses of $v \in V$.
+        Then $(-v) = v + (-v') + (-v) = (-v')$.
+
+        Also,
+        \begin{align*}
+            (1_{F} + -1_{F}) v &= 1_{F} v + (-1_{F}) v \\
+            0_{F} v &= 1_{F} v + (-1_{F}) v \\
+            0_{V} &= v + (-1_{F}) v
+        \end{align*}
+        Thus $(-1_{F}) v$ is the additive inverse of $v$.
+        \item Let $a v = a w$ for some $a \in F \setminus\set{0}$ and $v, w \in V$.
+        Then
+        \begin{align*}
+            a v &= a w \\
+            a^{-1} a v &= a^{-1} a w \\
+            1_{F} v &= 1_{F} w \\
+            v &= w \qedhere
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\begin{defn}[Subspace] \label{defn:vector:subspace}
+    Let $V$ be a vector space over some field $F$.
+    A subset $S \subseteq V$ is a (linear) \emph{subspace} of $V$ if the following hold:
+    \begin{enumerate}[label=(\alph*)]
+        \item $0_{V} \in S$.
+        \item If $v, w \in S$, then $v + w \in S$.
+        \item If $a \in F$ and $v \in S$, then $a v \in S$.
+    \end{enumerate}
+    These properties together imply that $S$ is also a vector space over $F$.
+
+    $S$ is said to be a \emph{proper} subspace of $V$ if $S \neq V$ but also $S \neq \set{0_{V}}$.
+\end{defn}
+
+\begin{example}
+    \begin{enumerate}[label=(\alph*)]
+        \item Any line passing through the origin is a subspace of $\R^{2}$.
+        \item Each $P_{d}$ is a subspace of $P$.
+        \item $S = \set{f \in \mathscr{C}([a, b]) : f(a) = 0}$.
+        \item The space of solutions (as $n$-tuples) to a homogeneous system of $m$ linear equations in $n$ variables is a subspace of $\R^{n}$.
+    \end{enumerate}
+\end{example}
+
+\begin{defn}[Span of finite sequences] \label{defn:vector:span:finite_sequence}
+    Let $v_{1}, v_{2}, \dots, v_{m} \in V$ be a finite sequence of vectors.
+    A linear combination of $v_{1}, v_{2}, \dots, v_{m}$ is any vector of the form \[
+        v = a_{1} v_{1} + a_{2} v_{2} + \cdots + a_{m} v_{m},
+    \] where $a_{1}, a_{2}, \dots, a_{m} \in F$.
+    The \emph{span} of the finite sequence $v_{1}, v_{2}, \dots, v_{m}$ is the set of all linear combinations of $v_{1}, v_{2}, \dots, v_{m}$.
+    That is, \[
+        \spann(v_{1}, v_{2}, \dots, v_{m}) = \set{\sum_{j = 1}^{m} a_{j} v_{j} : a_{j} \in F}.
+    \]
+\end{defn}
+\begin{rem}
+    \begin{enumerate}[label=(\alph*)]
+        \item A linear combination of $v_{1}, v_{2}, \dots, v_{m}$ refers to a vector.
+        The \emph{expression} on the RHS of the definition is called a \emph{representation} of $v$ as a linear combination of $v_{1}, v_{2}, \dots, v_{m}$.
+
+        For example, if $v_{1} = (0, 0)$ and $v_{2} = (1, 0)$, the vector $v = (1, 0)$ is a linear combination of $v_{1}$ and $v_{2}$ with infinitely many representations.
+        \begin{align*}
+            v &= 0 v_{1} + 1 v_{2} \\
+            &= 1 v_{1} + 1 v_{2} \\
+            &= 100 v_{1} + 1 v_{2} \\
+            &= -\pi v_{1} + 1 v_{2} \\
+            &\;\;\vdots
+        \end{align*}
+
+        \item The span of a finite sequence of vectors does not depend on the order or multiplicity of the vectors.
+        Thus we also write $\spann(v_{1}, v_{2}, \dots, v_{m})$ as $\spann\set{v_{1}, v_{2}, \dots, v_{m}}$ \[
+            \spann((1, 0), (0, 0), (1, 0)) = \spann\set{(1, 0), (0, 0)}
+        \]
+    \end{enumerate}
+\end{rem}

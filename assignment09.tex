@@ -1,0 +1,131 @@
+\documentclass[12pt]{article}
+\input{preamble}
+
+\title{Assignment 9}
+\author{Naman Mishra}
+\date{January 3, 2022}
+
+\begin{document}
+\maketitle
+
+\section*{Problem 1}
+
+Let $s$ be a step function on partition $\mathcal{P} = \set{x_{0} < x_{1} < \dots < x_{n}}$ of $[a, b]$.
+Suppose $\mathcal{P}'$ is a refinement of $\mathcal{P}$.
+Let $\mathcal{W} = \mathcal{P}' \setminus \mathcal{P} = \set{y_{1} < y_{2} < \dots < y_{m}}$.
+Let $\mathcal{P}_{0} = \mathcal{P}$ and $\mathcal{P}_{k+1} = \mathcal{P}_{k} \cup \set{y_{k+1}}$
+Then $\mathcal{P}_{m} = \mathcal{P} \cup \mathcal{W} = \mathcal{P}'$.
+
+We know that $s$ is a step function on $\mathcal{P}$ with some integral $I$.
+Suppose inductively that $s$ is a step function on $\mathcal{P}_{k} = \set{z_{0} < z_{1} < \dots < z_{n+k}}$ with integral $I$.
+Since $z_{0} = a < y_{k+1} < b = z_{n}$ and $y_{k+1} \not\in \mathcal{P}_{k}$, we have $z_{j-1} < y_{k+1} < z_{j}$ for some $j \in \N \cap [1, n+k]$. \[
+    \mathcal{P}_{k+1} = \set{z_{0} < z_{1} < \dots < z_{j-1} < y_{k+1} < z_{j} < \dots < z_{n+k}}.
+\]
+Since $s$ is a step function on $\mathcal{P}_{k}, \;\exists\; c_{i} \in \R$ such that $s(x) = c_{i} \;\forall\; x \in (z_{i-1}, z_{i})$. Thus $s(x) = c_{j} \;\forall\; x \in (z_{j-1}, y_{k+1})$ and $s(x) = c_{j} \;\forall\; x \in (y_{k+1}, z_{j})$.
+Thus $s$ is constant on all $(z_{i-1}, z_{i}), i \neq j$ as well as $(z_{j-1}, y_{k+1})$ and $(y_{k+1}, z_{j}) \implies s$ is a step function on $\mathcal{P}_{k+1}$. 
+
+Moreover, \begin{align*}
+    \int_{\mathcal{P}_{k+1}} s(x) \dd x &= \sum_{i=1}^{j-1} c_{i} (z_{i} - z_{i-1}) + c_{j} (y_{k+1} - z_{j-1}) + c_{j} (z_{j} - y_{k+1}) + \sum_{i=j+1}^{n+k} c_{i} (z_{i} - z_{i-1}) \\
+    &= \sum_{i=1}^{j-1} c_{i} (z_{i} - z_{i-1}) + c_{j} (z_{j} - z_{j-1}) + \sum_{i=j+1}^{n+k} c_{i} (z_{i} - z_{i-1}) \\
+    &= \sum_{i=1}^{n+k} c_{i} (z_{i} - z_{i-1}) \\
+    &= \int_{\mathcal{P}_{k}} s(x) \dd x \\
+    &= I.
+\end{align*}
+Thus by induction, $s$ is a step function on $\mathcal{P}'$ with integral $I$.
+
+Taking the common refinement $\mathcal{R}$ of $\mathcal{P}$ and $\mathcal{Q}$ yields $\int_{\mathcal{P}} s(x) \dd x = \int_{\mathcal{R}} s(x) \dd x = \int_{\mathcal{Q}} s(x) \dd x$.
+
+
+\section*{Problem 2}
+\begin{enumerate}[label=(\alph*)]
+    \item \[
+        \floor{x-\frac{1}{2}} + \floor{x} = 
+        \begin{cases}
+            -3 & x \in [-1, -\frac{1}{2}) \\
+            -2 & x \in [-\frac{1}{2}, 0) \\
+            -1 & x \in [0, \frac{1}{2}) \\
+            0 & x \in [\frac{1}{2}, 1) \\
+            1 & x \in [1, \frac{3}{2}) \\
+            2 & x \in [\frac{3}{2}, 2) \\
+            3 & x = 2
+        \end{cases}
+    \] Thus \[
+        \int_{-1}^{2} \paren{\floor{x-\frac{1}{2}} + \floor{x}} \dd x = -3 \cdot \frac{1}{2} + (-2) \cdot \frac{1}{2} + \dots + 2 \cdot \frac{1}{2} = -\frac{3}{2}.
+    \] \item \[
+        \floor{\sqrt{x}} =
+        \begin{cases}
+            1 & x \in [1, 4) \\
+            2 & x \in [4, 9) \\
+            3 & x = 9
+        \end{cases}
+    \] Thus \[
+        \int_{1}^{9} \floor{\sqrt{x}} \dd x = 1 \cdot 3 + 2 \cdot 5 = 13.
+    \]
+\end{enumerate}
+
+
+\section*{Problem 3}
+Given a step function $f$ on $[a, b]$, we have \[
+    S_{f} = \set{\int_{a}^{b} s(x) \dd x : s \text{ is a step function and } s \leq f \text{ on } [a, b]}.
+\] For any step function $s \leq f$, we have $\int_{a}^{b} s(x) \dd x \leq \int_{a}^{b} f(x) \dd x$ (defined as sum of $f_{j} (x_{j} - x_{j-1})$.
+
+Thus $\int_{a}^{b} f(x) \dd x$ is an upper bound of $S_{f}$. Moreover, since $f$ is a step function and $f \leq f$ on $[a, b]$, $\int_{a}^{b} f(x) \dd x \in S_{f}$.
+Therefore, $\sup S_{f} = \int_{a}^{b} f(x) \dd x$.
+
+Similarly, $\inf T_{f} = \int_{a}^{b} f(x) \dd x$ and so the two definitions are concurrent.
+
+Alternatively, \[
+    \int_{a}^{b} s(x) \dd x \leq \sup S_{f} \leq \inf T_{f} \leq \int_{a}^{b} t(x) \dd x.
+\] Since $f \leq f$ and $f \geq f$, we can let $s = f$ and $t = f$. So \[
+    \int_{a}^{b} f(x) \dd x \leq \sup S_{f} \leq \inf T_{f} \leq \int_{a}^{b} f(x) \dd x.
+\] Thus $\sup S_{f} = \inf T_{f} = \int_{a}^{b} f(x) \dd x$.
+
+
+\section*{Problem 4}
+Suppose $f$ is not Riemann integrable on $[c, d]$.
+Then $\ubar{I}_{[c, d]} \neq \bar{I}_{[c, d]} \implies \;\exists\; \varepsilon > 0$ such that $\int_{c}^{d} t_{[c, d]}(x) \dd x - \int_{c}^{d} s_{[c, d]}(x) \dd x > \varepsilon$ for all step functions $s_{[c, d]}, t_{[c, d]} : [c, d] \to \R$ such that $s_{[c, d]} \leq f \leq t_{[c, d]}$ on $[c, d]$.
+
+Now suppose $\hat{s}_{[a, b]}, \hat{t}_{[a, b]} : [a, b] \to \R$ are step functions such that $\hat{s}_{[a, b]} \leq f \leq \hat{t}_{[a, b]}$ on $[a, b]$.
+
+
+\section*{Problem 5}
+By the expansion property, \[
+    \int_{-0}^{-a} f(-x) \dd x = -\int_{0}^{a} f(x) \dd x.
+\]
+If $f$ is even, then $f(-x) = f(x)$ and so \[
+    \int_{-0}^{-a} f(x) \dd x = -\int_{0}^{a} f(x) \dd x.
+\] So $\int_{-a}^{0} f(x) \dd x = \int_{0}^{a} f(x) \dd x$ and thus \[
+    \int_{-a}^{a} f(x) \dd x = 2 \int_{0}^{a} f(x) \dd x.
+\] Similarly if $f$ is odd, then $f(-x) = -f(x)$ and so \[
+    \int_{-0}^{-a} f(x) \dd x = \int_{0}^{a} f(x) \dd x.
+\] So $\int_{-a}^{0} f(x) \dd x = -\int_{0}^{a} f(x) \dd x$ and thus \[
+    \int_{-a}^{a} f(x) \dd x = 0.
+\]
+
+
+\section*{Problem 6}
+Suppose $f$ attains a value $y > 0$ at some $x_{0}$. Since $f$ is continuous, there exists a neighborhood $N_{\delta}(x_{0})$ with $0 < \delta < \min \set{b - x_{0}, x_{0} - a}$ of size $2 \delta$ on which $f > y/2$.
+Thus $\int_{x_{0} - \delta}^{x_{0} + \delta} f(x) \dd x > y \delta > 0$.
+
+Since $f \geq 0$, we have $\int_{a}^{x_{0} - \delta} f(x) \dd x \geq 0$ and $\int_{x_{0} + \delta}^{b} f(x) \dd x \geq 0$. Thus \[
+    \int_{a}^{b} f(x) \dd x > 0.
+\] This is a contradiction, and thus $f(x) = 0 \;\forall\; x \in [a, b]$.
+
+
+\section*{Problem 7}
+Suppose $f$ is Riemann integrable on $[a, b]$ per the lecture definition. Then $\sup S_{f} = \inf T_{f} = I$.
+Since $I$ is the supremum of $S_{f}$, $I - \varepsilon$ is not an upper bound of $S_{f}$, and thus there exists an $s_{\varepsilon} \leq f$ such that $\int_{a}^{b} s_{\varepsilon}(x) \dd x > I - \varepsilon$.
+
+Similarly there exists a $t_{\varepsilon} \geq f$ such that $\int_{a}^{b} t_{\varepsilon}(x) \dd x$. Thus $f$ is Riemann integrable as per the given definition.
+
+Now suppose $f$ is Riemann integrable on $[a, b]$ per the given definition. Defining $S_{f}$ and $T_{f}$ as before, we have \[
+    \int_{a}^{b} s(x) \dd x \leq \sup S_{f} \leq \inf T_{f} \leq \int_{a}^{b} t(x) \dd x.
+\] Suppose $\int_{a}^{b} s(x) \dd x = I + \varepsilon_{0} > I$.
+Then there exists a $t_{\varepsilon_{0}}$ such that $\int_{a}^{b} t_{\varepsilon_{0}}(x) \dd x < I + \varepsilon_{0} = \int_{a}^{b} s(x) \dd x$. Contradiction.
+Thus $\int_{a}^{b} s(x) \dd x \leq I$.
+Also, since $I - \varepsilon$ is not an upper bound of $S_{f}$ for any $\varepsilon > 0$, $I$ is the least upper bound of $S_{f}$.
+
+Similarly, $I$ is the greatest lower bound of $T_{f}$.
+Thus $f$ is Riemann integrable per the lecture definition.
+
+\end{document}

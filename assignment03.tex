@@ -1,0 +1,130 @@
+\documentclass[12pt]{article}
+\input{preamble}
+
+\title{Assignment 03}
+\author{Naman Mishra}
+\date{4 November 2022}
+
+\begin{document}
+\maketitle
+
+\begin{problem}
+    Let $x \in \R$ such that $0 \leq x < \delta$ for every $\delta > 0$.
+    Show that $x$ must be 0. Explicitly state the field and order axioms that you are using.
+\end{problem}
+\begin{proof}
+    By \labelcref{defn:order:trichotomy}, done.
+\end{proof}
+%\begin{proof}
+%    We will first prove that inequalities can be added. \\
+%    Suppose $a < b$ and $c < d$. Then by (O3),
+%    \begin{align*}
+%        a + c &< b + c  &  b + c < b + d
+%    \end{align*}
+%    Thus by (O2), $a + c < b + d$.
+%
+%    Now since $2 = 1 + 1$, $2x = 1x + 1x$ (distributivity) $= x + x$ (identity). \\
+%    Thus $\frac{1}{2} + \frac{1}{2} = 2 \frac{1}{2} = 1$ (multiplicative inverse).
+%
+%    Now suppose for some $0 < x$, $\frac{1}{x} < 0$. \\
+%    Then by (O4), $0 < x \cdot \paren{- \frac{1}{x}} \implies 0 < -\paren{x \cdot \frac{1}{x}} \implies 0 < -1$ which is false.
+%\end{proof}
+
+\begin{problem}
+    Formulate  definitions  of  the  terms  ``bounded  below  set'',  ``lower  bound''  and ``greatest lower bound'' for subsets of $\R$.
+    Show that $\Z$ is neither bounded above nor bounded below.
+\end{problem}
+\begin{defn} \label{defn:bounds:lower}
+    A subset $S \subseteq \R$ is said to be \emph{bounded below} if there exists an element $b \in \R$ such that $\forall\; s \in S, b \leq s$.
+
+    Here, $b$ is called a \emph{lower bound} of $S$.
+
+    $b$ is said to be a (the) \emph{greatest lower bound} if $\forall\; b' > b$, $b'$ is not a lower bound of $S$, \textit{i.e.}, $\exists\; s \in S$ such that $s < b'$.
+\end{defn}
+\begin{proof}
+    ($\Z$ is unbounded) Suppose $b \in \R$ is an upper bound of $\Z$. By the Archimedean property, there exists $n \in \P \implies n \in \Z$ such that $n\cdot 1 = n > b$. Hence $b$ is not an upper bound. \\
+    Next suppose $b \in \R$ is a lower bound of $\Z$. By the Archimedean property, there exists $n \in \P \implies n \in \Z$ such that $n \cdot 1 = n > -b \implies -n < b$. Since the additive inverse of an integer is also an integer, $b$ is not a lower bound.
+
+    Thus $\Z$ cannot have an upper bound, nor a lower bound.
+\end{proof}
+
+\begin{problem}
+    If $x$ is an arbitrary real number, prove that there is exactly one integer $n$ which satisfies \[
+        n \leq x < n + 1
+    \] You may use Theorem 1.28 from Apostol (without proof), which says $\P$ is not bounded above.
+    Other than the least upper bound property of $\R$, you need not specify which axioms you are using in your proof.
+\end{problem}
+\begin{proof}
+    By the Archimedean property, there exists an $m$ such that $m \cdot 1 = m > x$. Thus the set \[
+        S = \set{n \in \Z : n \leq x}
+    \] is bounded above.
+    Since $\Z$ is unbounded below, $\exists\; n \in \Z : n < y \;\forall\; y \in \R$. Thus the set $S$ is non-empty. \\
+    Therefore the set $S$ has a least upper bound in $\R$.
+    Call this $z$.
+    Since $z-1$ is not an upper bound, there exists an $m \in S$ such that \[
+        z - 1 < m \leq z < m + 1.
+    \] Since $z < m + 1$, $m + 1 \notin S$.
+    Thus $m \leq x < m + 1$.
+
+    Now suppose $m_{1}$ and $m_{2}$ both satisfy this property.
+    $m_{1} \leq x < m_{2} + 1 \implies m_{1} < m_{2} + 1$.
+    Similarly $m_{2} < m_{1} + 1$.
+    Thus $\abs{m_{1} - m_{2}} < 1$.
+    Since $m_{1}$ and $m_{2}$ are integers, they cannot be distinct.
+\end{proof}
+
+\begin{problem}
+    Let $\set{a_{n}} \subset R$ be an arbitrary sequence.
+    Among the statements listed below,exactly one implies that $\set{a_{n}}$ is convergent, exactly one implies that $\set{a_{n}}$ is divergent, and the remaining one does not say anything conclusive about the convergence of $\set{a_{n}}$.
+    Determine which is which.
+    For the conclusive statements, you must give proofs.
+    For the inconclusive statement, you must provide two sequences which satisfy the given statement, but one converges and the other diverges.
+    \begin{enumerate}[label=(\arabic*)]
+        \item There exists an $L \in \R$ such that for every $\varepsilon > 0$, there exists an $N \in \N$ such that $\abs{a_{n} - L} < n \varepsilon$ for all $n \geq N$.
+        \item There exists an $L \in \R$ such that for every $\varepsilon > 0$, there exists an $N \in \N$ such that $\abs{a_{n} - L} < \frac{\varepsilon}{n + 1}$ for all $n \geq N$.
+        \item For every $R > 0$, there exists an $N \in \N$ such that $\abs{a_{N}} > R$.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=(\arabic*)]
+        \item (Inconclusive) Suppose $a_{n} = 1 \;\forall\; n \in \N$.
+        This converges to $1$, and passes the condition using the Archimedean property, and converges to 1.
+        Now suppose $a_{n} = \sqrt{n}$.
+        Then $\abs{a_{n} - 0} = \abs{\sqrt{n}}$.
+        For any $\varepsilon > 0$, choose $N > \frac{1}{\varepsilon^{2}}$.
+        Thus $n \geq N \implies \frac{1}{\sqrt{n}} < \frac{1}{\sqrt{n}} < \varepsilon$.
+        Also $\frac{1}{\sqrt{n}} > 0 > -\varepsilon$.
+        Thus the sequence satisfies the given condition, but diverges.
+        \item (Convergent) Since $n + 1 > 1$, $\frac{\varepsilon}{n + 1} < \varepsilon$.
+        So for any $\varepsilon > 0$, $\abs{a_{n} - L} < \frac{\varepsilon}{n + 1} < \varepsilon \implies \abs{a_{n} - L} < \varepsilon \implies \set{a_{n}}$ is convergent.
+        \item (Divergent) Suppose the sequence converges to a limit $L$.
+        Then there exists for all $\varepsilon > 0$, an $N \in \N$ such that $\abs{a_{n} - L} < \varepsilon$ for all $n \geq  N$.
+        Let $R = \max(\set{\abs{a_{n}}}_{n \in \N, n < N} \;\cup\; \set{\abs{L} + \varepsilon})$.
+        $\exists\; m \in \N$ such that $\abs{a_{m}} > R \implies \abs{a_{m}} > \abs{L} + \varepsilon$.
+        $\abs{a_{m} - L} \geq \abs{\abs{a_{m}} - \abs{L}} > \abs{a_{m}} - \abs{L} > \varepsilon$.
+        
+        $m \not< N$ since $R \geq \abs{a_{n}} \;\forall\; n \in \N, n < N$.
+        Thus $\exists\; m > N$ such that $\abs{a_{m} - L} > \varepsilon$, which contradicts the assumption that the sequence was convergent.
+
+        \textbf{FALSE} alternative: We know that $\abs{a_{n}}$ diverges to $+\infty$ (\textcolor{red}{not necessarily}).
+        Suppose $a_{n}$ converges to $L$.
+        Then $\abs{\abs{a_{n}} - \abs{L}} \leq \abs{a_{n} - L}$.
+        $\exists\; n \in \N$ such that for all $\varepsilon > 0, \abs{a_{n} - L} < \varepsilon$ for all $n \geq N$.This implies $\abs{\abs{a_{n}} - \abs{L}} < \varepsilon \;\forall\; n \geq N$, \textit{i.e.}, $\abs{a_{n}}$ converges to $\abs{L}$.
+
+        Since $\abs{a_{n}}$ diverges, $a_{n}$ must also diverge. \qedhere
+    \end{enumerate}
+\end{proof}
+
+\begin{problem}
+    Compute the limit of the following sequences.
+    \begin{enumerate}[label=(\arabic*)]
+        \item \[
+            \frac{2-3n^{2}}{n^{2} + 2n + 1}
+        \]
+    \end{enumerate}
+\end{problem}
+\end{document}
+
+
+
+

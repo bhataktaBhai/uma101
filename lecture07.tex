@@ -1,0 +1,61 @@
+\lecture{7}{wed 2 nov 2022}{Sequences and Convergence}
+\section{Sequences \& Series}
+We will now assume \emph{everything} about real numbers: multiplication, division, exponentiation, etc.
+
+\subsection{Sequences} \vskip 5pt
+\begin{defn} \label{defn:sequence}
+    A sequence in $\R$ is a function $f: \N \to \R$. We denote this sequence by $\set{a_{n}}_{n \in \N}$, where \[
+        a_{n} = f(n) \quad \forall\; n \in \N
+    \] and $a_{n}$ is called the $n^{th}$ term of $\set{a_{n}}_{n \in \N}$.
+\end{defn}
+\begin{rem}
+    $\set{a_{n}} \subseteq \R$ will denote a sequence of real numbers. \\
+    The numbering starts at 0 technically, but doesn't really matter. We will often omit the subscript $n \in \N$ and start indexing from some other point.
+\end{rem}
+
+\begin{defn} \label{defn:sequence:convergence}
+    We say that a sequence $\set{a_{n}} \subseteq \R$ is \emph{convergent} (in $\R$) if $\exists\; L \in \R$ such that for each $\varepsilon > 0, \,\exists\; N_{\varepsilon,L} \in \N$ such that \[
+        \abs{a_{n} - L} < \varepsilon \quad \forall\; n \geq N_{\varepsilon, L}
+    \] 
+    We will call $L$ \emph{a} limit of $\set{a_{n}}$ and we write: \[
+        a_{n} \to L \text{ as } n \to \infty
+    \]
+    A sequence $\set{a_{n}}$ is said to be \emph{divergent} if it is not convergent, \textit{i.e.}, $\forall\; L \in \R$ and $N_{L} \in \N$, $\exists\; \varepsilon > 0$ and $N \geq N_{L}$ such that \[
+        \abs{a_{N} - L} > \varepsilon
+    \]
+\end{defn}
+
+\begin{thm}[Uniqueness of limits] \label{thm:sequence:unique_limit}
+    Suppose $L_{1}$ and $L_{2}$ are limits of a (convergent) sequence $\set{a_{n}} \in \R$. Then $L_{1} = L_{2}$.
+\end{thm}
+\begin{proof}[Proof \textcolor{self_proof}{(self)}]
+    Suppose $L_{1} \neq L_{2}$. Then define $\varepsilon = \frac{\abs{L_{1} - L_{2}}}{2}$.
+    There exists $N_{1}$ such that $\abs{a_{n} - L_{1}} < \varepsilon \;\forall\; n \geq N_{1}$.
+    So for all $n \geq N_{1}$,
+    \begin{align*}
+        \abs{L_{1} - L_{2}}  &= \abs{L_{1} - a_{n} + a_{n} - L_{2}}  \\
+        &\leq \abs{a_{n} - L_{1}} + \abs{a_{n} - L_{2}} \\
+        &\leq \varepsilon + \abs{a_{n} - L_{2}}  \\
+        \implies 2 \varepsilon  &\leq \varepsilon + \abs{a_{n} - L_{2}} \\
+        \varepsilon &\leq \abs{a_{n} - L_{2}} \qedhere
+    \end{align*}
+    % $\abs{ a_{n} - L_{1} } = \abs{ a_{n} - L_{2} + L_{2} - L_{1} } \leq \abs{ a_{n} - L_{2} } + \abs{ L_{2} - L_{1} }$
+\end{proof}
+
+\begin{example} \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item Let $\set{a_{n}} = \frac{1}{n^{p}} \,\forall\; n \in \P$, where $p > 0$. \[
+            \lim_{n \to \infty} a_{n} = 0
+        \]
+        \begin{proof}
+            Let $\varepsilon > 0$. \\
+            By the \nameref{thm:R:archimedean} applied to $x = \varepsilon^{\frac{1}{p}}$ and $y = 1$, $\exists\; N \in \P$ such that: \[
+                N \varepsilon^{\frac{1}{p}} > 1 \implies \varepsilon^{\frac{1}{p}} > \frac{1}{N} \implies \varepsilon > \frac{1}{N^{p}}
+            \]
+            Let $n \geq N$. Then
+            \begin{align*}
+                \abs{\frac{1}{n^{p}} - 0} &= \frac{1}{n^{p}} \\
+                &\leq \frac{1}{N^{p}} \\
+                &< \varepsilon \qedhere
+            \end{align*}
+        \end{proof}

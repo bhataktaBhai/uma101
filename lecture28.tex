@@ -1,0 +1,64 @@
+\lecture{28}{thu 29 dec '22}{}
+
+\begin{thm}[Monotone Integrable] \label{thm:monotone integral}
+    Every bounded monotone function on $[a, b]$ is Riemann integrable on $[a, b]$.
+\end{thm}
+\begin{proof}
+    Assume WLOG that $f : [a, b] \to \R$ is increasing. Let \[
+        P_{n} = \set{x_{0} < x_{1} < \dots < x_{n}} \quad n \in \P
+    \] where $x_{j} = a + j \cdot \frac{b - a}{n}$.
+    Set
+    \begin{align*}
+        s_{n}(x) &=
+        \begin{cases}
+            f(x_{j-1}) & x \in [x_{j-1}, x_{j}] \\
+            f(b) & x = b
+        \end{cases}
+        & t_{n}(x) &=
+        \begin{cases}
+            f(x_{j}) & x \in [x_{j-1}, x_{j}) \\
+            f(b) & x = b
+        \end{cases}
+    \end{align*}
+    Note that $s_{n} \leq f \implies s \in S_{f}$ and $t_{n} \geq f \implies t \in T_{f}$.
+    \begin{align*}
+        \int_{a}^{b} s_{n}(x) \dd x &= \frac{b-a}{n} \sum_{j=1}^{n} f(x_{j-1}) &  \int_{a}^{b} t_{n}(x) \dd &= \frac{b-a}{n} \sum_{j=1}^{n} f(x_{j})
+    \end{align*}
+    
+    Note that \begin{multline*}
+        \int_{a}^{b} s_{n}(x) \dd x \leq \ubar{I}(f) \leq \bar{I}(f) \leq \int_{a}^{b} t_{n}(x) \dd x \\
+        \implies 0 \leq \bar{I}(f) - \ubar{I}(f) \leq \int_{a}^{b} t_{n}(x) \dd x - \int_{a}^{b} s_{n}(x)
+    \end{multline*}
+    We will show that $\int_{a}^{b} t_{n}(x) \dd x - \int_{a}^{b} s_{n}(x) \dd x \to 0$ as $n \to 0$. 
+    \[
+        \int_{a}^{b} t_{n}(x) \dd x - \int_{a}^{b} s_{n}(x) \dd x = \frac{(b - a)(f(x_{n}) - f(x_{0}))}{n} = \frac{(b - a)(f(b) - f(a))}{n} \to 0
+    \] Therefore $\bar{I}(f) - \ubar{I}(f) = 0$, \textit{i.e.}, $f$ is Riemann integrable.
+\end{proof}
+
+\begin{example}
+    Let $b > 0, p \in \N$. Then $x^{p}$ is Riemann integrable on $[0, b]$ and \[
+        \int_{0}^{b} x^{p} \dd x = \frac{b^{p+1}}{p+1}.
+    \]
+\end{example}
+\begin{proof}
+    Since $x^{p}$ is increasing on $[0, b]$, we have Riemann integrability on $[0, b]$. Using $s_{n}$ and $t_{n}$ as defined in \cref{thm:monotone integral}, \begin{align*}
+        \frac{b}{n} \sum_{j=0}^{n-1} \paren{\frac{bj}{n}}^{p} &\leq \int_{0}^{b} x^{p} \dd x \leq \frac{b}{n} \sum_{j=1}^{n} \paren{\frac{bj}{n}}^{p} \\
+        \frac{b^{p+1}}{n^{p+1}} \paren{1 + 2^{p} + \dots + (n-1)^{p}} &\leq \int_{0}^{b} x^{p} \dd x \leq \frac{b^{p+1}}{n^{p+1}} \paren{1 + 2^{p} + \dots + n^{p}} 
+    \end{align*}
+    \textcolor{exercise}{Prove:} \[
+        1^{p} + 2^{p} + \dots (n-1)^{p} < \frac{n^{p}}{p + 1} < 1^{p} + 2^{p} + \dots n^{p}.
+    \]
+    Let \[
+        a_{n} = \frac{1^{p} + 2^{p} \dots + (n-1)^{p}}{n^{p}}, \qquad b_{n} = \frac{1^{p} + 2^{p} + \dots (n-1)^{p} + n^{p}}{n^{p}}
+    \] Then \[
+        a_{n} < \frac{1}{p + 1} < b_{n} = a_{n} + \frac{1}{n} < \frac{1}{p + 1} + \frac{1}{n}.
+    \] Thus by the squeeze theorem \[
+        \lim_{n \to \infty} b_{n} = \lim_{n \to \infty} a_{n} = \frac{1}{p + 1}
+    \] Therefore \[
+        \int_{0}^{b} x^{p} \dd x = \frac{b^{p+1}}{p+1}.
+    \]
+\end{proof}
+
+
+
+

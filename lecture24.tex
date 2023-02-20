@@ -1,0 +1,96 @@
+\lecture{24}{Wed 21 Dec '22}{TAYLOR EXPANSION}
+
+\begin{defn}[Taylor Polynomial] \label{defn:taylor}
+    Let $f : (a, b) \to \R$ be $k$ times differentiable at some $x_{0} \in (a, b)$. The $k^{th}$ Taylor polynomial at $x_{0}$ is defined as \[
+        P_{k}^{x_{0}}(x) = f(x_{0}) + \frac{f'(x_{0})}{1!}(x - x_{0}) + \frac{f''(x_{0})}{2!}(x - x_{0})^{2} + \cdots + \frac{f^{(k)}(x_{0})}{k!}(x - x_{0})^{k}.
+    \]
+\end{defn}
+
+\begin{thm}[Taylor's Theorem] \label{thm:taylor}
+    Let $f : (a, b) \to \R$ be an $(n + 1)$ times differentiable function on $(a, b)$.
+    Note that this implies $f, f', f'', \dots f^{(n)}$ are continuous.
+    Let $x_{0} \in (a, b)$.
+    Then $\forall\; x \in (a, b) \;\exists\; c_{x}$ between $x$ and $x_{0}$ such that \[
+        f(x) = P_{n}^{x_{0}}(x) + f^{(n+1)}(c_{x}) \frac{(x - x_{0})^{n+1}}{(n+1)!}.
+    \]
+\end{thm}
+\begin{rem}
+    Compare this with the MVT: \[
+        f(x) = f(x_{0}) + f'(c_{x}) (x - x_{0}).
+    \]
+    This is in fact Taylor's theorem for $n = 0$.
+\end{rem}
+
+\begin{proof}[Copilot's Proof]
+    Let $x \in (a, b)$.
+    We will show that there exists a $c_{x}$ between $x$ and $x_{0}$ such that \[
+        f(x) = P_{n}^{x_{0}}(x) + f^{(n+1)}(c_{x}) \frac{(x - x_{0})^{n+1}}{(n+1)!}.
+    \]
+    We will show this by induction on $n$.
+    The base case is $n = 0$.
+    This is the MVT.
+    For the inductive step, let $n \geq 1$.
+    Let $x \in (a, b)$.
+    We will show that there exists a $c_{x}$ between $x$ and $x_{0}$ such that \[
+        f(x) = P_{n}^{x_{0}}(x) + f^{(n+1)}(c_{x}) \frac{(x - x_{0})^{n+1}}{(n+1)!}.
+    \]
+    Let $c_{x}$ be the point where $f^{(n)}$ is maximized on $(x_{0}, x)$.
+    Then \begin{multline}
+        f(x) = f(x_{0}) + f'(x_{0})(x - x_{0}) + \frac{f''(x_{0})}{2!}(x - x_{0})^{2} + \cdots + \frac{f^{(n)}(x_{0})}{n!}(x - x_{0})^{n} \\
+        + f^{(n+1)}(c_{x}) \frac{(x - x_{0})^{n+1}}{(n+1)!}.
+    \end{multline}
+    By the inductive hypothesis, there exists a $d_{x}$ between $x$ and $x_{0}$ such that \[
+        f(x) = P_{n}^{x_{0}}(x) + f^{(n+1)}(d_{x}) \frac{(x - x_{0})^{n+1}}{(n+1)!}.
+    \]
+    Since $f^{(n+1)}$ is continuous, we have \[
+        f^{(n+1)}(c_{x}) = f^{(n+1)}(d_{x}).
+    \]
+    Therefore, \[
+        f(x) = P_{n}^{x_{0}}(x) + f^{(n+1)}(c_{x}) \frac{(x - x_{0})^{n+1}}{(n+1)!}.
+    \]
+\end{proof}
+
+We want a $G$ such that \[
+    G'(c) = 0 \iff f^{(n+1)}(c) - (n+1)! \frac{f(x) - P_{n}^{x_{0}}(x)}{(x - x_{0})^{n+1}} = 0.
+\] So let \[
+    G(t) = f^{(n)}(t) - t (n+1)! \frac{f(x) - P_{n}^{x_{0}}(x)}{(x - x_{0})^{n+1}}.
+\] However, this $G$ does not satisfy the condition of Rolle's theorem on $[x, x_{0}]$ or $[x_{0}, x]$.
+
+\begin{example}
+    $f(x) = \cos x$ with $x_{0} = 0$.
+    \begin{align*}
+        P_{2}^{0}(x) &= f(0) + f'(0) x + \frac{f''(0)}{2!} x^{2} \\
+        &= 1 + 0 + \frac{-1}{2} x^{2} \\
+        &= 1 - \frac{x^{2}}{2}
+    \end{align*}
+
+    Since cos is infinitely differentiable on \R, we have for $n = 2$, \[
+        \cos x = 1 - \frac{x^{2}}{2} + \frac{\sin(c)}{3!} x^{3}
+    \] for some $c$ between 0 and $x$. \[
+        \cos x - (1 - x^{2}/2) = \frac{\sin(c)}{6} x^{3} \begin{cases}
+            > 0 & x \in (0, \pi) \\
+            > 0 & x \in (-\pi, 0)
+        \end{cases}
+    \]
+\end{example}
+\begin{rem}
+    We will define $e^{x}$ and $\log x$ rigorously later.
+\end{rem}
+\begin{rem}
+    We will also \emph{talk about} $x^{r}$ where $r$ is irrational rigorously.
+    We have defined $x^{n}$ as well as $x^{1/q}$, which lets us define $x$ to any rational power.
+
+    One way to define this is using limit of rational sequences converging to some irrational number. This is natural when defining \R\ using Cauchy sequence a la Tao.
+
+    We can also define it as the supremum of $x^{p/q}$ where $p/q$ is less that $r$. This is natural when defining \R\ using Dedekind cuts ala Rudin.
+\end{rem}
+\begin{rem}
+    We have not defined sine and cosine properly, but we know how they work. Section 2.5 in Apostol outlines some `rules' for sine and cosine. They derive ALL trigonometric identities from these. However, this is not a constructive definition.
+\end{rem}
+\begin{proof}
+     
+\end{proof}
+
+
+
+

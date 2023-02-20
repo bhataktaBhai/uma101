@@ -1,0 +1,194 @@
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, total={6in, 9in}]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{outlines}
+
+\usepackage{paracol}
+
+\usepackage[dvipsnames]{xcolor}
+\colorlet{exercise}{red!80!black}
+\colorlet{solved}{green!30!black}
+\colorlet{self_proof}{blue!30!black}
+
+\usepackage{mathrsfs}
+\usepackage{parskip}
+
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+\providecommand{\dd}{\,\mathrm{d}}
+
+\usepackage{mathtools} % also contains \coloneqq
+\DeclarePairedDelimiter{\oldparen}{(}{)}
+\DeclarePairedDelimiter{\oldset}{\{}{\}}
+\DeclarePairedDelimiter{\oldabs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\oldnorm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\oldfloor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\oldceil}{\lceil}{\rceil}
+
+\makeatletter
+\def\paren{\@ifstar{\oldparen}{\oldparen*}}
+\def\set{\@ifstar{\oldset}{\oldset*}}
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\def\floor{\@ifstar{\oldfloor}{\oldfloor*}}
+\def\ceil{\@ifstar{\oldceil}{\oldceil*}}
+
+\g@addto@macro\normalsize{%
+  \setlength\abovedisplayskip{7pt}%
+  \setlength\belowdisplayskip{7pt}%
+  \setlength\abovedisplayshortskip{1pt}%
+  \setlength\belowdisplayshortskip{1pt}%
+}
+\makeatother
+
+\newcommand\N{\ensuremath{\mathbb{N}}}
+\newcommand\R{\ensuremath{\mathbb{R}}}
+\newcommand\Z{\ensuremath{\mathbb{Z}}}
+\renewcommand\O{\ensuremath{\varnothing}}
+\renewcommand\P{\ensuremath{\mathbb{P}}}
+\newcommand\Q{\ensuremath{\mathbb{Q}}}
+\newcommand\C{\ensuremath{\mathbb{C}}}
+
+% make implied by and implies arrows shorter
+\let\implies\Rightarrow
+\let\impliedby\Leftarrow
+\let\iff\Leftrightarrow
+
+% make \epsilon and \varepsilon the same
+\let\epsilon\varepsilon
+
+% <theorems>
+% \theoremstyle{plain}
+% \newtheorem{thm}{Theorem}[section]
+% \newtheorem*{thm*}{Theorem}
+% \newtheorem{prop}[thm]{Proposition}
+% \newtheorem{lem}[thm]{Lemma}
+% \newtheorem{cor}[thm]{Corollary}
+% \newtheorem{axiom}{Axiom}[section]
+% \newtheorem*{exer}{Exercise}
+% 
+% \theoremstyle{definition}
+% \newtheorem{defn}[thm]{Definition}
+% 
+% \theoremstyle{remark}
+% \newtheorem*{rem}{Remark} 
+% \newtheorem*{example}{Example}
+% </theorems>
+
+% Gilles Castel's theorems
+\usepackage[framemethod=Tikz]{mdframed}
+\mdfsetup{skipabove=1em,skipbelow=0em}
+\mdfdefinestyle{axiomstyle}{
+    outerlinewidth = 1.5,
+    roundcorner = 10,
+    leftmargin = 15,
+    rightmargin = 15,
+    backgroundcolor = blue!10
+}
+\mdfdefinestyle{defnstyle}{
+    outerlinewidth = 1.5,
+    % roundcorner = 10,
+    leftmargin = 7,
+    rightmargin = 7,
+    backgroundcolor = green!10
+}
+\mdfdefinestyle{thmstyle}{
+    outerlinewidth = 1.5,
+    roundcorner = 10,
+    leftmargin = 7,
+    rightmargin = 7,
+    backgroundcolor = yellow!10
+}
+\mdfdefinestyle{lemmastyle}{
+    outerlinewidth = 1.5,
+    roundcorner = 10,
+    leftmargin = 7,
+    rightmargin = 7,
+    backgroundcolor = yellow!10
+}
+\theoremstyle{definition}
+\newmdtheoremenv[nobreak=true, style=axiomstyle]{axiom}{Axiom}[section]
+\newmdtheoremenv[nobreak=true, style=thmstyle]{thm}{Theorem}[section]
+\newmdtheoremenv[nobreak=true]{prop}[thm]{Proposition}
+\newmdtheoremenv[nobreak=true]{lem}[thm]{Lemma}
+\newmdtheoremenv[nobreak=true]{cor}[thm]{Corollary}
+\newmdtheoremenv[nobreak=true, style=defnstyle]{defn}[thm]{Definition}
+
+\newcounter{assignment}
+\newmdtheoremenv[nobreak=true]{problem}{Problem}[assignment]
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remarks}
+\newtheorem*{example}{Example}
+
+% <cref>
+\crefname{thm}{theorem}{theorems}
+\crefname{prop}{proposition}{propositions}
+\crefname{lem}{lemma}{lemmas}
+\crefname{cor}{corollary}{corollaries}
+\crefname{axiom}{axiom}{axioms}
+\crefname{defn}{definition}{definitions}
+% </cref>
+
+% <hyperlinks>
+\hypersetup{colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}}
+% </hyperlinks>
+
+\usepackage{xifthen}
+\def\testdateparts#1{\dateparts#1\relax}
+\def\dateparts#1 #2 #3 #4 #5\relax{
+    \marginpar{\small\textsf{\mbox{#1 #2 #3 #5}}}
+}
+
+\def\@lecture{}%
+\newcommand*{\lecture}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@lecture{Lecture #1}%
+    }{%
+        \def\@lecture{Lecture #1: #3}%
+    }%
+    \subsection*{\@lecture}
+    \marginpar{\small\textsf{\vbox{#2}}}
+    \vskip 6pt
+}
+\newcommand*{\assignment}[2]{%
+    \stepcounter{assignment}%
+    \subsection*{Assignment #1}
+    \marginpar{\small\vbox{due #2}}
+    \vskip 6pt
+}
+\makeatletter
+\newcommand*{\refifdef}[3]{%label,command,fallback
+    \@ifundefined{r@#1}{#3}{#2{#1}}%
+}
+\makeatother
+
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\spann}{span}
+\DeclareMathOperator{\dimn}{dim}
+
+\newcommand{\psum}[2]{\ensuremath{\mathrm{sum}_{#1}({#2})}}
+\newcommand{\pprod}[2]{\ensuremath{\mathrm{prod}_{#1}({#2})}}
+
+\newlist{examples}{enumerate}{1}
+\setlist[examples]{label*=(\alph*)~,ref=(\alph*)}
+\makeatletter
+\newcommand\myitem[1][]{%
+  \if\relax\detokenize{#1}\relax
+    \item\relax
+  \else
+    \protected@edef\@currentlabel{#1}%
+    \item[(#1)~]
+  \fi}
+\makeatother

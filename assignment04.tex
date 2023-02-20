@@ -1,0 +1,183 @@
+\documentclass[12pt]{article}
+\input{preamble}
+
+\title{Assignment 04}
+\author{Naman Mishra}
+\date{16 November 2022}
+
+\begin{document}
+\maketitle
+
+\begin{problem}
+    Let $\set{a_{n}}$ and $\set{b_{n}}$ be sequences in $\R$ such that for some $N \in \N, 0 \leq a_{n} \leq b_{n}$.
+    Convince yourself that if $\lim_{n \to \infty} b_{n} = 0$, then $\lim_{n \to \infty} a_{n} = 0$.
+    Using this fact, prove the following statements (you are not allowed to use logarithms for these proofs).
+    \begin{enumerate}[label=(\alph*)]
+        \item For any $r > 0$, $\lim\limits_{n \to \infty} \sqrt[n]{r} = 1$.
+        \item $\lim\limits_{n \to \infty} \sqrt[n]{n} = 1$.
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+    \begin{enumerate}[label=(\alph*)]
+        \item For $r > 1$: By the Archimedean property, there exists $n_{0} \in \P$ such that $n_{0} \varepsilon > r - 1$ for all $\varepsilon > 0$.
+        Thus for all $n \geq n_{0}$, $n \varepsilon > r - 1 \implies r < 1 + n \varepsilon \leq (1 + \varepsilon)^{n} \implies r^{1/n} < 1 + \varepsilon$.
+        $r > 1 \implies r^{1/n} > 1 > 1 - \varepsilon$.
+        Thus $\abs{r^{1 / n} - 1} < \varepsilon \;\forall\; n \geq n_{0}$.
+
+        For $r = 1$, $\abs{r^{1/n} - 1} = 0 < \varepsilon$ for all $n \geq  1, \varepsilon > 0$.
+
+        For $r < 1$, \[
+            r^{1/n} = \frac{1}{\paren{\frac{1}{r}}^{1/n}}
+        \] Since $\frac{1}{r} > 1$, by limit laws for sequnces, $\lim\limits_{n \to \infty} r^{1/n} = \frac{1}{1} = 1$.
+        
+        \item By the Archimedean property, there exists an $N \in \P > \frac{2}{\varepsilon^{2}} + 1$. For $n \geq N$, we have
+        \begin{align*}
+            \frac{n - 1}{2} \cdot \varepsilon^{2} &> 1 \\
+            \frac{n(n - 1)}{2} \cdot \varepsilon^{2} &> n \\
+            (1 + \varepsilon)^{n} &> n \\
+            \sqrt[n]{n} &< 1 + \varepsilon
+        \end{align*}
+        Also since $n \geq 1$, $n^{1 / n} \geq 1 \implies \sqrt[n]{n} > 1 - \varepsilon$. \qedhere
+    \end{enumerate}
+\end{proof}
+
+\begin{problem}
+    Show that the series $\sum\limits_{n=0}^{\infty} \frac{1}{n!}$ converges.
+    The mathematical constant $e$ is defined as the sum of this series.
+\end{problem}
+\begin{proof}
+    Ratio test.
+\end{proof}
+
+\begin{problem}
+    Let $\set{a_{n} : n \in \P}$ be an arbitrary collection of non-negative real numbers such that $\sum\limits_{n=1}^{\infty} a_{n}$ converges.
+    Determine which of the following series will necessarily converge (proof required), and which may either converge or diverge depending on the choice of the $a_{n}$'s (examples required).
+    \begin{enumerate}[label=(\alph*)]
+        \item $\sum\limits_{n=1}^{\infty} a_{n}^{2}$
+        \item $\sum\limits_{n=1}^{\infty} \sqrt{a_{n}}$
+        \item $\sum\limits_{n=1}^{\infty} \frac{\sqrt{a_{n}}}{n}$
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+    \begin{enumerate}[label=(\alph*)]
+        \item Since $\sum_{n=1}^{\infty} a_{n}$ converges, $\lim\limits_{n \to \infty} a_{n} = 0$. Thus there exists $N \in \P$ such that $a_{n} < 1 \;\forall\; n \geq N \implies a_{n}^{2} < a_{n} \;\forall\; n \geq N$. By the comparison test, $\sum_{n=1}^{\infty} a_{n}^{2}$ converges.
+
+        \item $\sum \frac{1}{n^{2}}$ converges but $\sum \frac{1}{n}$ diverges. $\sum 0$ converges and so does $\sum 0$. Inconclusive.
+
+        \item Let $b_{n} = a_{n} + \frac{1}{n^{2}}$. By the limit laws for series, $\sum b_{n}$ converges. \[
+            \frac{\sqrt{a_{n}}}{n} \leq \frac{\sqrt{b_{n}}}{n} = \frac{b_{n}}{n \sqrt{b_{n}}} \leq \frac{b_{n}}{n \sqrt{\frac{1}{n^{2}}}} = b_{n}.
+        \] Thus by the comparison test, $\sum\limits_{n=1}^{\infty} \frac{\sqrt{a_{n}}}{n}$ converges. \qedhere
+    \end{enumerate}
+\end{proof}
+
+\begin{problem}
+    Show that each of the following series converges, and determine its sum.
+    \begin{enumerate}[label=(\alph*)]
+        \item $\sum\limits_{n=1}^{\infty} \frac{4n^{2} - 1 + 3^{n-1}}{3^{n}(2n+1)(2n-1)}$
+        \item $\sum\limits_{n=6}^{\infty} \frac{6}{n^{2} - 1}$
+        \item $\sum\limits_{n=1}^{\infty} \frac{n}{(n + 1)(n + 2)(n + 3)}$
+    \end{enumerate}
+\end{problem}
+
+\begin{proof} \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item
+        \begin{align*}
+            \frac{4n^{2} - 1 + 3^{n-1}}{3^{n} (2n + 1)(2n - 1)} &= \frac{1}{3^{n}} + \frac{1}{3} \cdot \frac{1}{(2n + 1)(2n - 1)} \\
+            &= \frac{1}{3^{n}} + \frac{1}{6} \cdot \paren{\frac{1}{2n-1} - \frac{1}{2n+1}} \\
+            \\
+            \sum_{n=1}^{\infty} \frac{1}{3^{n}} = \frac{1}{3} \sum_{n=0}^{\infty} \frac{1}{3^{n}} &= \frac{1 / 3}{1-\frac{1}{3}} = \frac{1}{2} \\
+            \sum_{n=1}^{\infty} \frac{1}{2n-1} - \frac{1}{2n+1} &= \frac{1}{2n-1} - \frac{1}{2(n+1) - 1} \\
+            &= \frac{1}{1} - \frac{1}{3} + \frac{1}{3} - \frac{1}{5} + \frac{1}{5} - \dots \\
+            &= 1
+        \end{align*}
+        Thus by the limit laws,
+        \begin{align*}
+            \sum_{n=1}^{\infty} \frac{4n^{2} - 1 + 3^{n-1}}{3^{n} (2n + 1)(2n - 1)} &= \frac{1}{2} + \frac{1}{6} \cdot 1 \\
+            &= \frac{2}{3}
+        \end{align*}
+
+        \item
+        \begin{align*}
+            \frac{6}{n^{2} - 1} &= \frac{3 \cdot 2}{(n - 1)(n + 1)} \\
+            &= 3 \paren{\frac{1}{n - 1} - \frac{1}{n + 1}} \\
+            &= 3 \paren{\frac{1}{n - 1} - \frac{1}{(n + 2) - 1}} \\
+        \end{align*}
+        Let $\set{s_{n}}$ be the sops of $\frac{1}{n-1} - \frac{1}{n+1}$. For $n > 5$,
+        \begin{align*}
+            s_{n} &= \frac{1}{5} - \frac{1}{7} + \frac{1}{6} - \frac{1}{8} + \frac{1}{7} - \frac{1}{9} + \dots + \frac{1}{n-1} + \frac{1}{n + 1} \\
+            &= \frac{1}{5} + \frac{1}{6} - \frac{1}{n} - \frac{1}{n+1} \\
+            \lim_{n \to \infty} s_{n} &= \frac{1}{5} + \frac{1}{6} \\
+            &= \frac{11}{30} \\
+            \\
+            \implies \sum_{n=6}^{\infty} \frac{6}{n^{2} - 1} &= \frac{11}{10}
+        \end{align*}
+
+        \item
+        \begin{align*}
+            \frac{n}{(n + 1)(n + 2)(n + 3)} &= \frac{1}{2}\frac{3(n + 1) - (n + 3)}{(n + 1)(n + 2)(n + 3)} \\
+            &= \frac{3}{2} \frac{1}{(n + 2)(n + 3)} - \frac{1}{2} \frac{1}{(n + 1)(n + 2)}\\
+            &= \frac{3}{2} \paren{\frac{1}{n + 2} - \frac{1}{n + 3}} - \frac{1}{2} \paren{\frac{1}{n + 1} - \frac{1}{n + 2}}
+        \end{align*}
+        Let $s_{n}$ and $t_{n}$ be the sops of $\set{\frac{1}{n+2} - \frac{1}{n+3}}$ and $\set{\frac{1}{n+1} - \frac{1}{n+2}}$.
+        \begin{align*}
+            s_{n} &= \frac{1}{3} - \frac{1}{4} + \frac{1}{4} - \frac{1}{5} + \dots + \frac{1}{n} - \frac{1}{n+1} + \frac{1}{n+1} - \frac{1}{n+2} \\
+            s_{n} &= \frac{1}{3} - \frac{1}{n+2} \\
+            \lim_{n \to \infty} s_{n} &= \frac{1}{3} \\
+            t_{n} &= \frac{1}{2} - \frac{1}{3} + \frac{1}{3} -\frac{1}{4} + \dots + \frac{1}{n + 1} - \frac{1}{n + 2} + \frac{1}{n + 2} - \frac{1}{n + 3}\\
+            t_{n} &= \frac{1}{2} - \frac{1}{n + 3} \\
+            \lim_{n \to \infty} t_{n} &= \frac{1}{2} \\
+            \\
+            \sum_{n=1}^{\infty} \frac{n}{(n + 1)(n + 2)(n + 3)} &= \frac{3}{2} \cdot \frac{1}{3} - \frac{1}{2} \cdot \frac{1}{2} \\
+            &= \frac{1}{4} \qedhere
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\begin{problem}
+    For each of the series given below, determine whether it converges or diverges.
+    You need not compute the sum in the case of convergence.
+    \begin{enumerate}[label=(\arabic*)]
+        \item $\sum\limits_{n=1}^{\infty} \frac{n \sin^{2}(n\pi/3)}{2^{n}}$
+        \item $\sum\limits_{n=1}^{\infty} \paren{\frac{1}{n}}^{\frac{1}{n}}$
+        \item $\sum\limits_{n=1}^{\infty} \frac{(-1)^{n}n^{25}}{(n+2)!}$
+        \item $\sum\limits_{n=5}^{\infty} \frac{\sqrt{n}+1}{(n-1)(n+2)(n-4)}$
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+    \begin{enumerate}[label=(\arabic*)]
+        \item Let $b_{n} = \frac{n}{2^{n}}$. \[
+            \frac{b_{n+1}}{b_{n}} = \frac{n+1}{2^{n+1}} \cdot \frac{2^{n}}{n} = \frac{1}{2} \cdot \frac{n+1}{n}
+        \] \[
+            \lim_{n \to \infty} \frac{b_{n+1}}{b_{n}} = \frac{1}{2}
+        \] Thus by the ratio test, $\sum b_{n}$ converges. Since $a_{n} < b_{n}$, $\sum a_{n}$ converges by the comparison test.
+
+        \item $n \geq 1 \implies \frac{1}{n} \leq 1 \land n^{\frac{1}{n}} \leq  n^{1} \implies \paren{\frac{1}{n}}^{\frac{1}{n}} \geq \frac{1}{n}$.
+        By the comparison test, $\sum_{n=1}^{\infty}\paren{\frac{1}{n}}^{\frac{1}{n}}$ diverges.
+
+        \item Let $a_{n} = \frac{n^{25}}{(n + 2)!}$.
+        Clearly $a_{n} > 0$. \[
+            0 < \frac{a_{n+1}}{a_{n}} = \paren{1 + \frac{1}{n}}^{25} \cdot \frac{1}{n + 3} \leq 2^{25} \cdot \frac{1}{n + 3}
+        \] For any $\varepsilon > 0$, there exists (by the Archimedean property), $N > \frac{2^{25}}{\varepsilon} - 3$.
+        For $n \geq N, -\varepsilon < 0 < \frac{a_{n+1}}{a_{n}} \leq \frac{2^{25}}{n + 3} \leq \frac{2^{25}}{N + 3} < \varepsilon$.
+        Thus the ratio converges to 0.
+        By the ratio test, $\sum_{n=1}^{\infty} a_{n}$ converges.
+
+        Since the given series converges absolutely, it converges.
+
+        \item For $n \geq 5$, 
+        \begin{align*}
+            0 < \frac{\sqrt{n} + 1}{(n - 1)(n + 2)(n - 4)} &= \frac{1}{(\sqrt{n} - 1)(n + 2)(n - 4)} \\
+            &< \frac{1}{(n + 2)(n - 4)} \\
+            &= \frac{1}{n^{2} - 2n - 8} \\
+            &< \frac{1}{n^{2} - 4n} \\
+            &= \frac{1}{\frac{1}{5}n^{2} + \frac{4}{5} n (n - 5)} \\
+            &\leq \frac{5}{n^{2}}
+        \end{align*}
+        So by the comparison test, $\sum\limits_{n=5}^{\infty}\frac{\sqrt{n} + 1}{(n - 1)(n + 2)(n - 4)}$ converges. \qedhere
+    \end{enumerate}
+\end{proof}
+\end{document}

@@ -1,0 +1,72 @@
+\documentclass[12pt]{article}
+\input{preamble}
+
+\title{Assignment 8}
+\author{Naman Mishra}
+\date{23 Dec 2022}
+
+\begin{document}
+\maketitle
+
+\section*{Problem 7}
+We define a function $f : \R \to \R$ to be `close' at a point $c \in \R$ if for every $\varepsilon > 0$, there exists an $L \in \R$ and a $\delta > 0$ such that for every $x \in N_{\delta}(c) \setminus \set{c}$, we have that \[
+    \abs{ f(x) - L } < \varepsilon.
+\]
+We define a sequence $\set{a_{n}} \subset \R$ to be `close' if for every $\varepsilon > 0$, there exists an $L \in \R$ and an $n_{0} \in \N$ such that for every $n \geq n_{0}$, we have that \[
+    \abs{ a_{n} - L } < \varepsilon.
+\]
+
+We will prove that if a function $f : \R \to \R$ is close at $c \in \R$, then it admits a limit at $c$. Here is the outline of the proof.
+\begin{outline}
+    \1 Prove that a close sequence is a Cauchy sequence, and therefore convergent.
+    \1 Show that if $\set{a_{n}} \subset \R \setminus \set{c}$ converges to $c$, then $\set{f(a_{n})}$ is a close sequence and thus convergent.
+    \1 Show that if two sequences $\set{a_{n}}, \set{b_{n}} \subset \R \setminus \set{c}$ converge to $c$, then $\set{f(a_{n})}$ and $\set{f(b_{n})}$ have the same limit.
+    \1 Use sequential characterization of limits to conclude $f$ has a limit at $c$.
+\end{outline}
+
+We first prove that a sequence is close iff it is Cauchy.
+\begin{enumerate}[label=(\alph*)]
+    \item Suppose that $\set{a_{n}}$ is a Cauchy sequence. Then for every $\varepsilon > 0$ there exists an $n_{0} \in \N$ such that for every $n \geq n_{0}$, we have that \[
+        \abs{ a_{n} - a_{m} } < \varepsilon \;\forall\; m, n \geq n_{0}.
+    \]
+    Let $L = a_{n_{0}}$. Then for every $n \geq n_{0}$, we have \[
+        \abs{ a_{n} - L } < \varepsilon
+    \] as desired.
+    
+    \item Suppose that $\set{a_{n}}$ is a close sequence. Then for every $\varepsilon > 0$ there exists an $L \in \R$ and an $n_{0} \in \N$ such that \[
+        \abs{ a_{n} - L } < \varepsilon / 2 \;\forall\; n \geq n_{0}.
+    \] Thus for any $m, n > n_{0}$, \[
+        \abs{ a_{n} - a_{m} } \leq \abs{ a_{n} - L } + \abs{ a_{m} - L } < \varepsilon
+    \] as desired.
+\end{enumerate}
+
+For sequences of real numbers, Cauchy $\iff$ convergent.
+
+Now suppose that $f : \R \to \R$ is close at $c \in \R$.
+Then for every $\varepsilon > 0$, there exists an $L \in \R$ and a $\delta_{\varepsilon} > 0$ such that for every $x \in N_{\delta_{\varepsilon}}(c) \setminus \set{c}$, we have \[
+    \abs{ f(x) - L } < \varepsilon.
+\]
+Consider a sequence $\set{a_{n}} \subset \R \setminus \set{c}$ converging to $c$.
+Then there exists an $n_{0}$ such that for every $n \geq n_{0}$, we have \[
+    \abs{ a_{n} - c } < \delta_{\varepsilon} \implies \abs{ f(a_{n}) - L } < \varepsilon.
+\] Thus $\set{f(a_{n})}$ is close, and therefore convergent.
+
+Suppose sequences $\set{a_{n}}$ and $\set{b_{n}}$ both converge to $c$ (but never equal it), with $\set{f(a_{n})}$ and $\set{f(b_{n})}$ having different limits $L_{1}$ and $L_{2}$. Consider the sequence \[
+    c_{n} = \begin{cases}
+        a_{n} & \text{if } n \text{ is even} \\
+        b_{n} & \text{if } n \text{ is odd}
+    \end{cases}
+\] Clearly $\set{c_{n}}$ converges to $c$, but $\set{f(c_{n})}$ diverges. This is a contradiction. Thus there exists a unique $L_{0} \in \R$ such that given any sequence $\set{a_{n}}$ converging to $c$, we have that \[
+    \lim_{n \to \infty} f(a_{n}) = L_{0}.
+\]
+
+By the sequential characterization of limits, the limit of $f$ at $c$ exists.
+
+On the other hand, if it is known that $f$ has a limit $L_{0}$ at $c$, setting $L = L_{0} \;\forall\; \varepsilon$ proves that $f$ is close at $c$.
+
+Thus the two definitions are equivalent.
+\end{document}
+
+
+
+

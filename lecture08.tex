@@ -1,0 +1,73 @@
+\lecture{8}{fri 4 nov 2022}{Sequences Continued}
+        \item $\set{(-1)^{n}}_{n \in \P}$ is divergent.
+        \begin{proof}
+            Suppose there exists a limit $L$.
+
+            Let $\varepsilon = 1$.
+            Then $\exists\; N \in \P$ such that $\abs{a_{n} - L} < \varepsilon$ for all $n \geq N$.
+            \begin{align*}
+                \abs{a_{2N} - L} < 1 \quad\implies\quad \abs{L - 1} &< 1 \\
+                \abs{a_{2N + 1} - L} < 1 \quad\implies\quad \abs{L + 1} &< 1
+            \end{align*}
+            Thus,
+            \begin{align*}
+                \abs{1 - L + L + 1} &\leq \abs{L - 1} + \abs{L + 1} \\
+                2 &< 2
+            \end{align*}
+            Contradiction.
+        \end{proof}
+    \end{enumerate}
+\end{example}
+
+\begin{defn} \label{defn:sequence:bounded}
+    A sequence $\set{a_{n}}_{n \in \N}$ is said to be \emph{bounded} if $\exists\; M > 0$ such that $\abs{a_{n}} < M \,\forall\; n \in \N$.
+\end{defn}
+
+\begin{thm} \label{thm:sequence:convergent=>bounded}
+    Every convergent sequence is bounded.
+\end{thm}
+\begin{proof}
+    We know that every finite set of real numbers has a minimum and a maximum.
+\end{proof}
+
+\begin{defn} \label{defn:sequence:monotone}
+    A sequence $\set{a_{n}} \subseteq \R$ is said to be \emph{monotonically increasing} if $a_{n} \leq a_{n+1} \,\forall\; n \in \N$.
+
+    A sequence $\set{a_{n}} \subseteq \R$ is said to be \emph{monotonically decreasing} if $a_{n} \geq a_{n+1} \,\forall\; n \in \N$.
+
+    A sequence $\set{a_{n}} \subseteq \R$ is said to be \emph{monotone} if it is either monotonically increasing or monotonically decreasing.
+\end{defn}
+
+\begin{thm}[Monotone convergence theorem] \label{thm:sequence:MCT}
+    A monotone sequence is convergent iff it is bounded.
+\end{thm}
+\begin{proof}
+    Assume $\set{a_{n}}$ is increasing and $\exists\; M > 0$ such that $\abs{a_{n}} < M \,\forall\; n \in \N$.
+
+    Let $S = \set{a_{n} : n \in \N}$.
+    $S$ is nonempty. $S$ is bounded above.
+    Thus, by LUB, there exists \[
+        b = \sup S
+    \] Let $\varepsilon > 0$.
+    Since $a_{n} \leq b \,\forall\; n \in \N$, we have $a_{n} < b + \varepsilon$.
+
+    Since $b$ is the lowest upper bound, $\exists\; N \in \N : a_{N} > b - \varepsilon$.
+    Since $\set{a_{n}}$ is monotonically increasing, $b + \varepsilon > a_{n} \geq a_{N} > b - \varepsilon \;\forall\; n \geq N$.
+    $\abs{a_{n} - b} < \varepsilon \;\forall\; n \geq N$. Thus the given sequence is convergent, with limit $b$.
+
+    A monotone sequence which is unbouded is divergent, as all convergent sequences are bounded (\cref{thm:sequence:convergent=>bounded}).
+\end{proof}
+
+\begin{rem}[Warning!]
+    Divergent sequences may diverge for different reasons!
+    \begin{itemize}
+        \item $\set{(-1)^{n}}$ is bounded but divergent.
+        \item $\set{n}$ is unbounded and divergent, to $+\infty$
+        \item $\set{(-1)^{n}n}$ is unbounded and divergent, but not to $\infty$ or $-\infty$.
+    \end{itemize}
+\end{rem}
+\begin{defn} \label{defn:sequence:diverging_to_infinity}
+    We say that a sequence diverges to $+\infty$ if $\forall\; R \in \R$, $\exists\; N_{R} \in \N$ such that $a_{n} > R \;\forall\; n \geq N_{R}$. \\
+    We say that a sequence diverges to $-\infty$ if $\forall\; R \in \R$, $\exists\; N_{R} \in \N$ such that $a_{n} < R \;\forall\; n \geq N_{R}$. \\
+    We write $\lim_{n \to \infty} a_{n} = +\infty$ or $\lim_{n \to \infty} a_{n} = -\infty$, but this is purely notational and does not mean ``$\set{a_{n}}$ has a limit''.
+\end{defn}

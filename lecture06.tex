@@ -1,0 +1,100 @@
+\lecture{6}{mon 31 oct 2022}{\R, Bounds, Supremums and the LUB Property}
+\subsection{Upper bounds \& least upper bounds}
+Throughout this subsection, $(F, +, \cdot, <)$ is an ordered field, and we assume all ``basic'' properties. \\
+\textbf{Key example:} $(\R, +, \cdot, <)$
+
+\begin{defn} \label{defn:bounds:upper}
+    A non-empty subset $S \subseteq F$ is said to be \emph{bounded above} in $F$ if there exists a $b \in F$ such that \[
+        a \leq b \;\forall\; a \in S
+    \]
+    Here, $b$ is called an \emph{upper bound} of $S$. If $b \in S$, then $b$ is a \emph{maximum} of $S$.
+\end{defn}
+\begin{example}
+    \begin{align*}
+        S &= \set{ x \in F : 0 \leq x \leq 1 } \\
+        T &= \set{ x \in F : 0 \leq x < 1 }
+    \end{align*}
+    Both $S$ and $T$ are bounded above as $1$ is an upper bound for both. \\
+    $1$ is in fact, a maximum of $S$.
+\end{example}
+\begin{rem}
+    If a maximum exists, it must be unique (\textcolor{exercise}{why?}).
+\end{rem}
+\begin{proof}
+    Suppose $b_{1}, b_{2} \in S$ are two upper bounds of $S$. Then $b_{1} \leq b_{2}$ and $b_{2} \leq b_{1} \implies b_{1} = b_{2}$.
+\end{proof}
+\begin{rem}
+    Upper bounds may not be unique.
+\end{rem}
+
+\begin{defn} \label{defn:bounds:upper:supremum}
+    Let $S \subseteq F$ be bounded above. An element $b \in F$ is said to be a \emph{least upper bound} of $S$ or a \emph{supremum} of $S$ if:
+    \begin{enumerate}[label=(\alph*)]
+        \item $b$ is an upper bound of $S$.
+        \item If for $c \in F$, $c < b$, then $c$ is not an upper bound of $S$. In other words, for any $c < b, \;\exists\; s_{c} \in S$ such that $c < s_{c}$. \\
+        Contrapositive: If $c$ is an upper bound of $S$, then $c$ is not less than $b$, \textit{i.e.}, $b \leq c$.
+    \end{enumerate}
+\end{defn}
+\begin{rem}
+    There is only one supremum of $S$.
+\end{rem}
+\begin{proof}
+    Suppose $b_{1}, b_{2} \in F$ are two supremums of $S$. Then since $b_{1}$ is an upper bound, $b_{1}$ is not less than $b_{2}$. Similarly $b_{2}$ is not less than $b_{1}$. By \labelcref{defn:order:trichotomy}, $b_{1} = b_{2}$.
+\end{proof}
+
+\begin{example}
+    \[
+        \sup \set{x \in F : 0 \leq x < 1} = 1
+    \]
+\end{example}
+\begin{proof}
+    Call the given set $T$. $T$ is non-empty as $0 \in T$. It is clear that $1$ is an upper bound (because $x < 1 \implies x < 1 \;\forall\; x \in T$). \\
+    Let $a \in F$ s.t. $a < 1$. Now if $a < 0$, $a$ is not an upper bound as $0 \in T$.
+
+    If $0 \leq a < 1$, first note that
+    \begin{align*}
+        0 < 1 &\leq a + 1 < 2 \\
+        \implies 0 < \frac{1}{2} &\leq \frac{a+1}{2} < 1 \tag{\textcolor{exercise}{why?}}
+    \end{align*}
+    Thus, $\dfrac{a + 1}{2} \in T$.
+    Since $a = \dfrac{a + a}{2} < \dfrac{a + 1}{2}$ (\textcolor{exercise}{why?}), $a$ is not an upper bound.
+    Therefore, $1$ is the least upper bound of $T$.
+\end{proof}
+
+\subsection{The Real Numbers}
+We assume the existence of a set $\R$ with operations $+, \cdot$ and relation $<$ such that:
+\begin{enumerate}[label=(\alph*)]
+    \item $(\R, +, \cdot, <)$ is an ordered field.
+    \item (LUB property) every non-empty bounded above subset in $\R$ has a supremum in $\R$.
+\end{enumerate}
+
+Some special subsets of $\R$:
+\begin{itemize}
+    \item $x > 0$ is called a positive real number.
+    \item $x < 0$ is called a negative real number.
+    \item $\N = \set{0, 1, 2, \dots}$ is a subset of $\R$ and inherits $+, \cdot, <$.
+    \item $\P = \set{n \in \N : n \neq 0}$ is the set of positive natural numbers.
+    \item $\Z = \N \cup \set{-n : n \in \P}$ is the set of integers.
+    \item $\Q = \set{\frac{p}{q} : p \in \Z, q \in \P}$ is the set of rational numbers.
+    \item $\Q' = \R \setminus \Q$ is the set of irrational numbers.
+\end{itemize}
+
+\begin{thm}[Archimedean property of $\R$] \label{thm:R:archimedean}
+    Let $x, y \in \R$ and $x > 0$, then $\exists\; n \in \N$ such that \[
+        n \cdot x > y.
+    \]
+\end{thm}
+\begin{proof}
+    Assert $x > 0$. Let \[
+        S = \set{nx : n \in \N}
+    \]
+    Suppose $S$ is bounded above.
+    Since $x \in S$, $S$ is non-empty.
+    Let $b$ be the supremum of $S$ (exists by LUB).
+    Since $x$ is positive, $b - x < b$.
+    Thus $b - x$ is not an upper bound of $S$, \textit{i.e.}, $\exists\; n \in \N$ such that $nx > b - x$.
+    Thus $(n + 1)x > b$, and so $b$ is not an upper bound of $S$.
+    By contradiction, $S$ cannot be bounded above.
+
+    Hence for all $y \in \R$, $\exists\; s \in S$ such that $s > y$, and so the Archimedean property holds.
+\end{proof}

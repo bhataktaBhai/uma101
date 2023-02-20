@@ -1,0 +1,188 @@
+\documentclass[12pt]{article}
+\input{preamble.tex}
+
+\title{Assignment 05}
+\author{Naman Mishra}
+\date{20 November 2022}
+
+\begin{document}
+\maketitle
+
+You may freely use (without proof):
+\begin{enumerate}[label=(\roman*)]
+    \item $0 < \cos(x) < \abs{\dfrac{\sin x}{x}} < 1$ for all $0 < \abs{x} < \dfrac{\pi}{2}$.
+    \item Any trigonometric identities that you have seen in school.
+    \item Any limits computed in Lecture 12-14.
+\end{enumerate}
+
+\begin{problem}
+    Prove the squeeze theorem.
+\end{problem}
+\begin{thm}[squeeze theorem] \label{thm:limit:squeeze}
+    Let $f$, $g$, $h$ be functions defined on some neighborhood $N$ of $p$, except perhaps at $p$. Suppose $f \leq g \leq h$ on $N$, and \[
+        \lim_{x \to p} f(x) = \lim_{x \to p} h(x) = L \in \R.
+    \] Then \[
+        \lim_{x \to p} g(x) = L.
+    \]
+\end{thm}
+\begin{proof}
+    For any $\varepsilon > 0, \;\exists\; \delta_{1}, \delta_{2}$ such that \begin{align*}
+        \abs{f(x) - a} &< \varepsilon \quad\;\forall\; x \in N \cap N_{\delta_{1}}(p) \setminus \set{p} \\
+        \abs{h(x) - a} &< \varepsilon \quad\;\forall\; x \in N \cap N_{\delta_{2}}(p) \setminus \set{p}
+    \end{align*}
+
+    Thus for all $x \in N \cap N_{\delta}(p) \setminus \set{p}$, where $\delta = \min\set{\delta_{1}, \delta_{2}}$ so that $N_{\delta} = N_{\delta_{1}} \cap N_{\delta_{2}}$,
+    \begin{align*}
+        a - \varepsilon < f(x) \leq g(x) &\leq h(x) < a + \varepsilon \\
+        \implies \lim_{x \to p} g(x) &= a \qedhere
+    \end{align*}
+\end{proof}
+
+\begin{problem}
+    In each of the following cases, determine whether the limit exists or not, and compute the limit whenever it exists.
+    You may use any of the theorems stated in class, but state what you are using.
+    \begin{enumerate}[label=(\alph*)]
+        \item $\lim\limits_{x \to 2} \dfrac{(3x + 1)^{2} - 49}{x - 2}$
+        \item $\lim\limits_{x \to 0} \cos\paren{\dfrac{1}{x}}$
+        \item $\lim\limits_{x \to 0} \dfrac{\sqrt{1 + x} - \sqrt{1 - x}}{x}$
+        \item $\lim\limits_{x \to p} x^{n}$ (for fixed $n \in \N$ and $p \in \R$)
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=(\alph*)]
+        \item For any $x \neq  2$, \[
+            \frac{(3x + 1)^{2} - 49}{x - 2} = \frac{(3x + 8)(3x - 6)}{x - 2} = 3(3x + 8)
+        \] By limit laws, \[
+            \lim_{x \to 2} 3(3x + 8) = (\lim_{x \to 2} 3) ((\lim_{x \to 2} 3) \lim_{x \to 2} x + \lim_{x \to 2} 8) = 3(3 \cdot 2 + 8) = 42
+        \]
+    
+        \item Suppose the function has a limit $L$.
+        Take $\varepsilon = 1$.
+        Then $\exists\; \delta > 0$ such that $\abs{\cos \paren{\frac{1}{x}} - L} < 1$ for all $0 < \abs{x - 0} < \delta$.
+        By the Archimedean property, there exists $N$ such that $N 2\pi > \frac{1}{\delta} \implies 0 < \frac{1}{(2N + 1)\pi} < \frac{1}{2 N \pi} < \delta$.
+        \begin{align*}
+            \abs{1 - L} &< 1 \\
+            \abs{-1 - L} &< 1 \\
+            2 = \abs{1 - L + L + 1} &\leq \abs{1 - L} + \abs{-1 - L} < 1 + 1 = 2
+        \end{align*}
+        Contradiction.
+    
+        \item \[
+            \frac{\sqrt{1 + x} - \sqrt{1 - x}}{x} = \frac{2}{\sqrt{1 + x} + \sqrt{1 - x}} 
+        \] Since $\lim_{x \to 1} \sqrt{x} = 1$, we have $\lim_{x \to 0} \sqrt{1 + x} = \lim_{x \to 0} \sqrt{1 - x} = 1$. By limit laws, \[
+            \lim_{x \to 0} \frac{\sqrt{1 + x} - \sqrt{1 - x}}{x} = \frac{2}{2} = 1
+        \]
+    
+        \item We have $\lim_{x \to p} x^{0} = \lim_{x \to p} 1 = 1 = p^{0}$.
+        Suppose $\lim_{x \to p} x^{n} = p^{n} \;\forall\; p \in \R$ for some $n$.
+        Then $\lim_{x \to p} x^{n + 1} = \lim_{x \to p} x \cdot \lim_{x \to p} x^{n} = p \cdot p^{n} = p^{n + 1} \;\forall\; p \in \R$.
+        Thus $\lim_{x \to p} x^{n} = p^{n} \;\forall\; p \in \R \;\forall\; n \in \N$. \qedhere
+    \end{enumerate}
+\end{proof}
+\begin{problem}
+    Let $f$ and $g$ be functions on $\R$ such that \[
+        \lim_{x \to 0} f(x) = L \quad\text{and}\quad \lim_{y \to 0} g(y) = M,
+    \] for some $L, M \in \R$.
+    Is it true that \[
+        \lim_{x \to 0} (g \circ f)(x) = M?
+    \] If your answer is ``yes'', prove the above statement.
+    If your answer is ``no'', provide a counterexample, and give a sufficient condition on $g$ that will make the above statement true.
+\end{problem}
+\begin{proof}
+    \emph{NO.}
+    Let $f(x) = 0$, $g(x) = \begin{cases} 0 & x \neq 0 \\ 1 & x = 0 \end{cases}$.
+    Then $\lim_{x \to 0} f(x) = 0$ and $\lim_{x \to 0} g(x) = 0$, but $\lim_{x \to 0} g \circ f (x) = 1$.
+    
+    This arises from the fact that $\abs{f(x) - L} < \varepsilon$ does not imply $0 < \abs{f(x) - L}$, so it doesn't guarantee $0 < \abs{y - L} < \delta$.
+    
+    If we have $g$ continuous at $L$, then we know $g$ is defined at $L$ as well.
+    
+    For any $\varepsilon > 0$, $\exists\; \delta_{1} > 0$ such that $\abs{y - L} < \delta_{1} \implies g(y) \textrm{is defined and} \abs{g(y) - M} < \varepsilon$.
+    Choose $\varepsilon_{2} = \delta_{1}$.
+    Then there exists $\delta > 0$ such that $0 < \abs{x - 0} < \delta \implies f(x)$ is defined and $\abs{f(x) - L} < \varepsilon_{2} = \delta_{1} \implies \abs{g(f(x)) - M} < \varepsilon$.
+\end{proof}
+\begin{rem}
+    We can also enforce a condition on $f$: if $f(x) \neq L \;\forall\; x \neq 0$, then $\lim_{x \to 0} g(f(x)) = \lim_{x \to L} g(x)$.
+\end{rem}
+This yields a theorem:
+\begin{thm}[limit of composition] \label{thm:limit:composition}
+    Suppose $f$ and $g$ are functions on $\R$ such that \[
+        \lim_{x \to a} f(x) = L \;\textrm{and}\; \lim_{x \to L} g(x) = M.
+    \] Then we have \[
+        \lim_{x \to a} g(f(x)) = M
+    \] if
+    \begin{enumerate}[label=(\alph*)]
+        \item $g$ is continuous, or
+        \item $f(x) \neq L \;\forall\; x \in N_{\delta}(a) \setminus \set{a}$ for some $\delta > 0$.
+    \end{enumerate}
+\end{thm}
+
+\begin{problem}
+    Prove the sequential characterization of continuity.
+\end{problem}
+\begin{thm}[sequential characterization of continuity] \label{thm:cont:sequential_characterization}
+    Let $f : A \to \R$ be a function and let $p \in A$.
+    Let $P = \set{\set{a_{n}} \subseteq A : \lim\limits_{n \to \infty} a_{n} = p}$.
+    Then $f$ is continuous at $p$ iff $\lim\limits_{n \to \infty} f(a_{n}) = f(p) \;\forall\; \set{a_{n}} \in P$.
+\end{thm}
+\begin{proof} \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item Let $f$ be continuous at $p$ and let $\set{a_{n}} \in P$.
+
+        For every $\varepsilon > 0$ there exists $\delta$ such that $f(x) \in N_{\varepsilon}(f(p)) \;\forall\; x \in N_{\delta}(p) \cap A$.
+        Morever, $\exists\; N \in \N$ such that $ a_{n} \in N_{\delta}(p) \cap A \;\forall\; n \geq N$.
+
+        Thus for all $n \geq N$, $ f(a_{n}) \in N_{\varepsilon}(f(p))$.
+        Thus $\lim_{n \to \infty} f(a_{n}) = f(p)$.
+        \item Let $\lim_{n \to \infty} f(a_{n}) = f(p) \;\forall\; \set{a_{n}} \in P$.
+        Suppose $f$ is not continuous at $p$.
+        Then there exists an $\varepsilon > 0$ such that for all $\delta > 0$, there exists $a \in N_{\delta}(p) \cap A \setminus \set{p}$ such that $\abs{f(a) - f(p)} \geq \varepsilon$.
+
+        Let $\set{\delta_{n}}_{n \in \P} = \set{\frac{1}{n}}_{n \in \P}$.
+        Then corresponding to every $\delta_{n} \;\exists\; a_{n} \in A \cap N_{\delta_{n}}(p) \setminus \set{p}$ such that $\abs{f(a_{n}) - f(p)} \geq \varepsilon$.
+
+        Thus $\set{a_{n}} \to p$ but $\lim\limits_{n \to \infty} f(a_{n}) \neq f(p)$.
+        Contradiction. \qedhere
+
+        (This proof uses the axiom of choice. Let me know if you have a proof without it.)
+    \end{enumerate}
+\end{proof}
+
+\begin{problem}
+    Complete the following steps to establish the continuity of the sine and cosine functions on \R. Recall (i) and (ii) given at the beginning of this assignment.
+    \begin{enumerate}[label=(\alph*)]
+        \item Show that $\lim\limits_{x \to 0} \sin(x) = 0$.
+        \item Using (a) and a trigonometric identity relating sin and cos, show that $\lim\limits_{x \to 0} \cos(x) = 1$.
+        \item Using (a) and (b), show that sin and cos are continuous at any $x \in \R$.
+        \item Show that $\lim\limits_{x \to 0} \dfrac{\sin x}{x} = 1$.
+    \end{enumerate}
+\end{problem}
+\begin{proof} \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item \begin{equation*}
+            0 < \abs{\frac{\sin x}{x}} < 1 \implies -\abs{x} < \sin x < \abs{x} \qquad\forall\; 0 < \abs{x} < \frac{\pi}{2}
+        \end{equation*}
+        Since $\lim_{x \to 0} -\abs{x} = \lim_{x \to 0} \abs{x} = 0$, we have $\lim_{x \to 0} \sin x = 0$ by \nameref{thm:limit:squeeze}.
+        \item Since $\cos^{2}(x) + \sin^{2}(x) = 1$, we have \[
+            \lim_{x \to 0} \cos^{2}(x) = \lim_{x \to 0}(1 - \sin^{2}(x)) = 1 - \lim_{x \to 0} \sin^{2} x = 1 - \paren{\lim_{x \to 0} \sin x}^{2} =  1
+        \] Since $\cos x > 0$ for $\abs{x - 0} < \frac{\pi}{2}$, we have $\sqrt{\cos^{2} (x)} - \cos x = 0$ for $\abs{x - 0} < \frac{\pi}{2}$.
+        So $\lim_{x \to 0} (\sqrt{\cos^{2}x} - \cos x) = 0$. Thus \[
+            \lim_{x \to 0} \cos x = \lim_{x \to 0} \sqrt{\cos^{2} x} = \sqrt{\lim_{x \to 0} \cos^{2} x} = 1
+        \] by \nameref{thm:limit:composition} ($\sqrt{\cdot}$ is continuous).
+        \item Now
+        \begin{align*}
+            \sin(x + h) &= \sin x \cos h & \cos(x + h) &= \cos x \cos h \\
+            &+ \cos x \sin h &&- \sin x \sin h \\
+            \lim_{h \to 0} \sin(x + h) &= \sin x & \lim_{h \to 0} \cos(x + h) &= \cos x \\
+            \lim_{y \to x} \sin(y) &= \sin x & \lim_{y \to x} \cos(y) &= \cos x
+        \end{align*} for all $x \in \R$. Thus $\sin$ and $\cos$ are continuous at any $x \in \R$
+        \item Finally, we have \[
+            \abs{\frac{\sin x}{x}} = \frac{\sin x}{x} \quad\;\forall\; 0 < \abs{x} < \frac{\pi}{2}
+        \] so \[
+            \cos x < \frac{\sin x}{x} < 1 \quad \forall\; 0 < \abs{x} < \frac{\pi}{2}.
+        \] By the squeeze theorem, we get \[
+            \lim_{x \to 0} \frac{\sin x}{x} = 1. \qedhere
+        \]
+    \end{enumerate}
+\end{proof}
+\end{document}

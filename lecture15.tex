@@ -1,0 +1,55 @@
+\lecture{15}{mon 21 nov 2022}{Compositions; Borsuk-Ulam Theorem}
+
+\begin{thm} \label{thm:cont:composition}
+    Let $f: A \to \R$ and $g: B \to \R$ be continuous functions such that $f(A) \coloneqq \mathop{range}(f) \subseteq B$. Then, \[
+        g \circ f : x \in A \mapsto g(f(x)) \in \R
+    \] is continuous.
+\end{thm}
+
+\begin{proof}
+    Let $p \in A$ and $q = f(p)$. Let $\varepsilon > 0$. Since $g$ is continuous at $q$, $\exists\; \tau > 0$ such that whenever $y \in B$ and $\abs{ y - q } < \tau$, then $\abs{ g(y) - g(q) } < \varepsilon$.
+
+    Let $\varepsilon_{1} = \tau$. Then by the continuity of $f$ at $p$, $\exists\; \delta > 0$ such that whenever $x \in A \land \abs{ x - p } < \delta$, we have $\abs{ f(x) - f(p) } < \varepsilon_{1} = \tau$.
+
+    Thus, $\abs{ g(f(x)) - g(f(p)) } < \varepsilon$. Since $\varepsilon > 0$ and $p \in A$ were arbitrary, $g \circ f$ is continuous.
+\end{proof}
+
+\begin{thm}[intermediate value theorem] \label{thm:cont:IVT}
+    Let $f: [a, b] \to \R$ be a continuous function. Suppose $y \in \R$ is a number between $f(a)$ and $f(b)$, \textit{i.e.}, $y \in [f(a), f(b)]$. Then $\exists\; c \in [a, b]$ such that \[
+        f(c) = y
+    \]
+\end{thm}
+\begin{cor}[Bolzano's theorem] \label{thm:cont:Bolzano}
+    Let $f : [a, b] \to \R$ be a continuous function such that $f(a)$ and $f(b)$ take opposite signs. Then $\exists\; c \in (a, b)$ such that $f(c) = 0$.
+\end{cor}
+\begin{rem}
+    Bolzano's statement is equivalent to the IVT (let $g = f - y$).
+\end{rem}
+
+\begin{thm}[the Borsuk-Ulam theorem] \label{thm:cont:Borsuk-Ulam}
+    Let $S^{n}$ be the unit $n$-sphere, \textit{i.e.}, $S^{n} = \set{x \in \R^{n+1} : \norm{x} = 1}$. Let $f: S^{n} \to \R^{n}$ be a continuous function.
+    Then $f$ maps some pair of antipodal points to the same point. \[
+        \exists\; x \text{ such that } f(x) = f(-x)
+    \]
+\end{thm}
+
+\begin{proof}[``Proof'' for $n = 1$]
+    A continuous function $f$ on $S^{1}$ is a $2\pi$-periodic function on $\R$.
+    
+    View $f$ on $[0, \pi]$. Let \[
+        g(\theta) = f(\theta) - f(\theta + \pi).
+    \] $g$ is continuous (Note that $f(\theta + \pi)$ is continous as it can be viewed as a composition).
+
+    Then either $g(0) = g(\pi) = 0$, or $g(0) = -g(\pi) \neq 0$. Thus by \nameref{thm:cont:IVT} there exists $c \in (0, \pi)$ such that $f(c) = 0$.
+\end{proof}
+
+\begin{lem} \label{thm:sequence:comparison}
+    Let $a_{n}, b_{n}$ be convergent sequences such that $a_{n} \leq b_{n}$ for all $n$ (large enough). Then \[
+        \lim_{n \to \infty} a_{n} \leq \lim_{n \to \infty} b_{n}
+    \]
+\end{lem}
+\begin{proof}
+    Let $c_{n} = a_{n} - b_{n}$. By limit laws, $\lim_{n \to \infty} c_{n}$ exists. Since $c_{n} > 0 \;\forall\; n \geq N$, $\lim_{n \to \infty} c_{n} \geq 0$ (if it were negative, choose $\varepsilon = L$ giving $c$ negative). This gives \[
+        \lim_{n \to \infty} a_{n} \leq \lim_{n \to \infty} b_{n} \qedhere
+    \]
+\end{proof}

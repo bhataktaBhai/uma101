@@ -1,0 +1,48 @@
+\lecture{12}{mon 14 nov 2022}{Limit of a Function}
+
+\section{Limits \& Continuity}
+\subsection{Limit of a function}
+\vskip 5pt
+\begin{defn}[Neighborhood] \label{defn:limit:neighborhood}
+    Given a real number $p$ and an $\varepsilon > 0$, the \emph{$\varepsilon$-neighborhood of $p$} is the open interval \[
+        N_{\varepsilon}(p) = \paren{p - \varepsilon, p + \varepsilon} = \set{x \in \R : \abs{ x - p} < \varepsilon}.
+    \] 
+\end{defn}
+
+\begin{defn}[Limit of a function] \label{defn:limit:function}
+    Given a function $f$ that is defined on some $I = (a, p) \cup (p, b)$ with $a < b$, we say that $f$ has a \emph{limit} $L$ as it approaches $p$ iff for every $\varepsilon > 0 \;\exists\; \delta > 0$ such that
+    \begin{enumerate}[label=(\alph*)]
+        \item $0 < \abs{ x - p } < \delta \implies \abs{ f(x) - L } < \varepsilon$ OR
+        \item $x \in N_{\delta}(p) \setminus \set{p} \implies f(x) \in N_{\varepsilon}(L)$.
+    \end{enumerate}
+    This is denoted as \[
+        \lim_{x \to p} f(x) = L.
+    \]
+\end{defn}
+
+\begin{example} \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item For $f(x) = c$, $c \in \R$, \[
+            \lim_{x \to p} f(x) = c.
+        \] Choose $\delta = 1$.
+        $0 < \abs{ x - p } < \delta \implies \abs{ f(x) - c } = 0 < \varepsilon \;\forall\; \varepsilon > 0$.
+
+        \item For $f(x) = x$, \[
+            \lim_{x \to p} f(x) = p.
+        \] Choose $\delta = \varepsilon$.
+        $ 0 < \abs{ x - p } < \delta \implies \abs{ f(x) - p} < \varepsilon$.
+
+        \item For $f(x) = \sqrt{x}$ and $p > 0$, \[
+            \lim_{x \to p} f(x) = \sqrt{p}.
+        \]
+        \begin{align*}
+            \abs{ \sqrt{x} - \sqrt{p} } &< \varepsilon \\
+            \iff \frac{\abs{ x - p }}{\abs{ \sqrt{x} + \sqrt{p} }} &< \varepsilon \\
+        \end{align*}
+        Take $\delta = \min \set{p, \sqrt{p} \varepsilon}$ (this is to make sure $f$ is defined for all points in $N_{\delta}(p) \setminus \set{p}$).
+        Now $\abs{ x - p} < \delta \implies$
+        \begin{align*}
+            \frac{\abs{ x - p }}{\abs{ \sqrt{x} + \sqrt{p} }} &< \frac{\delta}{\abs{ \sqrt{x} + \sqrt{p} }} \\
+            &= \frac{\sqrt{p} \varepsilon}{\abs{ \sqrt{x} + \sqrt{p} }} \\
+            &< \varepsilon \qedhere
+        \end{align*}

@@ -1,0 +1,104 @@
+\lecture{39}{Wed 25 Jan '23}{}
+\begin{defn}[Basis] \label{defn:basis}
+    Given a vector space $V$ over $F$, a \emph{basis} is a subset $B \subseteq V$ such that
+    \begin{enumerate}[label=(\alph*)]
+        \item $B$ is a spanning set, \textit{i.e.}, $V = \spann(B)$.
+        \item $B$ is linearly independent.
+    \end{enumerate}
+\end{defn}
+\begin{example}
+    Let $V = \R^{n}$ and $B = \set{e_{1}, e_{2}, \dots, e_{n}}$. Then $B$ is a basis of $V$.
+\end{example}
+\begin{rem}
+    If $B$ is a basis of $V$, every $v \in \spann(V)$ has a \emph{unique} representation of the form \[
+        v = c_{1} v_{1} + c_{2} v_{2} + \cdots + c_{m} v_{m}
+    \] for some $c_{1}, c_{2}, \dots, c_{m} \in F$ and $v_{1}, v_{2}, \dots, v_{m} \in B$ in the following sense: \\
+    If $v = b_{1} v_{1} + b_{2} v_{2} + \cdots + b_{m} v_{m}$ for some $b_{1}, b_{2}, \dots, b_{m} \in F$, then $b_{1} = c_{1}, b_{2} = c_{2}, \dots, b_{m} = c_{m}$.
+
+    We have span of $B = V$, which gives the above representation of $v$.
+
+    We have that $B$ is linearly independent, which gives uniqueness.
+    \begin{proof}
+        \[
+            (c_{1} - b_{1}) v_{1} + (c_{2} - b_{2}) v_{2} + \cdots + (c_{m} - b_{m}) v_{m} = 0
+        \] By the linear independence of $B$, we get \[
+            c_{j} = b_{j} \;\forall\; j \in \set{1, 2, \dots, m} \qedhere
+        \]
+    \end{proof}
+\end{rem}
+
+\begin{cor}[] \label{cor:}
+    Let $V$ be a finite dimensional vector space over a field $F$.
+    Let $S$ be a finite spanning set of $V$.
+    Then $S$ contains as a subset a basis of $V$.
+\end{cor}
+\begin{cor}[] \label{cor:}
+    Every finite dimensional vector space has a basis.
+\end{cor}
+\begin{proof}
+    Let $S$ be a finite spanning set of $V$.
+    Assume that $\#S = n \in \N$.
+    Let $P(n)$: every spanning set of size $n$ contains a basis.
+
+    $P(0)$ is true as the only possibility of $S$ is \O.
+    $V = \spann(\O) = \{0\}$. But \O\ is linearly independent. So $S$ itself is a basis.
+
+    Suppose $P(j)$ is true for some $j \in \N$.
+    Let $S$ be a spanning set of $V$ of size $j + 1$.
+    If $S$ is linearly independent, then $S$ is a basis.
+    If $S$ is linearly dependent, then there exists $S' \subseteq S$ such that $\#S' = j$ and $\spann(S') = \spann(S) = V$.
+    By $P(j)$, $S'$ contains a basis.
+
+    Thus by induction, $P(n)$ is true for all $n \in \N$.
+\end{proof}
+
+\begin{prop}[] \label{prop:}
+    Let $L \subseteq V$ be linearly independent.
+    Then for some $v \in V$, $L \cup \set{v}$ is linearly independent iff $v \notin \spann(L)$.
+\end{prop}
+\begin{proof}
+    Assume $v \notin \spann(L)$.
+    Suppose $L \cup \set{v}$ is linearly dependent. Thus, there exist $v_{1}, \dots, v_{m} \in L$ such that \[
+        c_{1} v_{1} + \dots + c_{m} v_{m} + c_{m + 1} v = 0
+    \] for some $c_{1}, \dots, c_{m + 1} \in F$ not all zero.
+    If $c_{m+1}$ is zero, then $L$ is linearly dependent, a contradiction.
+
+    If $c_{m+1} \neq 0$, then \[
+        v = -\frac{c_{1} v_{1} + \dots + c_{m} v_{m}}{c_{m + 1}}
+    \] is in $\spann(L)$, a contradiction.
+    Thus $L \cup \set{v}$ is linearly independent.
+
+    The converse is \textcolor{red!70!black}{homework}.
+\end{proof}
+\begin{cor}[] \label{cor:}
+    Let $V$ be a finite dimensional vector space.
+    Let $L \subseteq V$ be a finite linearly independent set.
+    Then there exist finitely many vectors $w_{1}, \dots, w_{m} \in V$ such that $L \cup \set{w_{1}, \dots, w_{m}}$ is a basis.
+\end{cor}
+
+\begin{thm}[] \label{thm:}
+    Let $V$ be a finite dimensional vector space. Let $S, L \subseteq V$ be such that $S$ is a \emph{finite} spanning set and $L$ is linearly independent. Then $L$ is finite and \[
+        \#L \leq \#S.
+    \]
+\end{thm}
+\begin{cor}[] \label{cor:}
+    Every (finite) basis of a finite dimensional vector space has the same size.
+\end{cor}
+\begin{proof}
+    Let $B_{1}, B_{2} \subseteq V$ be two finite bases of $V$.
+    By the above theorem, \[
+        \#B_{1} \leq \#B_{2} \qquad \#B_{2} \leq \#B_{1}.
+    \] Thus $\#B_{1} = \#B_{2}$.
+\end{proof}
+
+\textcolor{orange!60!black}{Question: Is every basis of a finite dimensional vector space finite?}
+
+\begin{cor}[] \label{cor:}
+    Let $S$, $L$, $V$ be as in the previous theorem.
+    If $\#L = \#S$, then both are bases of $V$.
+\end{cor}
+\begin{proof}
+    If $L$ is not a basis, some finite $L' \supsetneq L$ is a basis. But then \[
+        \#L' > \#S,
+    \] a contradiction.
+\end{proof}

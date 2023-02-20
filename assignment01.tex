@@ -1,0 +1,170 @@
+\documentclass[12pt]{article}
+\input{preamble}
+
+\title{Assignment 01}
+\author{Naman Mishra}
+\date{22 October 2022}
+
+\begin{document}
+\maketitle
+
+\begin{problem}
+    Let $A$ be a Peano set and $S$ be the successor function on $A$ (as defined in the first lecture).
+    Show, using only the axioms of Peano, that the range of $S$ is $A \setminus \set{0}$.
+    For this question, please interpret the words ``function'' and ``range'' in the way you did in school, and not in the set-theoretic way introduced in class.
+\end{problem}
+\begin{proof}
+    Let $P(n)$ be the property that $n$ is in the range of $S$, or $n = 0$.
+    $P(0)$ is trivially true.
+    If $P(n)$ is true, then $P(S(n))$ is trivially true, as $S(n)$ is the successor of $n$.
+
+    Thus by the principle of mathematical induction, $P(n)$ is true for all natural $n$.
+    
+    This means that for all $n \neq 0 \in A$, $n$ is in the range of $S$.
+    Since $0$ is not the successor of any natural number, it is not in the range of $S$.
+
+    Thus, the range of $S$ is precisely $A \setminus \set{0}$.
+\end{proof}
+
+\begin{problem}
+    We mentioned in class that when listing the ZFC axioms, we do not need to addadditional axioms for the existence of the intersection or the set-difference of two sets.
+    Using the ZFC axioms, prove the following statements.
+    \begin{enumerate}[label=(\alph*)]
+        \item Given two sets $A$ and $B$, show that $A \cap B$ exists as a set.
+        \item Given two sets $A$ and $B$, show that $A \setminus B$ exists as a set.
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+    Using the axiom of specification, we have:
+    \begin{enumerate}[label=(\alph*)]
+        \item \[
+            A \cap B = \set{a \in A : a \in B}
+        \]
+        \item \[
+            A \setminus B = \set{a \in A : a \not\in B} \qedhere
+        \]
+    \end{enumerate}
+\end{proof}
+
+\begin{problem}
+    Given two objects $a, b$, let $(a, b)$ denote the set $\set{\set{a}, \set{a, b}}$.
+    First argue why the ZFC axioms guarantee the existence of this set.
+    Then show that $(a, b) = (c, d)$ (as sets) if and only if $a = c$ and $b = d$.
+\end{problem}
+
+\begin{proof}
+    By the basic axiom, $a$ and $b$ are sets. \\
+    By the axiom of pairing, set $\set{a, a} = \set{a}$ (by axiom of equality) exists. \\
+    By the axiom of pairing, set $\set{a, b}$ exists. \\
+    Applying the axiom of pairing on these two sets, the set $(a, b) = \set{\{a}, \set{a, b}\}$ exists.
+
+    If $a = c$ and $b = d$, $(a, b) = (c, d)$. \textcolor{exercise}{Do I even need to compare the two sets manually? Invoke any of ZFC? Doesn't this follow directly from the notion of ``equality''?}
+    
+    If $(a, b) = (c, d)$, then $\set{\{a}, \set{a, b}\} = \set{\{c}, \set{c, d}\}$. By the axiom of equality, $\set{a} \in (c, d) \implies \set{a} = \set{c}$ or $\set{a} = \set{c, d}$. In either case, the axiom of equality again implies that $c \in \set{a} \implies c = a$.
+
+    By the axiom of equality again, $\set{c, d} = \set{a}$ implying $d = a$, or $\set{c, d} = \set{a, b}$ implying $d \in \set{a, b}$. Thus $d$ is either equal to $a$ or to $b$. Similarly $b$ is equal to either $c$ or $d$.
+
+    If $b \neq d$, we must have $d = a$ and $b = c = a = d$, a contradiction. \\
+    Thus $d$ is necessarily equal to $b$.
+\end{proof}
+
+\begin{problem}
+    Prove \refifdef{thm:zfc:inductive_intersection}{\cref}{lemma 1.5 (probably)}, \textit{i.e.}, show that if $\mathscr{F}$ is a non-empty set of inductive sets, then \[
+        \bigcap_{A \in \mathscr{F}} A
+    \]
+    is an inductive set.
+\end{problem}
+
+\begin{proof}
+    I shall assume $I = \bigcap_{A \in \mathscr{F}}A$ to be defined as
+    \[
+        \bigcap_{A \in \mathscr{F}}A  = \set{a \in \bigcup_{A \in \mathscr{F}}A : a \in A \;\forall\; A \in \mathscr{F}}
+    \]
+    Since $\O \in A$ for every $A \in \mathscr{F}$, and $\O$ is also in the union of the sets contained in $\mathscr{F}$, $\O \in I$
+
+    If an element $a \in I$, then $a$ is in every $A \in \mathscr{F}$. Since $A \in \mathscr{F}$, $A$ is an inductive set, and so $a \in A \implies a^{+} \in A$. Thus $a^{+} \in A$ for every $A \in \mathscr{F}$, which implies $a^{+} \in I$.
+
+    These conditions together imply that $I$ is an inductive set.
+\end{proof}
+
+\begin{problem}
+    Let $A, B, C, D$ be sets.
+    Some of the following statements are always true, and the others are sometimes wrong.
+    Decide which is which.
+    For the ones you declare ``always true'', provide a proof.
+    For the others, provide one counterexample each.
+    \begin{enumerate}[label=(\alph*)]
+        \item $A \times (B \cup C) = (A \times B) \cup (A \times C)$
+        \item $(A \times B) \setminus (C \times D) = (A \setminus C) \times (B \setminus D)$
+        \item $C \cap (A \setminus B) = A \cap (C \setminus B)$
+        \item $C \cup (A \setminus B) = A \cup (C \setminus B)$
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+    \begin{enumerate}[label=(\alph*)]
+        \item \emph{True.}
+        Call the LHS set $P$ and the RHS set $Q$.
+        If $(a, x) \in P$, then $a \in A$ and $x \in B \cup C \iff x \in B$ or $x \in C$.
+        Thus $a \in A$ and $x \in B$, or $a \in A$ and $x \in C$.
+        Thus $(a, x) \in A \times B$ or $(a, x) \in A \times C$.
+        Thus $(a, x) \in (A \times B) \cup (A \times C) = Q$.
+
+        If $(a, x) \in Q$, then $(a, x) \in A \times B$ or $(a, x) \in A \times C$.
+        Thus $a \in A$ and $x \in B$, or $a \in A$ and $x \in C$.
+        Thus $a \in A$, and $x \in B$ or $x \in C$.
+        Thus $a \in A$ and $x \in B \cup C$.
+        Thus $(a, x) \in A \times (B \cup C) = P$.
+
+        Therefore by the axiom of equality, $P = Q$.
+
+        \item \emph{False.}
+        Consider the sets $A = B = C = \set{\O}, D = \O$.
+        Then $A \times B = \set{(\O, \O)}$ and $C \times D = \O$.
+        Also, $A \setminus C = \O$ and $B \setminus D = \set{\O}$.
+
+        LHS $= \set{(\O, \O)}$ \\
+        RHS $= \O \neq$ LHS
+
+        \item \emph{True.}
+        Call the LHS set $P$ and the RHS set $Q$.
+        \begin{align*}
+            P &= \set{c \in C : c \in (A \setminus B)} \\
+            &= \set{c \in C : c \in \{a \in A : a \notin B} \} \\
+            &= \set{c \in C : c \in A, c \notin B}
+        \end{align*}
+
+        Similarly $Q = \set{a \in A : a \in C, a \notin B}$.
+
+        Clearly, every element of $P$ is in $Q$ and vice versa. Thus the two sets are equal.
+
+        \item \emph{False.} Consider the sets $A = \O, B = C = \set{\O}$. Then LHS $= C \cup \O = C = \set{\O}$, but RHS $= \O \cup \O = \O \neq$ LHS. \qedhere
+    \end{enumerate}
+\end{proof}
+
+\begin{problem}
+    Let $A$ be a set. Define a relation \textbf{R} such that for any subsets $B$ and $C$ of $A$,
+    \[
+        B \text{\textbf{R}} C \iff B \subseteq C
+    \]
+    Remember that a relation \textbf{R} is a subset of a Cartesian product of sets.
+    Is the relation that you’ve defined a function?
+\end{problem}
+
+\begin{proof}
+    Since $B$ and $C$ are subsets of $A$, they can be precisely the elements of the power set of $A$. So \textbf{R} is a subset of the $P(A) \times P(A)$.
+
+    If $A = \O$, the only subset of $A$ is $\O$.
+    So $B$ and $C$ can only take one value, $\O$, and indeed $\O \subseteq \O \iff \O$\textbf{R}$\O$.
+
+    Thus, in this case, \textbf{R} is a function if it is taken to be a relation from $\set{\O}$ to $\set{\O}$.
+    However, \textbf{R} could also be taken to be a relation from $\set{\O, \{\O}\}$ to $\set{\O}$, in which case it is no longer a function as $\set{\O}$\textbf{R}$x$ is false for all $x \in \set{\O}$.
+
+    If $A \neq \O$, we have $\O \in P(A)$ and $A \in P(A)$.
+    Thus $\O$\textbf{R}$\O$ and $\O$\textbf{R}$A$, with $\O \neq A$.
+    Thus for $\O \in P(A)$ there are at least two $x$ such that $(\O, x) \in$ \textbf{R}.
+    Therefore \textbf{R} is not a function.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,22 @@
+\section{Set theory \& the real number system}
+
+\begin{defn} \label{defn:peano set}
+    The set $A$ along with a successor function $S$ is called a Peano set if it obeys the Peano axioms.
+    \begin{enumerate}[label=(P\arabic*)]
+        \item \label{peano:zero}
+            There is an element called 0 in $A$.
+        \item \label{peano:succ}
+            For every $a \in A$, its successor $S(a)$ is also in $A$.
+        \item \label{peano:not succ}
+            $\forall \; a \in A, S(a) \neq 0$.
+        \item \label{peano:injective}
+            For any $m, n \in A$, $S(m) = S(n)$ only if $m = n$.
+        \item \label{peano:induction}
+            (principle of mathematical induction) For any set $B \subseteq A$, if $0 \in B$ and $a \in B \implies S(a) \in B$, then $B = A$.
+    \end{enumerate}
+\end{defn}
+
+
+
+
+

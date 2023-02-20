@@ -1,0 +1,103 @@
+\lecture{34}{Fri 13 Jan '23}{}
+
+\part{Linear Algebra}
+
+Linear functions:
+\begin{align*}
+    f(cx) &= c f(x) \\
+    f(x + y) &= f(x) + f(y)
+\end{align*}
+
+\begin{example}[Error Detection/Correction]
+    We wish to transmit a message $m \in \{0, 1\}^2$ over a noisy channel.
+    Say the words have meanings:
+    \begin{align*}
+        (0, 0) &\mapsto \text{up} \\
+        (0, 1) &\mapsto \text{down} \\
+        (1, 0) &\mapsto \text{left} \\
+        (1, 1) &\mapsto \text{right}
+    \end{align*}
+    If one bit gets flipped, `left' may become `right' or `up'.
+    We can detect whether a bit has been flipped by sending a parity bit.
+    \begin{align*}
+        (0, 0, 0) &\mapsto \text{up} \\
+        (0, 1, 1) &\mapsto \text{down} \\
+        (1, 0, 1) &\mapsto \text{left} \\
+        (1, 1, 0) &\mapsto \text{right}
+    \end{align*}
+\end{example}
+
+\section{Vector Spaces}
+Recall that a field $(F, \oplus, \odot)$ is a set with two binary operations $\oplus$ and $\odot$ that satisfy 6 axioms %\cref{defn:field:commutativity,defn:field:associativity,defn:field:distributivity,defn:field:identity,defn:field:negative,defn:field:reciprocal}.
+Key example: $(\R, +, \cdot)$.
+
+Let us test this definition on $\R^{2} = \R \times \R$ (the real plane), with the operations:
+\begin{align*}
+    (a, b) \oplus (c, d) &= (a + c, b + d) \\
+    (a, b) \odot (c, d) &= (a \cdot c, b \cdot d) \;\forall\; (a, b), (c, d) \in \R^{2}
+\end{align*}
+\begin{enumerate}[label=(\alph*)]
+    \item It is clear that $\oplus$ and $\odot$ are commutative, associative, and distributive.
+    \item $(0, 0)$ is the unique identity and $(-a, -b)$ is the unique additive inverse of $(a, b)$.
+    \item $(1, 1)$ is the unique multiplicative identity and $(\frac{1}{a}, \frac{1}{b})$ is the unique multiplicative inverse of $(a, b)$, for $a \neq 0, b \neq 0$.
+    $(1, 0)$ does not have a multiplicative inverse, despite being nonzero.
+    \begin{proof}
+        Suppose $(a, b) \in \R^{2}$ is a multiplicative inverse of $(1, 0)$. Then
+        \begin{align*}
+            (a, b) \odot (1, 0) &= (a \cdot 1, b \cdot 0) \\
+            &= (a, 0) \\
+            &= (1, 1)
+        \end{align*}
+        Thus $0 = 1$, which is a contradiction.
+    \end{proof}
+\end{enumerate}
+Thus these operators don't make $\R^{2}$ a field. We define (formally) \[
+    (a, b) = a + ib
+\] and define
+\begin{align*}
+    (a + ib) \oplus (c + id) &= (a + c) + i(b + d) \\
+    (a + ib) \odot (c + id) &= (ac - bd) + i(ad + bc)
+\end{align*}
+This is a field! The identities are \[
+    0 := 0 + i0 \quad\text{and}\quad 1 := 1 + i0
+\] Note that for real numbers $a, b$,
+\begin{align*}
+    a &\leftrightarrow a + i0 \\
+    ib &\leftrightarrow 0 + ib
+\end{align*}
+Note that \[
+    (i \cdot 1)^{2} = (0 + i) \odot (0 + i) = -1 + i0 = -1
+\] We denote $\R^{2}$ with this structure by $\C$ and call any $a + ib$ a complex number.
+
+\begin{defn}[] \label{defn:}
+    Let $(F, \oplus, \odot)$ be a field. A \emph{vector space over $F$} is a set $V$ such that:
+    \begin{enumerate}[label=(\alph*)]
+        \item Given any two elements $v, w \in V$, there exists a unique element $v + w \in V$ called its sum.
+        (This $+$ may not be the same as $\oplus$).
+        \item Given an $a \in F$ and a $v \in V$, there is a unique element $av = a \cdot v \in V$ called the scalar product of $a$ and $v$.
+    \end{enumerate}
+    satisfying the following axioms:
+    \begin{enumerate}[label=(V\arabic*)]
+        \item $v + w = w + v$ for all $v, w \in V$.
+        \item $(v + w) + u = v + (w + u)$ for all $v, w, u \in V$.
+        \item There is an element $0 \in V$ such that $v + 0 = v$ for all $v \in V$.
+        \item For all $v \in V$, there is a unique element $-v \in V$ called the additive inverse of $v$ such that $v + (-v) = 0$.
+        \item For all $a, b \in F$ and $v \in V$, we have \[
+            (a \odot b) \cdot v = a \cdot (b \cdot v)
+        \] Note that this implies $a \cdot (b \cdot v) = b \cdot (a \cdot v)$ by the commutativity of $\odot$.
+        \item Let $1_{F}$ be the multiplicative identity of $F$. Then, \[
+            1_{F} \cdot v = v \quad\text{for all}\quad v \in V
+        \]
+        \item For all $a, b \in F$ and $v \in V$, we have \[
+            (a \oplus b) \cdot v = a \cdot v + b \cdot v
+        \]
+        \item For all $a \in F$ and $v, w \in V$, we have \[
+            a \cdot (v + w) = a \cdot v + a \cdot w
+        \]
+    \end{enumerate}
+    We call the elements of $F$ \emph{scalars} and the elements of $V$ \emph{vectors}.
+\end{defn}
+\begin{example}[Key Example]
+    $F = (\R, +, \cdot)$ or \emph{real vector spaces}.
+\end{example}
+

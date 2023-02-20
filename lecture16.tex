@@ -1,0 +1,78 @@
+\lecture{16}{wed 23 nov 2022}{IVT; Continuous Functions on Compact Intervals}
+
+\begin{proof}[Proof of \nameref{thm:cont:IVT}]
+    We may assume: $y$ is strictly between $f(a)$ and $f(b)$.
+    Further, we may assume $f(a) < y < f(b)$.
+    The other case is \textcolor{exercise}{HW}.
+    Let \[
+        S = \set{x \in [a, b]: f(x) < y}.
+    \] $S$ is nonempty as $a \in S$.
+    Moreover, $b$ is an upper bound of $S$. \\
+    $\implies c := \sup S$ exists. 
+
+    Let $n \in \P$.
+    Then $c - \frac{1}{n}$ is not an upper bound of $S$.
+    Therefore $\exists\; x_{n} \in S$ such that \[
+        c - \frac{1}{n} < x_{n} \leq c \qquad f(x_{n}) < y.
+    \] By squeeze theorem, $\set{x_{n}} \to c$ as $n \to \infty$.
+    By the sequential character of continuity, \[
+        \lim_{n \to \infty} f(x_{n}) = f(c)
+    \] But $f(x_{n}) < y \;\forall\; n \in \N$.
+    By \cref{lem:seq:comparison}, $\lim_{n \to \infty} f(x_{n}) \leq y \implies f(c) \leq y$.
+
+    Similarly, defining $x_{n} = c + \frac{1}{n}$ yields $f(c) \geq y$. And thus we have \[
+        f(c) = y. \qedhere
+    \]
+\end{proof}
+
+\begin{proof}[Proof \textcolor{self_proof}{(self)}]
+    $\implies c := \sup S$ exists.
+
+    Suppose $f(c) < y$.
+    $f(b) > y > f(c) \implies c \neq b$.
+    There exists $\delta > 0$ such that $\abs{x - c} < \delta \implies \abs{f(x) - f(c)} < \abs{f(c) - y} \implies f(x) < y$.
+    Thus $c + \delta/2 \in S$, a contradiction.
+
+    Now suppose $f(c) > y$.
+    $f(a) < y < f(c) \implies c \neq a$.
+    There exists $\delta > 0$ such that $\abs{x - c} < \delta \implies \abs{f(x) - f(c)} < \abs{f(c) - y} \implies f(x) > y$.
+    Thus $c - \delta/2 \not\in S$, a contradiction.
+
+    So $f(c)$ must be equal to $y$.
+\end{proof}
+
+\begin{defn} \label{defn:cont:bounded}
+    A function $f : S \to \R$ is said to be \emph{bounded above} on $S$ if $\exists\; U \in \R$ such that $f(x) \leq U \;\forall\; x \in S$.
+
+    $f$ is said to be \emph{bounded} if $\exists\; M > 0$ such that $\abs{f(x)} < M \;\forall\; x \in S$.
+\end{defn}
+
+\begin{thm}[Continuous functions on compact intervals are bounded] \label{thm:cont:compact->bounded}
+    Let $f : [a, b] \to \R$ be continuous on $[a, b]$. Then $f$ is a bounded function.
+\end{thm}
+\begin{proof}[Proof by contradiction \textcolor{self_proof}{(morphed)}]
+    Let $a_{0} = a$, $b_{0} = b$, and $I_{n} = [a_{n}, b_{n}]$.
+
+    If $f$ is not bounded on $I_{n}$, then it is not bounded on at least one of $[a_{n}, \frac{a_{n} + b_{n}}{2}]$ and $[\frac{a_{n} + b_{n}}{2}, b_{n}]$.
+
+    Let the leftmost of the subintervals on which it is unbounded be $I_{n+1}$.
+    Since $f$ is unbounded on $I_{0}$, it is unbounded on $I_{k} \;\forall\; k \in \N$.
+    Note that $a_{n+1} \geq a_{n}$ and that $\norm{I_{n+1}} = \frac{1}{2} \norm{I_{n}}$.
+    Thus $\norm{I_{n}} = \frac{1}{2^{n}} \norm{I_{0}} = \frac{1}{2^{n}} (b - a)$.
+
+    Let $a_{\infty}$ be the supremum of $\set{a_{n}}$.
+    Note that $b$ is an upper bound of $a_{n}$, so $a_{\infty} \leq b$.
+    Also, since $a \in \set{a_{n}}$, $a \leq a_{\infty}$.
+
+    Note that $p, q \in N_{\delta}(a_{\infty}) \cap [a, b]$ with $p < q$ implies $[p, q] \subseteq N_{\delta}(a_{\infty}) \cap [a, b]$.
+
+    By continuity $\exists\; \delta > 0$ such that $\abs{f(x) - f(a_{\infty})} < 1 \;\forall\; x \in N_{\delta}(a_{\infty}) \cap [a, b]$.
+    That is, $f$ is bounded on $N_{\delta}(a_{\infty}) \cap [a, b]$.
+
+    There exists a $k \in \N$ such that $a_{\infty} - \delta < a_{k} \leq a_{\infty}$.
+    Since $\set{a_{n}}$ is increasing, we have $a_{\infty} - \delta < a_{n} \leq a_{\infty} \;\forall\; n \geq k$.
+    Choose $N$ such that $\frac{b - a}{2^{n}} = \norm{I_{n}} < \delta \;\forall\; n \geq N$.
+
+    Letting $n_{0} = \max \set{k, N}$, we get $a_{\infty} - \delta < a_{n_{0}} \leq b_{n_{0}} < a_{\infty} + \delta$.
+    Thus $[a_{n_{0}}, b_{n_{0}}] \subseteq N_{\delta}(a_{\infty}) \cap [a, b] \implies I_{n_{0}}$ is bounded, a contradiction.
+\end{proof}

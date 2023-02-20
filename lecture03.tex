@@ -1,0 +1,88 @@
+\lecture{3}{fri 21 oct 2022}{Relations and Infinity}
+\begin{defn} \label{defn:relation}
+    A relation from set $A$ to set $B$ is a subset $R$ of $A \times B$. For any $a \in A, b \in B$ we say $a\mathrel{R}b$ iff $(a, b) \in R$.
+    \begin{outline}
+        \1 The \emph{domain} of $R$ is the set
+        \[
+            \text{dom}(R) = \set{ a \in A : (a, b) \in R \text{ for some } b \in B}
+        \]
+        \1 The \emph{range} of $R$ is the set
+        \[
+            \text{ran}(R) = \set{ b \in B : (a, b) \in R \text{ for some } a \in A}
+        \]
+        \1 $R$ is called a \emph{function} from $A$ to $B$, denoted as $R: A \to B$ iff
+            \2 dom$(R) = A$
+            \2 for each $a \in A$ there is (at most) one $b \in B$ such that $(a, b) \in R$.
+    \end{outline}
+\end{defn}
+
+\textbf{Exercise:} Write definitions for \emph{injective} and \emph{surjective} functions.
+\begin{rem}
+    A \emph{bijective} function from $A$ to $B$ is an injective as well as surjective fuction from $A$ to $B$.
+\end{rem}
+
+\begin{axiom}[axiom of regularity] \label{zfc:regularity}
+    Read up
+\end{axiom}
+\begin{axiom}[axiom of replacement] \label{zfc:replacement}
+    Read up
+\end{axiom}
+\begin{axiom}[axiom of choice] \label{zfc:choice}
+    Read up
+\end{axiom}
+
+\begin{defn} \label{defn:zfc:inductive}
+    Given a set $A$, its \emph{successor} is the set \[
+        A^{+} = A \cup \set{A}.
+    \] A set $A$ is said to be \emph{inductive} if $\varnothing \in A$ and for every $a \in A$, we have $a^{+} \in A$.
+\end{defn}
+\begin{rem}
+    The successor of $A$ is guaranteed to exist by \nameref{zfc:pairing} and \nameref{zfc:unions}. \\
+    $\set{A}$ exists by \nameref{zfc:pairing} by letting $B = A$. \\
+    $A \cup \set{A}$ exists by applying \nameref{zfc:unions} on the set $\set{A, \{A}\}$ formed using \nameref{zfc:pairing} again.
+
+    $\set{A}$ can also be created as a subset (\nameref{zfc:specification}) of the power set (\nameref{zfc:powers}) of $A$.
+\end{rem}
+\begin{rem}
+    The definition of an inductive set is very similar to the principle of mathematical induction in the Peano axioms.
+\end{rem}
+
+\begin{axiom}[axiom of infinity] \label{zfc:infinity}
+    There exists an inductive set.    
+\end{axiom}
+
+\begin{lem} \label{thm:zfc:inductive_intersection}
+    Let $\mathscr{F}$ be a nonempty set of inductive sets. (This exists by \nameref{zfc:infinity} and \nameref{zfc:pairing}). Then \[
+        \bigcap_{A \in \mathscr{F}}{A} \text{ is inductive.}
+    \]
+\end{lem}
+\begin{proof}
+    Assignment 1, Problem 5
+\end{proof}
+
+\begin{thm} \label{thm:zfc:omega}
+    There exists a \emph{unique}, \emph{minimal} inductive set $\omega$, \textit{i.e.}, for any inductive set $S$, \[
+        \omega \subseteq S
+    \] and if $\omega'$ is any other inductive set satisfying this property, \[
+        \omega = \omega'
+    \]
+\end{thm}
+\begin{proof}[Proof under construction]
+    Suppose there is no minimal inductive set. Then for any inductive set $\omega$, we have $ \omega \not\subseteq S$ for some inductive $S$. \\
+    Thus there exists a set $\mathscr{F}$ of inductive sets, which contains $S$, such that $\bigcup_{A \in \mathscr{F}} A$ does not have $\omega$ as a subset.
+\end{proof}
+
+
+\begin{thm} \label{thm:zfc:omega_is_peano}
+    The $\omega$ in \cref{thm:zfc:omega} is a Peano set with successor function $a \mapsto a^{+}$.
+\end{thm}
+
+\begin{thm}[principle of recursion] \label{thm:zfc:recursion}
+    Let $A$ be a set, and $f: A \to A$ be a function. Let $a \in A$. Then, there exists a function $F: \omega \to A$ such that
+    \begin{enumerate}[label=(\alph*)]
+        \item $F(\varnothing) = a$
+        \item For some $b \in \omega$, we have $F(b^{+}) = f(F(b))$
+    \end{enumerate}
+\end{thm}
+
+\textbf{Back to natural numbers!}

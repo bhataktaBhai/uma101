@@ -1,0 +1,179 @@
+\documentclass[12pt]{article}
+\input{preamble}
+
+\title{Assignment 02}
+\author{Naman Mishra}
+\date{31 October 2022}
+
+\begin{document}
+\maketitle
+
+\begin{problem} \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item Prove that for any $m, n \in \N$, exactly one of the following statements holds.
+        \begin{enumerate}[label=(\textit{\roman*})]
+            \item $m = n$;
+            \item there is a $k \in \N \setminus \set{0}$ such that $m + k = n$;
+            \item there is a $k \in \N \setminus \set{0}$ such that $n + k = m$.
+        \end{enumerate}
+        You may use: induction, the definition of $\mathrm{sum}_{m}$ any of its six properties stated in class (as Theorem 1.12), and the fact that the range of the function $f(x) = x + 1$ on $\N$ is $\N \setminus \set{0}$ (Problem 1 in HW1).
+        \item Show that $\N$ is an ordered set if we define $<$ as follows: $m < n$ if there is a $k \in \N \setminus \set{0}$ such that $m + k = n$.  
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+    Unless otherwise stated, any lowercase variable denotes a natural number.
+    \begin{enumerate}[label=(\alph*)]
+        \item Let $R \subseteq \N \times \N$ be a relation such that $a\mathrel{R}b \iff \exists\; k \neq 0$ such that $a + k = b$. Let \[
+            B = \set{m \in \N : m = n, m\mathrel{R}n, \text{ or } n\mathrel{R}m}
+        \]
+        \textbf{Note:} If $\exists\; k$ such that $m + k = n$, then $m \in B$ as $k = 0$ gives $m = n$ and $k \neq 0$ gives $m \mathrel{R} n$. Similarly $n + k = m$ also implies $m \in B$. \\
+        $0 \in B$ as $0 + n = n$. \\
+        If $b \in B$, then:
+        \begin{enumerate}
+            \item[$(b = n)$] $S(b) = S(n) = n + 1 \implies S(b) \in B$.
+            \item[$(b \mathrel{R} n)$] $\exists\; k \neq 0$ such that $b + k = n$. Since $k \in \operatorname{ran}(S)$ (HW 1.1), $\exists\; k'$ such that $S(k') = k$. Thus $b + S(k') = n \implies S(b) + k' = n \implies S(b) \in B$.
+            \item[$(n \mathrel{R} b)$] $\exists\; k \neq 0$ such that $n + k = b$. Then $S(n + k) = S(b) \implies n + S(k) = S(b) \implies S(b) \in B$.
+        \end{enumerate}
+        Thus $b \in B \implies S(b) \in B \implies B = \N$.
+        Since $n$ was arbitrary, one of the three statements holds for each $m, n$.
+
+        Suppose $m = n$.
+        Then if $m + k = n$, then $m + k = m + 0 \implies k = 0$ by the cancellation law.
+        Similarly $n + k = m$ also implies $k = 0$.
+        Thus $m = n$ cannot hold simultaneously with $m \mathrel{R} n$ or $n \mathrel{R} m$.
+        Now if $m + k = n$ and $n + k' = m$, then $(n + k') + k = n \implies n + (k + k') = n + 0 \implies k + k' = 0 \implies k = k' = 0$.
+        Thus $m \mathrel{R} n$ and $n \mathrel{R} n$ cannot hold simultaneously.
+
+        Therefore exactly one of the three statements holds for all $m, n \in \N$.
+
+        \item If we define $m < n$ as $m \mathrel{R} n$ above, from part (a) it is clear that exactly one of $m = n, m < n, n < m$ holds for all $m, n \in \N$.
+        Moreover, if $a < b$ and $b < c$, then there exist natural numbers $k, k' \neq 0$ such that $a + k = b$ and $b + k' = c$.
+        This implies $(a + k) + k' = a + (k + k') = c$.
+        Since $x + y = 0 \implies x = y = 0$, $x \neq 0$ or $y \neq 0 \implies x + y \neq 0$.
+        Thus $k + k' \neq 0 \implies a < c$.
+
+        We have shown that $<$ obeys trichotomy and is transitive. Thus $(\N, <)$ is an ordered set. \qedhere
+    \end{enumerate}
+\end{proof}
+
+\begin{problem}
+    Let $(F, +, \cdot)$ be a field.
+    According to axiom (F5), given $x \in F$, there is a $y \in F$ such that $x + y = 0$.
+    Show that $y$ is unique, i.e., if there is a $z \in F$ such that if $x + y = x + z = 0$, then $y = z$.
+    Use only the field axioms to justify your answer.
+\end{problem}
+\begin{proof}
+    \begin{align*}
+        x + y &= x + z \\
+        (y + x) + y &= (y + x) + z \\
+        y &= z \qedhere
+    \end{align*}
+\end{proof}
+
+\begin{problem}
+    Let $+$ and $\cdot$ be the usual addition and multiplication on $\N$.
+    You are free to use their well-known properties.
+    \begin{enumerate}[label=(\alph*)]
+        \item Let $F = \set{0, 1, 2, 3}$. We endow $F$ with addition and multiplication as follows:
+        \begin{align*}
+            & a \oplus b = c, && \text{where $c$ is the remainder that $a + b$ leaves when divided by 4} \\
+            & a \odot b = c, && \text{where $c$ is the remainder that $a \cdot b$ leaves when divided by 4}
+        \end{align*}
+        Is $(F, \oplus, \odot)$ a field? Please justify your answer.
+
+        \item Let $F = \set{0, 1}$. We endow $F$ with addition and multiplication as follows:
+        \begin{align*}
+            & a \oplus b = c, && \text{where $c$ is the remainder that $a + b$ leaves when divided by 2} \\
+            & a \odot b = c, && \text{where $c$ is the remainder that $a \cdot b$ leaves when divided by 2}
+        \end{align*}
+        You may assume that $(F, \oplus, \odot)$ is a field. Is it possible to give $F$ a relation $<$ so that $(F, \oplus, \odot, <)$ is an ordered field? Please justify your answer.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=(\alph*)]
+        \item Clearly 1 is the multiplicative identity.
+            \begin{align*}
+                2 \cdot 0 &= 0 & 2 \cdot 1 &= 2 & 2 \cdot 2 &= 4 & 2 \cdot 3 &= 6 \\
+                2 \odot 0 &= 0 & 2 \odot 1 &= 2 & 2 \odot 2 &= 0 & 2 \odot 3 &= 2
+            \end{align*}
+            Thus there is no multiplicative inverse of 2 in $F$. So $(F, \oplus, \odot)$ is not a field.
+        \item
+            If $(F, \oplus, \odot, <)$ is an ordered field and $0 < 1$, then by the field axioms, $0 \oplus 1 < 1 \oplus 1 \iff 1 < 0$ which is a contradiction as it disobeys trichotomy of order. If $1 < 0$ then $1 \oplus 1 < 0 \oplus 1 \iff 0 < 1$, which cannot be true. \qedhere
+    \end{enumerate}
+\end{proof}
+
+\begin{problem}
+    Let $(F, +, \cdot, <)$ be an ordered field.
+    \begin{enumerate}[label=(\textit{\roman*})]
+        \item Using only the field axioms, and the uniqueness of the additive inverse, show that for all $a, b, c \in F, a(b - c) = ab - ac$.
+        \item Using the field axioms, the order axioms, and Part (i), show that for all $a, b, c \in F$, if $a < b$ and $c < 0$, then $bc < ac$.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=(\textit{\roman*})]
+        \item $a(b + (-c)) = ab + a(-c)$
+        \begin{align*}
+            a(c + (-c)) &= ac + a(-c) \\
+            0 &= ac + a(-c) \\
+            a(-c) &= -(ac)
+        \end{align*}
+        Thus $a(b + (-c)) = ab - ac$.
+
+        \item $c < 0 \implies c + (-c) < -c \implies 0 < -c$. \\
+        $a < b \implies a + (-a) < b + (-a) \implies 0 < b - a$. \\
+        Thus
+        \begin{align*}
+             0 &< (b + (-a))(-c) \tag{O4} \\
+             0 &< b(-c) + (-a)(-c) \\
+             0 &< -bc + ac \\
+            bc &< ac \qedhere
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\begin{problem}
+    Apostol defines an ordered field as a field $(F, +, \cdot)$ together with a set $P \subseteq F$ satisfying the following axioms.
+    \begin{enumerate}[label=(O'\arabic*)]
+        \item If $x, y \in P$, then $x + y \in P$ and $x \cdot y \in P$.
+        \item For every $x \in F$ such that $x \neq 0$, $x \in P$ or $-x \in P$, but not both.
+        \item $0 \notin P$
+    \end{enumerate}
+    Show that our definition of an ordered field is equivalent to that of Apostol’s. That is, show that for a field$(F, +, \cdot)$:
+    \begin{enumerate}[label=(\textit{\roman*})]
+        \item If there is a relation $<$ satisfying (O1)-(O4), then there is a $P \subseteq F$ satisfying (O'1)-(O'3), and
+        \item if there is a $P \subseteq F$ satisfying (O’1)-(O’3), then there is a relation $<$ satisfying (O1)-(O4).
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    Suppose there is a relation $<$ on $(F, +, \cdot)$ satisfying (O1)-(O4). Define \[
+        P = \set{x \in F : 0 < x}.
+    \]
+    Suppose $x, y \in P \iff 0 < x, y$.
+    Then  $-x < x + (-x) \implies -x < 0 < y \implies -x < y \implies 0 < x + y \implies x + y \in P$ by (O2) and (O3).
+
+    If $x, y \in P$, then by (O4), $x \cdot y \in P$.
+    Thus (O'1) holds.
+
+    If $0 < x$, $x \in P$.
+    If $x < 0$, then by (O3) $x + (-x) < -x \implies 0 < -x$, \emph{i.e.}, $-x \in P$. Thus (O'2) is holds.
+
+    $0 \not< 0$, so (O'3) holds.
+
+    Now suppose there is a subset $P \subseteq F$ which satisfies (O'1)-(O'3).
+    Define relation $<$ on $F$ as $a < b \iff b - a \in P $.
+
+    Note that $-(b - a) = a - b$.
+    \begin{enumerate}[label=(O\arabic*)]
+        \item For any $a, b \in F$, exactly one of $b - a = 0$, $b - a \in P$, and $-(b - a) \in P$ holds (by (O'2) and (O'3), as $-0 = 0$).
+        $b - a = 0 \iff a = b, b - a \in P \iff a < b,$ and $-(b - a) \in P \iff a - b \in P \iff b < a$.
+        Thus exactly one of $a = b, a < b,$ and $b < a$ holds.
+        \item If $a < b$ and $b < c$, then $b - a \in P$ and $c - b \in P$.
+        So by (O'1), $c - b + b - a \in P \iff c - a \in P \iff a < c$.
+        \item If $a < b$ and $c \in F$, then $(b + c) - (a + c) = b + c + (-a) + (-c) = b - a \in P \implies a + c < b + c$.
+        \item $0 < a \iff a - 0 \in P \iff a \in P$.
+        So $0 < a$ and $0 < b$ implies $0 < a \cdot b$ by (O'1). \qedhere
+    \end{enumerate}
+\end{proof}
+
+\end{document}

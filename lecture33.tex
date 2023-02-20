@@ -1,0 +1,104 @@
+\lecture{33}{11 jan '23}{Logarithms \& Exponentiation}
+
+\subsection{Logarithms \& Exponentiation}
+Goal: for any $b > 0$, we wish to define ``$\log_{b}(x)$'' as \emph{the} real number $z$ which satisfies: $b^z = x$. \\
+There are multiple caveats:
+
+\begin{enumerate}[label=(\alph*)]
+    \item However, we don't even know what $b^{z}$ means for irrational $z$.
+    \item Why should there exist exactly one $z$, and for what values of $x$?
+\end{enumerate}
+
+Heuristics: Suppose $z = ``\log_{b}(x)''$ and $w = ``\log_{b}(y)''$, \textit{i.e.}, \[
+    b^{z} = x \qquad b^{w} = y.
+\] Then $b^{z + w} = x + y$. Thus we expect \begin{equation}
+    \log_{b}(x) + \log_{b}(y) = \log_{b}(xy) \;\forall\; x, y \in \dom(\log)
+\end{equation}
+We will call this function $l$ for the moment.
+Suppose $0 \in \dom(\log)$. Then taking $x = 0$ in the above equation, we get \[
+    l(0) + l(y) = l(0y) = l(0) \;\forall\; y \in \dom(\log).
+\] Thus $l(y) = 0$ for all $y \in \dom(\log)$. \\
+
+Thus we will exclude $0$ from the domain. Let's calculate $l(1)$. \[
+    l(1) + l(1) = l(1) = 0.
+\] Since $(-x)(-x) = (x)(x)$, we get $l(-x) + l(-x) = l(x) + l(x) \implies$ \[
+    l(-x) = l(x).
+\]
+
+Now, differentiating the functional equation with respect to $x$,
+\begin{align*}
+    l(xy) &= l(x) + l(y) \\
+    yl'(xy) &= l'(x) \\
+    l'(y) &= \frac{l'(1)}{y}
+\end{align*}
+
+By the second fundamental theorem of calculus, \[
+    l(y) = \begin{cases}
+        l(y) - l(1) = \int_{1}^{y} \dfrac{l'(1)}{x} \dd x & y > 0 \\
+        l(y) - l(-1) = \int_{-1}^{y} \dfrac{l'(1)}{x} \dd x
+    \end{cases}
+\]
+
+\begin{defn}[Natural Logarithm] \label{defn:ln}
+    Let $x > 0$. The \emph{natural logarithm} of $x$ is the quantity \[
+        \ln(x) = \int_{1}^{x} \frac{1}{t} \dd t.
+    \]
+\end{defn}
+
+\begin{thm}[] \label{thm:}
+    The function $\ln : \R^{+} \to \R$ has the following properties:
+    \begin{enumerate}[label=(\alph*)]
+        \item $\ln(1) = 0$.
+        \item $\ln(x) + \ln(y) = \ln(xy) \;\forall\; x, y \in \R^{+}$.
+        \item $\ln$ is continuous and strictly increasing.
+        \item $\ln$ is differentiable and \[
+            \ln'(x) = \frac{1}{x}.
+        \]
+        \item (Leibniz) \[
+            \int \frac{1}{t} \dd t = \ln \abs{t} + C.
+        \]
+        \item (Leibniz) \[
+            \int \ln x \dd x = x \ln x - x + C.
+        \]
+        \item $\ln$ is bijective.
+    \end{enumerate}
+\end{thm}
+\begin{proof} \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item $\ln(1) = \int_{1}^{1} \frac{1}{t} \dd t = 0$.
+        \item Suppose $x, y > 0$. Then
+        \begin{align*}
+            \ln(\frac{1}{x}) &= \int_{1}^{\frac{1}{x}} \frac{1}{t} \dd t \\
+            &= \frac{1}{x} \int_{x}^{1} \frac{x}{t} \dd t \\
+            &= - \int_{1}^{x} \frac{1}{t} \dd t \\
+            &= - \ln(x). \qedhere
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\begin{defn}[e \& Exponentiation] \label{defn:e}
+    Let $e$ be the unique number that satisfies \[
+        \ln(e) = 1.
+    \] Given any $x \in \R$, let $\exp(x)$ be the unique positive $y$ such that \[
+        \ln(y) = x.
+    \] That is, $\exp$ is the inverse function of $\ln$.
+\end{defn}
+
+Hard exercise: Prove that this definition of $e$ is identical to the infinite series definiton.
+
+\begin{thm}[] \label{thm:}
+    $\exp : \R \to \R^{+}$ has the following properties:
+    \begin{enumerate}[label=(\alph*)]
+        \item $\exp(0) = 1$.
+        \item $\exp(x + y) = \exp(x) \exp(y)$.
+        \item $\exp$ is continuous and strictly increasing.
+        \item $\exp$ is differentiable and \[
+            \exp'(x) = \exp(x) \;\forall\; x \in \R.
+        \]
+        \item \[
+            \int \exp(x) \dd x = \exp(x) + C.
+        \]
+        \item $\exp$ is bijective.
+        \item $\exp(r) = e^{r} \;\forall\; r \in \Q$.
+    \end{enumerate}
+\end{thm}

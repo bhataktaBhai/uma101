@@ -1,0 +1,82 @@
+\lecture{29}{mon 2 jan '23}{}
+
+We will take the following properties of Riemann integrals for granted.
+
+Theorem 1.16-1.20 in Apostol (Section 1.27).
+\begin{outline}
+    \1 Linearity wrt the integrand.
+    \1 Additivity wrt interval of integral.
+    \1 Translation invariance.
+    \1 Expansion/contraction of the interval.
+    \1 Comparison: $f \leq g \implies \int_{a}^{b} f(x) \dd x \leq \int_{a}^{b} g(x) \dd x$.
+\end{outline}
+
+We won't assume that $f, g$ being Riemann integrable $\implies fg$ is Riemann integrable.
+
+\begin{defn}[Uniform Continuity] \label{defn:uniformly continuous}
+    A function $f : A \to \R$ is said to be \emph{uniformly continuous} if for every $\varepsilon > 0$, there exists a $\delta_{\varepsilon} > 0$ such that whenever $x, y \in A$ and $\abs{x - y} < \delta_{\varepsilon}$, then $\abs{f(x) - f(y)} < \varepsilon$.
+\end{defn}
+\begin{rem} \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item Obviously this implies continuity.
+        \item Uniform continuity is not a local definition. It depends on $A$.
+        \item If $f$ is uniformly continuous on $A$, then it is uniformly continuous on any subset of $A$.
+    \end{enumerate}
+\end{rem}
+
+\begin{example} \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item $f : \R \to \R, f(x) = x$. $\delta = \varepsilon$ works for all $\varepsilon > 0$ irresepective of $x$.
+        \item $f : \R \to \R, f(x) = x^{2}$ is not uniformly continuous on \R.
+        \begin{proof}
+            Let $\varepsilon = 1$. Suppose $\delta > 0$. Consider $x = p$, $y = p + \delta/2$. Then $\abs{f(x) - f(y)} = p \delta + \frac{\delta^{2}}{4} > p \delta$.
+            Choose $p = \varepsilon / \delta = \frac{1}{\delta}$. Thus $\abs{p - (p + \frac{\delta}{2})} < \delta$ but $\abs{f(x) - f(y)} > \varepsilon$. 
+        \end{proof}
+    \end{enumerate}
+\end{example}
+
+\begin{thm}[Closed continuous $\implies$ uniformly continuous] \label{thm:integration:uniform_continuity:bounded}
+    Every continuous function on a closed, bounded interval is uniformly continuous on $[a, b]$.
+\end{thm}
+One can use the same technique as used for showing boundedness of continuous functions on $[a, b]$. \textcolor{exercise}{Prove this}.
+
+\begin{thm}[Continuity $\implies$ Riemann Integrability] \label{thm:continuous RI}
+    Let $f$ be a continuous function on $[a, b]$. Then $f$ is Riemann integrable on $[a, b]$.
+\end{thm}
+
+Idea: Squeeze $\ubar{I}$ and $\bar{I}$ between $\int_{a}^{b} s_{n}(x) \dd x$ and $\int_{a}^{b} t_{n}(x) \dd x$.
+
+\begin{proof}
+    Since $f$ is bounded on $[a, b]$, $\ubar{I}$ and $\bar{I}$ exist.
+    By \cref{thm:integration:uniform_continuity:bounded}, there exists a $\delta > 0$ such that whenever $x, y \in [a, b]$ and $\abs{x - y} < \delta$, then $\abs{f(x) - f(y)} < \varepsilon$.
+    
+    By the Archimedean property of \R, there exists an $N \in \N$ such that $\frac{b - a}{n} < \delta \;\forall\; n \geq N$.
+    Let $P_{n} = \set{x_{0} < x_{1} < \dots < x_{n}}$ where $x_{j} = a + \frac{j(b - a)}{n}$.
+
+    Note that $f_{[x_{j-1}, x_{j}]}$ attains its minimum value $m_{j}$ at some $l_{j} \in [x_{j-1}, x_{j}]$ and its maximum value $M_{j}$ at some $u_{j} \in [x_{j-1}, x_{j}]$. \[
+        f(l_{j}) = m_{j} \leq f(x) \leq M_{j} = f(u_{j}) \qquad\forall\; x \in [x_{j-1}, x_{j}].
+    \] Let, for the same $n$, \[
+        s(n) = 
+        \begin{cases}
+            m_{j} & x \in [x_{j-1}, x_{j}) \\
+            f(b) & x = b
+        \end{cases}
+    \] and \[
+        t(n) = 
+        \begin{cases}
+            M_{j} & x \in [x_{j-1}, x_{j}) \\
+            f(b) & x = b
+        \end{cases}
+    \] Note that \[
+        \int_{a}^{b} s_{n}(x) \dd x \leq \ubar{I}(f) \leq \bar{I}(f) \leq \int_{a}^{b} t_{n}(x) \dd x
+    \] Thus
+    \begin{align*}
+        0 \leq \ubar{I}(f) - \bar{I}(f) &\leq \int_{a}^{b} t_{n}(x) \dd x - \int_{a}^{b} s_{n}(x) \dd x \\
+        &= \sum_{j = 1}^{n} M_{j} (x_{j} - x_{j-1}) - \sum_{j = 1}^{n} m_{j} (x_{j} - x_{j-1}) \\
+        &= \sum_{j = 1}^{n} (f(u_{j}) - f(l_{j})) (x_{j} - x_{j-1}) \\
+        &< \varepsilon \sum_{j = 1}^{n} (x_{j} - x_{j-1}) \\
+        &= \varepsilon (b - a)
+    \end{align*}
+    Since $\varepsilon > 0$ was arbitrary, $\ubar{I}(f) = \bar{I}(f)$.
+\end{proof}
+

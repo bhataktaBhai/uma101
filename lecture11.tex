@@ -1,0 +1,142 @@
+\lecture{11}{fri 11 nov 2022}{Series Convergence Tests}
+\begin{thm}[Ratio test] \label{thm:series:ratio_test}
+    Let $\sum a_{n}$ be a series of positive terms. Suppose \[
+        \lim_{n \to \infty} \frac{a_{n+1}}{a_{n}} = L \in \R
+    \] Then,
+    \begin{enumerate}[label=(\alph*)]
+        \item If $L < 1$, the series converges.
+        \item If $L > 1$, the series diverges.
+        \item If $L = 1$, the test is inconclusive.
+    \end{enumerate}
+\end{thm}
+\begin{proof}[Proof \textcolor{self_proof}{(self)}] \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item There exists an $N \in \N$ such that $\frac{a_{n+1}}{a_{n}} < (L + \varepsilon) \;\forall\; n \geq N$.
+        Thus $a_{N+k} < (L + \varepsilon)^{k} a_{N} \;\forall\; k > 0$.
+        Since $L < 1$, choose $\varepsilon = \frac{1 - L}{2} \implies (L + \varepsilon) < 1$.
+        Since the geometric series converges, so does $\sum a_{n}$ by the comparison test.
+        \item There exists an $N \in \N$ such that $\frac{a_{n+1}}{a_{n}} > (L - \varepsilon) \;\forall\; n \geq N$.
+        Thus $a_{N+k} > (L + \varepsilon)^{k} a_{N} \;\forall\; k > 0$.
+        Since $L > 1$, choose $\varepsilon = \frac{L - 1}{2} \implies (L - \varepsilon) > 1$.
+        Since the geometric series diverges, so does $\sum a_{n}$ by the comparison test (contrapositive).
+        \item $\sum a_{n}$ diverges for $a_{n} = \frac{1}{n}$, converges for $a_{n} = \frac{1}{n^{2}}$.
+        Both these sequences satisfy $L = 1$, thus the test is inconclusive. \qedhere
+    \end{enumerate}
+\end{proof}
+
+\begin{thm} \label{thm:series:limit_laws}
+    Suppose $\sum a_{n}$ and $\sum b_{n}$ converge with sums $a$ and $b$ respectively.
+    Then, for constants $l$ and $m$, $\sum la_{n} + mb_{n}$ converges to $la + mb$.
+    Suppose $\sum \abs{a_{n}}$ and $\sum \abs{b_{n}}$ converge.
+    Then, so does $\sum \abs{la_{n} + mb_{n}}$ for any choice of $l$ and $m$ in $\R$.
+\end{thm}
+\begin{proof}[Proof \textcolor{self_proof}{(self)}]
+    Let $s_{n}$ and $t_{n}$ be the sops of $a_{n}$ and $b_{n}$.
+    Let $S_{n}$ and $T_{n}$ be the sops of $la_{n}$ and $mb_{n}$.
+    We have $S_{n} = l s_{n}$ and $T_{n} = m t_{n}$, so by the limit laws for sequences we have $\sum la_{n} = l \sum a_{n}$ and $\sum mb_{n} = m \sum b_{n}$.
+
+    By the limit laws for sequences and defining $Q_{n} =$ sops of $la_{n} + mb_{n} = S_{n} + T_{n}$, we have $\sum la_{n} + mb_{n} = l \sum a_{n} + m \sum b_{n}$.
+
+    Now suppose $\sigma_{n}, \tau_{n}$ and $\mu_{n}$ are the sops of $\abs{a_{n}}, \abs{b_{n}}$ and $\abs{a_{n} + b_{n}}$.
+    Since $\abs{a_{n} + b_{n}} \leq \abs{a_{n}} + \abs{b_{n}}$, we have $\mu_{n} \leq \sigma_{n} + \tau_{n}$.
+    Since $\sigma$ and $\tau$ are monotone and convergent, they are bounded.
+    So $\mu_{n} \leq \sup \set{\sigma_{n}} + \sup \set{\tau_{n}}$.
+
+    Thus $\mu$ is bounded and increasing.
+    By \nameref{thm:sequence:MCT}, it is convergent.
+\end{proof}
+
+\begin{cor} \label{thm:series:limit_laws:divergence}
+    Suppose $\sum a_{n}$ converges and $\sum b_{n}$ diverges. Let $m \in \R \setminus \set{0}$. Then, $\sum(a_{n} + b_{n})$ diverges, and $\sum mb_{n}$ diverges.
+\end{cor}
+
+\begin{defn} \label{defn:series:absolute_convergence}
+    A series $\sum a_{n}$ of real numbers is said to \emph{converge absolutely} if $\sum \abs{a_{n}}$ converges. A series $\sum a_{n}$ of real numbers is said to \emph{converge conditionally} if $\sum \abs{a_{n}}$ diverges but $\sum a_{n}$ converges.
+\end{defn}
+\begin{thm} \label{thm:series:absolute=>conditional}
+    If $\sum a_{n}$ converges absolutely, it must converge. Moreover, $\abs{\sum a_{n}} \leq \sum \abs{a_{n}}$.
+\end{thm}
+\begin{proof}
+    We construct a new series \[
+        b_{n} = a_{n} + \abs{a_{n}}
+    \] Observe that $0 \leq  b_{n} \leq  2 \abs{a_{n}}$. Thus, by the comparison test, $\sum b_{n}$ converges. Now, by the limit laws for convergent series, $\sum a_{n} = \sum (b_{n} - \abs{a_{n}})$ converges.
+\end{proof}
+
+\begin{example}
+    $\sum \frac{(-1)^{n}}{n}$ is convergent.
+\end{example}
+\begin{proof}
+    \begin{align*}
+        s_{1} &= -1 \\
+        s_{3} &= -1 + \paren{\frac{1}{2} - \frac{1}{3}} > s_{1} \\
+        s_{5} &= s_{3} + \paren{\frac{1}{4} - \frac{1}{5}} > s_{3} \\
+        &\;\;\vdots \\
+        s_{2k+1} &= \paren{-1 + \frac{1}{2}} + (-\frac{1}{3} + \frac{1}{4}) + \dots \paren{-\frac{1}{2k+1}} < 0
+    \end{align*}
+    Thus, $\set{s_{2k+1}}$ being a bounded increasing sequence, converges to some limit $l$ by \nameref{thm:sequence:MCT}
+    \begin{align*}
+        s_{2} &= -1 + \frac{1}{2} \\
+        s_{4} &= -1 + \frac{1}{2} - \paren{\frac{1}{3} - \frac{1}{4}} < s_{2} \\
+        &\;\;\vdots \\
+        s_{2k} &= -1 + \paren{\frac{1}{2} - \frac{1}{3}} + \paren{\frac{1}{4} - \frac{1}{5}} + \dots + \paren{\frac{1}{2k}} > -1
+    \end{align*}
+    Thus, $\set{s_{2k}}$ being a bounded decreasing sequence, converges to some limit $m$ by \nameref{thm:sequence:MCT}
+    Moreover, $s_{2k+1} = s_{2k} - \frac{1}{2k + 1}$.
+    So by limit laws for sequences, $l = m$.
+    \textcolor{exercise}{Why does this suffice to claim that $\set{s_{n}}$ converges?}.
+
+    \textcolor{solved}{For any $\varepsilon > 0$,} there exist $n_{1}, n_{2}$ such that $\abs{s_{2k} - l} < \varepsilon \;\forall\; 2k \geq n_{1}$ and $\abs{s_{2k+1} - l} < \varepsilon \;\forall\; 2k + 1 \geq  n_{2}$.
+    Choose $N = \max \set{n_{1}, n_{2}}$.
+    Then $\abs{s_{n} - l} < \varepsilon$ for all $n \geq  N$.
+\end{proof}
+
+\begin{thm}[Alternating series test] \label{thm:series:AST}
+    Suppose $\set{a_{n}}_{n \in \N}$ is a decreasing sequence of positive numbers going to 0.
+    Then, $\sum (-1)^{n} a_{n}$ converges.
+    Denoting the sum by $S$, we have that \[
+        0 < (-1)^{n}(S - s_{n}) < a_{n+1}.
+    \] Also called the Leibniz test.
+\end{thm}
+\begin{proof}
+    Same principle as the example of $\sum \dfrac{(-1)^{n}}{n}$.
+    \begin{paracol}{2}
+        \begin{leftcolumn}
+            Since $a$ is decreasing,
+            \begin{align*}
+                a_{2k} &> a_{2k+1} \\
+                a_{2k} - a_{2k+1} &> 0 \\
+                s_{2k+1} &> s_{2k-1}.
+            \end{align*}
+            So $\set{s_{2k+1}}$ is increasing.
+            Thus \[
+                s_{2k + 1} > a_{0} - a_{1} > 0.
+            \]
+        \end{leftcolumn}
+        
+        \begin{rightcolumn}
+            Since $a$ is decreasing,
+            \begin{align*}
+                a_{2k+1} &> a_{2k+2} \\
+                - a_{2k+1} + a_{2k+2} &< 0 \\
+                s_{2k+2} &< s_{2k}.
+            \end{align*}
+            So $\set{s_{2k}}$ is decreasing.
+            Thus \[
+                s_{2k} < a_{0}.
+            \]
+        \end{rightcolumn}
+    \end{paracol}
+    Thus $\set{s_{2k}}$ and $\set{s_{2k + 1}}$ are bounded and monotone, and convergent by \nameref{thm:sequence:MCT}.
+
+    Since $\set{s_{2k + 1}}$ converges, we have by \cref{thm:series:convergent=>limit=0} that $a_{2k + 1} \to 0$.
+    Since $s_{2k + 1} = s_{2k} - a_{2k + 1}$, by limit laws we have $\lim s_{2k} = \lim s_{2k + 1}$.
+
+    Thus the sequence converges.
+\end{proof}
+
+\begin{rem}
+    The estimate in \nameref{thm:series:AST} allows us to estimate sums of alternating series within any prescribed error.
+    For instance, to know $\sum_{n=1}^{\infty} \dfrac{(-1)^{n}}{n}$ up to an error of $0.1$, it suffices to find $n$ so that \[
+        \abs{S - s_{n}} < \abs{a_{n + 1}} \leq \frac{1}{100}.
+    \] $n = 99$ works.
+\end{rem}

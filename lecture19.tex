@@ -1,0 +1,148 @@
+\lecture{19}{tue 30 nov '22}{Invertible Functions: Monotonicity and Continuity}
+\begin{defn}[Inverse function] \label{defn:diff:inverse}
+    Let $f : A \to B$ be bijective. Then for any $y \in B$, there exists (unique) $x_{y} \in A$ such that $f(x_{y}) = y$. We define the inverse function $f^{-1} : B \to A$ as \[
+        f^{-1}(y) = x_{y}.
+    \] and say that $f$ is invertible on $A$.
+
+    Note that $(f \circ f^{-1})$ and $(f^{-1} \circ f)$ are the identity functions on $B$ and $A$ respectively.
+    
+    For example, the function $f(x) = x^{2}$ is invertible on $\R^{+}$ and its inverse is $f^{-1}(x) = \sqrt{x}$.
+\end{defn}
+
+\begin{thm}[inverse function properties] \label{thm:diff:inverse}
+    Let $f : [a, b] \to \R$ be an invertible function on $[a, b]$ with range $J$.
+    \begin{enumerate}[label=(\roman*)]
+        \item If $f$ is (strictly) increasing, then so is $f^{-1}$.
+        \item If $f$ is continuous, then $f : [a, b] \to J$ is strictly monotone and $f^{-1} : J \to [a, b]$ is continuous.
+        \item If $f$ is differentiable at $p \in (a, b)$ with $f'(p) \neq 0$ \emph{and continuous in some neighborhood around $p$}, then $f^{-1}$ is differentiable at $f(p) = q \in J$ and $(f^{-1})'(q) = \dfrac{1}{f'(p)}$.
+    \end{enumerate}
+\end{thm}
+\begin{proof} \leavevmode
+    \begin{enumerate}[label=(\roman*)]
+        \item If $x_{1}, x_{2} \in [a, b]$, then $f(x_{1}) < f(x_{2})$ implies $x_{1} < x_{2}$, and hence $f^{-1}(f(x_{1})) < f^{-1}(f(x_{2}))$.
+        \item Given: $f : [a, b] \to J$ is invertible and continuous.
+        Thus, $J = [A, B]$ (\cref{thm:cont:EVT:compact->compact}).
+        \begin{enumerate}[label= (Case \arabic*)]
+            \item ($f(a) < f(b)$) We prove that $f$ is strictly increasing.
+
+            Suppose there exists $c$ in $(a, b)$ such that $f(c) < f(a) < f(b)$.
+            Then by \nameref{thm:cont:IVT}, $f$ attains the value $f(a)$ somewhere in $(c, b)$, contradicting that it is invertible.
+
+            Similarly for any $x_{0} \in (a, b)$, $f(x_{0})$ can neither be greater that $f(b)$ nor less than $f(a)$ because of IVT.
+            Then for all $x \in (x_{0}, b)$, $f(x) > f(x_{0})$.
+            Hence $f$ is strictly increasing.
+
+            \item ($f(a) > f(b)$) We prove that $f$ is strictly decreasing.
+
+            Suppose there exists $c$ in $(a, b)$ such that $f(c) > f(a) > f(b)$.
+            Then by IVT, $f$ attains the value $f(a)$ somewhere in $(c, b)$, contradicting that it is invertible.
+
+            Similarly for any $x_{0} \in (a, b)$, $f(x_{0})$ can neither be greater that $f(a)$ nor less than $f(b)$ because of IVT.
+            Then for all $x \in (x_{0}, b)$, $f(x) < f(x_{0})$.
+            Hence $f$ is strictly decreasing.
+        \end{enumerate}
+        Let $p \in [a, b]$.
+        We show that $f^{-1}$ is continuous at $f(p)$.
+
+        Suppose WLOG that $f$ is increasing.
+
+        Let $\varepsilon > 0$.
+        Let \[
+            \delta = \min\set{f(p) - f^{-1}(\max \{f(p) - \varepsilon, f(a)}), f^{-1}(\min \set{f(p) + \varepsilon, f(b)}) - f(p)\}.
+        \]
+        This is very ugly, so instead we do this:
+
+        Let \[
+            d = \min\set{b - p, p - a}.
+        \] It suffices to consider $0 < \varepsilon \leq d$.
+        Because if $\varepsilon > d$, we choose $\delta_{\varepsilon}$ corresponding to $\varepsilon = d$.
+        Then, whenever $\abs{y - q} < \delta_{\varepsilon}$, we have $\abs{f^{-1}(y) - f^{-1}(q)} < d < \varepsilon$.
+        
+        Let $0 < \varepsilon \leq d$.
+        Since $(p - \varepsilon, p + \varepsilon) \subseteq (a, b)$, we have $A \leq f(p - \varepsilon) < f(p) = q < f(p + \varepsilon) \leq B$.
+        Let \[
+            \delta = \min \set{f(p + \varepsilon) - q, q - f(p - \varepsilon)}
+        \]
+        Then whenever $y \in N_{\delta}(q) \cap [A, B]$, we have \[
+            f(p - \varepsilon) \leq q - \delta < q < q + \delta \leq f(p + \varepsilon)
+        \] Thus, \[
+            p - \varepsilon \leq f^{-1}(q - \delta) < p < f^{-1}(q + \delta) \leq p + \varepsilon
+        \] Thus, \[
+            y \in N_{\delta}(q) \cap [A, B] \implies f^{-1}(y) \in N_{\varepsilon}(p) \cap [a, b].
+        \]
+
+        \item Given: $f : [a, b] \to J$ is invertible and differentiable at $p \in (a, b)$ with $f'(p) \neq 0$.
+        Thus, $J = [A, B]$.
+        We also require $f$ to be continuous in some neighborhood around $p$.
+
+        We want $\lim_{k \to 0} (f^{-1})^{q}_{\delta}(k)$.
+
+        \textbf{JEE Solution:} Since $f(p) + k \in \dom (f^{-1})$, it is the image of some $p + h$ in $f$.
+        Then,
+        \begin{align*}
+            \lim_{k \to 0} \frac{f^{-1}(f(p) + k) - f^{-1}(f(p))}{k} &= \lim_{k \to 0} \frac{f^{-1}(f(p + h)) - f^{-1}(f(p))}{f(p + h) - f(p)} \\
+            &= \lim_{k \to 0} \frac{p + h - p}{f(p + h) - f(p)} \\
+            &= \lim_{k \to 0} \frac{h}{f(p + h) - f(p)} \\
+            &= \textcolor{exercise}{\lim_{h \to 0}} \frac{h}{f(p + h) - f(p)} \\
+            &= \frac{1}{f'(p)}.
+        \end{align*}
+
+        Note that $h$ is a function of $k$.
+        We don't know that \[
+            \lim_{k \to 0} \frac{h(k)}{f(p + h(k)) - f(p)} = \lim_{h \to 0} \frac{h}{f(p + h) - f(p)}.
+        \]
+        Let $h(k) = k \cdot (f^{-1})^{q}_{\delta}(k) = f^{-1}(q + k) - f^{-1}(q) = f^{-1}(q + k) - p$ for $k \in \dom ((f^{-1})^{q}_{\delta})$.
+        Thus
+        \begin{align*}
+            h(k) + p &= f^{-1}(q + k) \\
+            f(h(k) + p) &= q + k \\
+            k &= f(h(k) + p) - q \\
+            &= f(h(k) + p) - f(p)
+        \end{align*}
+        If $k \neq 0$, then $h(k) \neq 0$ as $f^{-1}$ is injective.
+        Thus 
+
+        Note that since $f$ is continuous in some neighborhood around $p$, $f^{-1}$ is continuous in some neighborhood around $q$.
+        Thus, \begin{align*}
+            \lim_{k \to 0} k &= \lim_{k \to 0} f(h(k) + p) - \lim_{k \to 0} f(p) \\
+            \lim_{k \to 0} f(h(k) + p) &= f(p) \\
+            f(\lim_{k \to 0} h(k) + p) &= f(p) \\
+            f^{-1}(f(\lim_{k \to 0} h(k) + p)) &= f^{-1}(f(p)) \\
+            \lim_{k \to 0} h(k) &= 0
+        \end{align*}
+
+        If $k \neq 0$, then $h(k) \neq 0$.
+        By the composition theorem,
+        \begin{align*}
+            \lim_{k \to 0} \frac{f^{-1}(q + k) - f^{-1}(q)}{k} &= \lim_{k \to 0} \frac{h}{f(h(k) + p) - f(p)} \\
+            &= \lim_{k \to 0} F(h(k))
+        \end{align*}
+        where $F(x) = \frac{x}{f(p + x) - f(p)}$.
+        Since $k \neq 0 \implies h(k) \neq 0$,
+        \begin{align*}
+            \lim_{k \to 0} F(h(k)) &= \lim_{h \to 0} F(h) \\
+            &= \frac{1}{f'(p)}. \qedhere
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\begin{example}
+    A function continuous at just one point in its domain, defined on all of $\R$. \[
+        f(x) = \begin{cases}
+            x & x \in \Q \\
+            0 & x \in \R \setminus \Q
+        \end{cases}
+    \]
+    A function differentiable at one point and not continuous in any neighborhood about it. \[
+        f(x) = \begin{cases}
+            x + x^{2} & x \in \Q \\
+            x & x \in \R \setminus \Q
+        \end{cases}
+    \]
+\end{example}
+
+\begin{example}
+    Derivatives of $x^{\frac{1}{n}}$ for $x \in (0, \infty)$, $n \in \N$.
+
+    By product rule, we get derivatives of $x^{p/q} = (x^{1 / q})^{p}$.
+\end{example}

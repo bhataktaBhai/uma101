@@ -1,0 +1,110 @@
+\lecture{18}{mon 28 nov '22}{Differentiation}
+
+\section{Differentiation}
+
+\begin{defn} \label{defn:diff}
+    Let $f : (a, b) \to \R$ be a function and $p \in (a, b)$. We say that $f$ is differentiable in $(a, b)$ if \[
+        \lim_{h \to 0} \frac{f(p + h) - f(p)}{h} = \lim_{x \to p} \frac{f(x) - f(p)}{x - p}
+    \] exists, and the limit is called the derivative of $f$ at $p$, denoted $f'(p)$.
+
+    If $f$ is differentiable on each $p$ in $(a, b)$, it is said to be differentiable on $(a, b)$ and $f' : (a, b) \to \R$ is called the derivative of $f$ on $(a, b)$.
+
+    We define two more functions:
+    \begin{enumerate}[label=(\alph*)]
+        \item For any function $f : (a, b) \to \R$ and any $p \in (a, b)$, define \[
+            f^{p}_{\delta} : h \in (a - p, b - p) \setminus \set{0} \mapsto \frac{f(p + h) - f(p)}{h} \in \R.
+        \]
+        \item For any differentiable function $f : (a, b) \to \R$ and any $p \in (a, b)$, define \[
+            f^{p}_{\Delta} : h \in (a - p, b - p) \mapsto \begin{cases}
+                \dfrac{f(p + h) - f(p)}{h} & h \neq 0 \\
+                f'(p) & h = 0
+            \end{cases} \in \R.
+        \]
+    \end{enumerate}
+\end{defn}
+
+\begin{thm}[Differentiability $\implies$ continuity] \label{thm:diff:continuity}
+    Let $f : (a, b) \to \R$ be differentiable at $p \in (a, b)$. Then $f$ is continuous at $p$.
+\end{thm}
+\begin{proof}
+    \begin{align*}
+        f(x) &= (x - p) \cdot \frac{f(x) - f(p)}{x - p} + f(p) \\
+        \lim_{x \to p} f(x) &= 0 \cdot f'(p) + f(p) \tag{exists} \\
+        &= f(p) \qedhere
+    \end{align*}
+\end{proof}
+
+\begin{thm}[Algebra of derivatives] \label{thm:diff:laws}
+    Let $f, g : (a, b) \to \R$ be differentiable at $p \in (a, b)$. Then
+    \begin{enumerate}[label=(\alph*)]
+        \item $f + g$ is differentiable at $p$ and $(f + g)' = f' + g'$.
+        \item $f - g$ is differentiable at $p$ and $(f - g)' = f' - g'$.
+        \item $f \cdot g$ is differentiable at $p$ and $(f \cdot g)' = f' \cdot g + f \cdot g'$.
+        \item $f / g$ is differentiable at $p$ if $g \neq 0$ and $(f / g)' = \frac{f' \cdot g - f \cdot g'}{g^2}$.
+    \end{enumerate}
+\end{thm}
+\begin{proof}[Proof (Quotient rule)]
+    For the special case of $f(x) = 1$, we have
+    \begin{align*}
+        \lim_{h \to 0} \frac{\frac{1}{g(p + h)} - \frac{1}{g(p)}}{h} &= - \lim_{h \to 0} \frac{g(p + h) - g(p)}{h \cdot g(p + h) \cdot g(p)} \\
+        &= - \frac{1}{g(p)^{2}} \lim_{h \to 0} \frac{g(p + h) - g(p)}{h} \\
+        &= - \frac{1}{g(p)^{2}} g'(p) \text{exists}. \qedhere
+    \end{align*}
+\end{proof}
+
+\begin{example} \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item (Constant function) $f(x) = c$ is differentiable at $p$ for any $c \in \R$ and $f'(p) = 0$.
+        \begin{proof}
+        \[
+            \lim_{h \to 0} \frac{f(p + h) - f(p)}{h} = \lim_{h \to 0} \frac{c - c}{h} = 0. \qedhere
+        \]
+        \end{proof}
+        \item $f(x) = x^{n}, x \in \R, n \in \Z \setminus \set{0}$ is differentiable at $p$ and $f'(p) = n \cdot p^{n - 1}$.
+        \begin{proof}
+            \begin{align*}
+                \lim_{h \to 0} \frac{f(p + h) - f(p)}{h} &= \lim_{h \to 0} \frac{(p + h)^{n} - p^{n}}{h} \\
+                &= \lim_{h \to 0} \frac{p^{n} + n \cdot p^{n - 1} \cdot h + \cdots + n \cdot h^{n - 1} \cdot p + h^{n} - p^{n}}{h} \\
+                &= \lim_{h \to 0} \frac{n \cdot p^{n - 1} \cdot h + \cdots + n \cdot h^{n - 1} \cdot p}{h} \\
+                &= n \cdot p^{n - 1} \qedhere
+            \end{align*}
+        \end{proof}
+        As a consequence, we get that polynomials and rational functions are differentiable in their domains.
+
+        \item $f(x) = \sin x$ is differentiable at $p$ and $f'(p) = \cos p$.
+        \begin{proof}
+            \begin{align*}
+                \lim_{h \to 0} \frac{f(p + h) - f(p)}{h} &= \lim_{h \to 0} \frac{\sin(p + h) - \sin p}{h} \\
+                &= \lim_{h \to 0} \frac{\sin p \cos h + \cos p \sin h - \sin p}{h} \\
+                &= \cos p \lim_{h \to 0} \frac{\sin h}{h} + \sin p \lim_{h \to 0} \frac{\cos h - 1}{h} \\
+                &= \cos p + \sin p \lim_{h \to 0} \frac{-2 \sin^{2} \frac{h}{2}}{h} \\
+                &= \cos p + \sin p \cdot 0 \\
+                &= \cos p. \qedhere
+            \end{align*}
+        \end{proof}
+
+        \item $f(x) = \cos x$ is differentiable at $p$ and $f'(p) = - \sin p$.
+        \begin{proof}
+            \begin{align*}
+                \lim_{h \to 0} \frac{f(p + h) - f(p)}{h} &= \lim_{h \to 0} \frac{\cos(p + h) - \cos p}{h} \\
+                &= \lim_{h \to 0} \frac{- \sin p \sin h + \cos p \cos h - \cos p}{h} \\
+                &= - \sin p \lim_{h \to 0} \frac{\sin h}{h} + \cos p \lim_{h \to 0} \frac{\cos h - 1}{h} \\
+                &= - \sin p + \cos p \lim_{h \to 0} \frac{-2 \sin^{2} \frac{h}{2}}{h} \\
+                &= - \sin p + \cos p \cdot 0 \\
+                &= - \sin p. \qedhere
+            \end{align*}
+        \end{proof}
+
+        \item $f(x) = \abs{x}$ is continuous but not differentiable at $p = 0$.
+        \begin{proof}
+            \begin{align*}
+                \frac{\abs{h}}{h} &= \begin{cases}
+                    1 & h > 0 \\
+                    -1 & h < 0 \\
+                    \text{undefined} & h = 0
+                \end{cases}
+            \end{align*}
+            Let $a_{n} = \frac{(-1)^{n}}{n}$, then $\lim_{n \to \infty} a_{n} = 0$ but $\lim_{n \to \infty} \frac{\abs{a_{n}}}{a_{n}} = \lim_{n \to \infty} (-1)^{n}$ does not exist.
+        \end{proof}
+    \end{enumerate}
+\end{example}

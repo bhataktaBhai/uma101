@@ -1,0 +1,45 @@
+\lecture{31}{fri 6 jan '23}{}
+\begin{thm}[Integral Triangle Inequality] \label{thm:integral triangle}
+    Let $f : [a, b] \to \R$ be Riemann integrable.
+    Then $\abs{f} : x \in [a, b] \mapsto \abs{f(x)} \in \R$ is Riemann integrable and \[
+        \abs{\int_{a}^{b} f(x) \dd x} \leq \int_{a}^{b} \abs{f(x)} \dd x.
+    \]
+\end{thm}
+\begin{proof}
+\end{proof}
+
+\begin{defn}[Primitive] \label{defn:primitive}
+    Given a function $f : (a, b) \to \R$, with $a < b$ and $a, b \in \R \cup \set{-\infty, +\infty}$, a \emph{primitive} or \emph{antiderivative} of $f$ on $(a, b)$ is a differentiable function $F : (a, b) \to \R$ such that \[
+        F'(x) = f(x) \;\forall\; x \in (a, b).
+    \]
+\end{defn}
+\begin{rem}[on the First FTOC]
+    We could have also set \[
+        G(x) = \int_{b}^{x} f(t) \dd t.
+    \] Note $F - G = \int_{a}^{x} f(t) \dd t - \int_{b}^{x} f(t) \dd t = \int_{a}^{b} f(t) \dd t$ which is a constant.
+    Thus continuity and differentiability of $F$ transfers to $G$.
+\end{rem}
+\begin{rem} \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item Let $f, F$ be as in \cref{thm:integration:IFTOC}.
+        If $f$ is continuous, then $F$ is a primitive of $f$ and 
+        \item In general, if $F$ and $G$ are primitives of $f$, then $F' - G' = 0 \implies F = G + C$, where $C$ is a constant.
+    \end{enumerate}
+\end{rem}
+\begin{example} \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item sin and cos are primitives of cos and $-\sin$ on all of \R.
+        \item \[
+            \frac{x^{\gamma + 1}}{\gamma + 1} \qquad \gamma \in \R \setminus \set{-1}, x \in \R^{+}
+        \] is a primitive of $x^{\gamma}$ on $\R^{+}$.
+        \item Let \[
+            L(x) = \int_{1}^{x} \frac{1}{t} \dd t \qquad x > 0.
+        \] By the first fundamental theorem of calculus, $L$ is a primitive of $\dfrac{1}{x}$.
+    \end{enumerate}
+\end{example}
+
+\begin{thm}[The Second Fundamental Theorem of Calculus] \label{thm:second ftoc}
+    Let $f : (c, d) \to \R$ be a function such that $f_{[a, b]}$ ($[a, b] \subset (c, d)$) is Riemann integrable. Let $F$ be a primitive of $f$ on $(c, d)$. Then \[
+        \int_{a}^{b} f(x) \dd x = F(b) - F(a).
+    \]
+\end{thm}
