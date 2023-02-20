@@ -46,4 +46,3 @@ for file in *.tex; do
     cat $file.copy > $file
     rm $file.copy
 done
-

@@ -7,4 +7,3 @@ for file in lecture01*; do
 " $file
     fi
 done
-
