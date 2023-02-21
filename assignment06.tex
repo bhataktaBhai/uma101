@@ -36,96 +36,149 @@
     Thus $f(x) \geq c = \frac{1}{M} \;\forall\; x \in [a, b]$ where $M$ is the supremum of $1 / f$ on $[a, b]$.
 \end{proof}
 
-\textbf{Problem 3.}
-Let the polynomial be $f(x) = a_{0} + a_{1}x + a_{2}x^{2} + \dots + a_{n}x^{n}$, where $n$ is odd. Define \[
+% Problem 3
+\begin{problem}
+    Show that every polynomial with real coefficients and odd degree has at least one real root.
+\end{problem}
+Let the polynomial be $f(x) = a_{0} + a_{1}x + a_{2}x^{2} + \dots + a_{n}x^{n}$, where $n$ is odd and $a_{n} \neq 0$.
+Define \[
     g(x) = \frac{f(x)}{x^{n}} = \frac{a_{0}}{x^{n}} + \frac{a_{1}}{x^{n-1}} + \dots + a_{n}.
-\] Define the sequence $\set{g(m)}_{m \in \N}$. We have \[
+\] Define the sequence $\set{g(m)}_{m \in \N}$.
+We have \[
     \lim_{m \to \infty} g(m) = a_{n}.
-\] Thus we have $N \in \N$ such that $\abs{ g(m) - a_{n} } < a_{n} \;\forall\; m \geq N \implies g(N) > 0 \implies f(N) = N^{n} g(N) > 0$. 
+\] Thus we have $N \in \N$ such that $\abs{g(m) - a_{n}} < a_{n} \;\forall\; m \geq N \implies g(N) > 0 \implies f(N) = N^{n} g(N) > 0$. 
 
 Define the sequence $\set{g(-m)}_{m \in \N}$. We have
 \begin{align*}
     g(-m) &= -\frac{a_{0}}{m^{n}} + \frac{a_{1}}{m^{n-1}} - \dots + a_{n} \\
     \implies \lim_{m \to \infty} g(-m) &= a_{n}
 \end{align*}
-Thus we have $N' \in \N$ such that $\abs{ g(-m) - a_{n} } < a_{n} \;\forall\; m \geq N' \implies g(-N') > 0 \implies f(-N') = (-N')^{n} g(-N) = - (N')^{n} g(-N) < 0$. Also $-N' < 0 < N$. By IVT we have \[
+Thus we have $N' \in \N$ such that $\abs{g(-m) - a_{n}} < a_{n} \;\forall\; m \geq N' \implies g(-N') > 0 \implies f(-N') = (-N')^{n} g(-N) = - (N')^{n} g(-N) < 0$.
+Also $-N' < 0 < N$. By \refifdef{thm:cont:IVT}{\nameref}{IVT} we have \[
     \exists\; c \in [-N', N] : f(c) = 0.
 \]
 
-\textbf{Problem 4.}
-Consider $g(x) = \cos x - x^{2}$. Then $g'(x) = - \sin x - 2x < 0$. So $g$ is decreasing. $g(0) = 1 > 0$. $g(\frac{\pi}{2}) = -\frac{\pi^{2}}{4} < 0$. Therefore $g(x) = 0$ at exactly one $x = c$ in $[0, \frac{\pi}{2}]$. Thus $g(x) > 0$ for $0 \leq x < c$ and $g(x) < 0$ for $c < x \leq \frac{\pi}{2}$.
+\begin{problem}
+    Let $f : [0, \pi / 2] \to \R$ be given by \[
+        f(x) = \max\set{x^{2}, \cos x}.
+    \] Argue that $f$ attains a global minimum on $[0, \pi / 2]$ at some $c \in [0, \pi / 2]$.
+    Show that $c$ is a solutio of the equation $\cos x = x^{2}$.
+\end{problem}
+% TODO: Check and also write down Purvi's solution.
+\begin{proof}
+    Consider $g(x) = \cos x - x^{2}$.
+    Then $g'(x) = - \sin x - 2x < 0$.
+    So $g$ is decreasing.
+    $g(0) = 1 > 0$.
+    $g(\frac{\pi}{2}) = -\frac{\pi^{2}}{4} < 0$.
+    Therefore $g(x) = 0$ at exactly one $x = c$ in $[0, \frac{\pi}{2}]$.
+    Thus $g(x) > 0$ for $0 \leq x < c$ and $g(x) < 0$ for $c < x \leq \frac{\pi}{2}$.
+    
+    For $0 \leq x < c$, $f(x) = \cos x$.
+    For $c < x \leq \frac{\pi}{2}$, $f(x) = x^{2}$.
+    
+    Since $\cos x$ is decreasing in $[0, c] \subseteq [0, \frac{\pi}{2}]$, we have $f(x) > f(c) \;\forall\; x \in [0, c)$.
+    Since $x^{2}$ is increasing in $[c, \frac{\pi}{2}] \subseteq [0, \frac{\pi}{2}]$, we have $f(x) > f(c) \;\forall\; x \in (c, \frac{\pi}{2}]$
+    
+    Thus $f$ attains a global minimum at $c$, where $\cos c = c^{2}$.
+\end{proof}
 
-For $0 \leq x < c$, $f(x) = \cos x$. For $c < x \leq \frac{\pi}{2}$, $f(x) = x^{2}$.
+\begin{problem}
+    For each $f$ given below, determine its region of continuity and region of differentiability.
+    As always, you may cite any theorems or examples discussed in class.
+    \begin{enumerate}[label=(\alph*)]
+        \item $f : \R \to \R$ defined by $h \circ g$, where $g(x) = x^{3}$ and $h(x) = \abs{x}$.
+        \item $f : \R \to \R$ given by \[
+            f(x) = \begin{cases}
+                \abs{x}, & x < 0, \\
+                0, & x = 0, \\
+                x^{2} \cos(\frac{1}{x}), & x > 0.
+            \end{cases}
+        \]
+        \item $f : \R \to \R$ given by \[
+            f(x) = \begin{cases}
+                \frac{\abs{\sin x}}{\sin \abs{x}} & x \neq n \pi, \text{ for any } n \in \Z, \\
+                1, & \text{otherwise}.
+            \end{cases}
+        \]
+    \end{enumerate}
+\end{problem}
+\begin{rem}
+    We have not discussed one-sided limits/derivatives in class.
+    While you may use those ideas, you do not need the language of one-sided limits to write your proofs.
+\end{rem}
+\begin{proof} \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item \[
+            h \circ g (x) = \abs{x}^{3} =
+            \begin{cases}
+                x^{3} & x \geq 0 \\
+                -x^{3} & x < 0
+            \end{cases}
+        \] Since all polynomials are continuous and differentiable at every point, we only need to check at 0.
+        \begin{align*}
+            \lim_{h \to 0} \frac{f(0 + h) - f(0)}{h} &= \lim_{h \to 0} \frac{\abs{h}^{3}}{h} \\
+            &= \lim_{h \to 0} \frac{h^{2}\abs{h}}{h} \\
+            &= \lim_{h \to 0} h \abs{h} \\
+            &= 0
+        \end{align*}
+        Thus $h \circ g$ is differentiable everywhere, so it is continuous everywhere.
+    
+        \item We first show that $\cos(\frac{1}{x})$ is differentiable at $x \neq 0$.
+        \begin{align*}
+            \lim_{x \to p} \frac{\cos(\frac{1}{x}) - \cos(\frac{1}{p})}{x - p} &= \lim_{x \to p} \frac{2 \sin(\frac{1}{2x} + \frac{1}{2p})\sin(\frac{1}{2p} - \frac{1}{2x})}{x - p} \\
+            &= 2 \sin(\frac{1}{p}) \lim_{x \to p} \frac{\sin(\frac{x - p}{2xp})}{x - p} \\
+            &= 2 \sin(\frac{1}{p}) \lim_{x \to p} \frac{\sin(\frac{x - p}{2xp})}{\frac{x - p}{2xp}} \frac{1}{2xp} \\
+            &= \frac{1}{p^{2}} \sin(\frac{1}{p})
+        \end{align*}
+        The limit exists, so $\cos(\frac{1}{x})$ is differentiable everywhere in its domain.
+    
+        By algebra laws we have $x^{2} \cos(\frac{1}{x})$ also differentiable, as is $\abs{x} = -x \;\forall\; x < 0$.
+        So we only need to worry about 0.
+    
+        In the neighbourhood $(-1, 1)$ about 0, we have $-x^{2} \leq f(x) \leq \abs{x}$.
+        By the squeeze theorem, $f(x) + x^{2}$ tends to 0.
+        By the limit laws, $\lim_{x \to 0} f(x) = 0$.
+        Thus $f$ is continuous everywhere.
+    
+        \begin{align*}
+            f(0 + h) - f(0) &= 
+            \begin{cases}
+                -h & h < 0 \\
+                h^{2} \cos(\frac{1}{h}) & h > 0
+            \end{cases} \\
+            \frac{f(0 + h) - f(0)}{h} &=
+            \begin{cases}
+                -1 & h < 0 \\
+                h \cos(\frac{1}{h}) & h > 0
+            \end{cases} \\
+        \end{align*}
+        Let $\varepsilon = \frac{1}{4}$.
+        For any $\delta > 0$, choose $k = \min \set{\frac{1}{2}, \frac{\delta}{2}}$.
+        $-k \leq f(k) \leq k \implies f(k) > -k > -\frac{1}{2}$ and $\abs{k - 0} < \delta$.
+        Also $f(-k) = -1$.
+        For any $L$, $\abs{f(k) - L} + \abs{f(-k) - L} \geq \abs{f(k) - f(-k)} = \abs{f(k) + 1} \geq \frac{1}{2} = 2 \varepsilon$.
+        Thus the limit does not exist and so the function is not differentiable at $0$.
+    
+        \item $\abs{\sin x} = \abs{\sin \abs{x}}$. So \[
+            f(x) = 
+            \begin{cases}
+                \frac{\abs{\sin \abs{x}}}{\sin \abs{x}} & x \neq n \pi \\
+                1 & x = n \pi
+            \end{cases}
+        \] or \[
+            f(x) =
+            \begin{cases}
+                1 & \sin \abs{x} > 0 \\
+                1 & \sin \abs{x} = 0 \\
+                -1 & \sin \abs{x} < 0
+            \end{cases}
+        \] Since constant functions are continuous and differentiable, $f(x)$ is differentiable in any region where $\sin \abs{x}$ is constant in sign.
+        Thus $f(x)$ is continuous and differentiable in all intervals $(n\pi, (n+1)\pi), n \in \Z$.
+        This leaves only the points $n\pi$, where the function is neither continuous nor differentiable, as \[
+            \lim_{x \to n\pi} f(x) \text{ does not exist.}
+        \] Suppose limit exists and is equal to $L$. Then 
+    \end{enumerate}
+\end{proof}
 
-Since $\cos x$ is decreasing in $[0, c] \subseteq [0, \frac{\pi}{2}]$, we have $f(x) > f(c) \;\forall\; x \in [0, c)$. Since $x^{2}$ is increasing in $[c, \frac{\pi}{2}] \subseteq [0, \frac{\pi}{2}]$, we have $f(x) > f(c) \;\forall\; x \in (c, \frac{\pi}{2}]$
-
-Thus $f$ attains a global minimum at $c$, where $\cos c = c^{2}$.
-
-\textbf{Problem 5.}
-\begin{enumerate}[label=(\alph*)]
-    \item \[
-        h \circ g (x) = \abs{ x }^{3} =
-        \begin{cases}
-            x^{3} & x \geq 0 \\
-            -x^{3} & x < 0
-        \end{cases}
-    \] Since all polynomials are continuous and differentiable at every point, we only need to check at 0.
-    \begin{align*}
-        \lim_{h \to 0} \frac{f(0 + h) - f(0)}{h} &= \lim_{h \to 0} \frac{\abs{ h }^{3}}{h} \\
-        &= \lim_{h \to 0} \frac{h^{2}\abs{ h }}{h} \\
-        &= \lim_{h \to 0} h \abs{ h } \\
-        &= 0
-    \end{align*}
-    Thus $h \circ g$ is differentiable everywhere, so it is continuous everywhere.
-
-    \item We first show that $\cos(\frac{1}{x})$ is differentiable at $x \neq 0$.
-    \begin{align*}
-        \lim_{x \to p} \frac{\cos(\frac{1}{x}) - \cos(\frac{1}{p})}{x - p} &= \lim_{x \to p} \frac{2 \sin(\frac{1}{2x} + \frac{1}{2p})\sin(\frac{1}{2p} - \frac{1}{2x})}{x - p} \\
-        &= 2 \sin(\frac{1}{p}) \lim_{x \to p} \frac{\sin(\frac{x - p}{2xp})}{x - p} \\
-        &= 2 \sin(\frac{1}{p}) \lim_{x \to p} \frac{\sin(\frac{x - p}{2xp})}{\frac{x - p}{2xp}} \frac{1}{2xp} \\
-        &= \frac{1}{p^{2}} \sin(\frac{1}{p})
-    \end{align*}
-    The limit exists, so $\cos(\frac{1}{x})$ is differentiable everywhere in its domain.
-
-    By algebra laws we have $x^{2} \cos(\frac{1}{x})$ also differentiable, as is $\abs{ x } = -x \;\forall\; x < 0$. So we only need to worry about 0.
-
-    In the neighbourhood $(-1, 1)$ about 0, we have $-x^{2} \leq f(x) \leq \abs{ x }$. By the squeeze theorem, $f(x) + x^{2}$ tends to 0. By the limit laws, $\lim_{x \to 0} f(x) = 0$. Thus $f$ is continuous everywhere.
-
-    \begin{align*}
-        f(0 + h) - f(0) &= 
-        \begin{cases}
-            -h & h < 0 \\
-            h^{2} \cos(\frac{1}{h}) & h > 0
-        \end{cases} \\
-        \frac{f(0 + h) - f(0)}{h} &=
-        \begin{cases}
-            -1 & h < 0 \\
-            h \cos(\frac{1}{h}) & h > 0
-        \end{cases} \\
-    \end{align*}
-    Let $\varepsilon = \frac{1}{4}$. For any $\delta > 0$, choose $k = \min \set{\frac{1}{2}, \frac{\delta}{2}}$. $-k \leq f(k) \leq k \implies f(k) > -k > -\frac{1}{2}$ and $\abs{ k - 0 } < \delta$. Also $f(-k) = -1$. For any $L$, $\abs{ f(k) - L } + \abs{ f(-k) - L } \geq \abs{ f(k) - f(-k) } = \abs{ f(k) + 1 } \geq \frac{1}{2} = 2 \varepsilon$. Thus the limit does not exist and so the function is not differentiable at 0.
-
-    \item $\abs{ \sin x } = \abs{ \sin \abs{ x } }$. So \[
-        f(x) = 
-        \begin{cases}
-            \frac{\abs{ \sin \abs{ x } }}{\sin \abs{ x }} & x \neq n \pi \\
-            0 & x = n \pi
-        \end{cases}
-    \] or \[
-        f(x) =
-        \begin{cases}
-            1 & \sin \abs{ x } > 0 \\
-            0 & \sin \abs{ x } = 0 \\
-            -1 & \sin \abs{ x } < 0
-        \end{cases}
-    \] Since constant functions are continuous and differentiable, $f(x)$ is differentiable in any region where $\sin \abs{ x }$ is constant in sign. Thus $f(x)$ is continuous and differentiable in all intervals $(n\pi, (n+1)\pi), n \in \Z$. This leaves only the points $n\pi$, where the function is neither continuous nor differentiable, as \[
-        \lim_{x \to n\pi} f(x) \text{ does not exist.}
-    \] Suppose limit exists and is equal to $L$. Then 
-\end{enumerate}
-
-% Problem 4, 5(b)
 \end{document}
-
-
-
-
