@@ -8,7 +8,7 @@
 \begin{document}
 \maketitle
 
-\begin{problem}
+\begin{problem} \label{prob:peano:successor_range}
     Let $A$ be a Peano set and $S$ be the successor function on $A$ (as defined in the first lecture).
     Show, using only the axioms of Peano, that the range of $S$ is $A \setminus \set{0}$.
     For this question, please interpret the words ``function'' and ``range'' in the way you did in school, and not in the set-theoretic way introduced in class.
@@ -26,7 +26,7 @@
     Thus, the range of $S$ is precisely $A \setminus \set{0}$.
 \end{proof}
 
-\begin{problem}
+\begin{problem} \label{prob:zfc:intersection_and_difference}
     We mentioned in class that when listing the ZFC axioms, we do not need to addadditional axioms for the existence of the intersection or the set-difference of two sets.
     Using the ZFC axioms, prove the following statements.
     \begin{enumerate}[label=(\alph*)]
@@ -47,7 +47,7 @@
     \end{enumerate}
 \end{proof}
 
-\begin{problem}
+\begin{problem} \label{prob:zfc:ordered_pair}
     Given two objects $a, b$, let $(a, b)$ denote the set $\set{\set{a}, \set{a, b}}$.
     First argue why the ZFC axioms guarantee the existence of this set.
     Then show that $(a, b) = (c, d)$ (as sets) if and only if $a = c$ and $b = d$.
@@ -69,7 +69,7 @@
     Thus $d$ is necessarily equal to $b$.
 \end{proof}
 
-\begin{problem}
+\begin{problem} \label{prob:zfc:inductive_intersection}
     Prove \refifdef{thm:zfc:inductive_intersection}{\cref}{lemma 1.5 (probably)}, \textit{i.e.}, show that if $\mathscr{F}$ is a non-empty set of inductive sets, then \[
         \bigcap_{A \in \mathscr{F}} A
     \]

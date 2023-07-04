@@ -64,25 +64,25 @@
 \end{axiom}
 
 \begin{rem}
-    Intersection of a nonempty set of two or more sets and difference between two sets need not be defined as they follow from the previous axioms. (Exercise)
+    Intersection of a nonempty set of two or more sets and difference between two sets need not be defined as they follow from the previous axioms.
+    See \cref{prob:zfc:intersection_and_difference}.
 \end{rem}
-
-\begin{proof}
-    By the \nameref{zfc:specification},
-    \begin{align*}
-        A - B &= \set{a \in A : a \not\in B} \\
-        A \cap B &= \set{a \in A : a \in B}
-    \end{align*}
-\end{proof}
 
 \begin{axiom}[axiom of powers] \label{zfc:powers}
     Given a set $A$, there exists a set called power set of $A$ denoted $\mathscr{P}(A)$, whose elements are precisely all the subsets of $A$.   
 \end{axiom}
 \begin{rem}
-    This axiom allows us to define ordered pairs as sets (assignment) (\textcolor{red!85!black}{Isn't pairing sufficient?}) and thus direct products, relations and functions. \[
+    This axiom allows us to define ordered pairs (\cref{prob:zfc:ordered_pair}) and direct products, relations and functions as sets. \[
         A \times B = \set{(a, b) : a \in A, b \in B}
-    \] \textcolor{red!85!black}{How does this set exist?}
+    \] \textcolor{exercise}{How does this set exist?}
 \end{rem}
+\begin{proof}[Proof \textcolor{self_proof}(self + internet)]
+    Given the definition of an ordered pair \[
+        (a, b) = \set{\set{a}, \set{a, b}},
+    \] we can say that every element of every element of a direct product is a subset of $A \cup B$ (\nameref{zfc:unions}).
+    That is, the direct product is a subset of $\mathscr{P}(\mathscr{P}(A \cup B))$ (\nameref{zfc:powers}), where $A \cup B$ denotes $\bigcup\limits_{X \in \set{A, B}} X$.
+    Using the \nameref{zfc:specification}, we can define the direct product as \[
+        A \times B = \set{x \in \mathscr{P}(\mathscr{P}(A \cup B)) : \exists a \exists b (a \in A \land b \in B \land x = (a, b))}. \qedhere
+    \]
+\end{proof}
 
-\textcolor{red!85!black}{How are we able to define $A \times B$, more specifically, ordered pairs?} \\
-\quad \textcolor{green!30!black}{This is problem 3 of assignment 1.} 

@@ -8,7 +8,15 @@
 \begin{document}
 \maketitle
 
-\section*{Problem 1}
+% Problem 1
+\begin{problem}
+    Let $f : (a, b) \to \R$ be a function and let $c \in (a, b)$.
+    Which of the following statements are true, and which are false?
+    \begin{enumerate}[label=(\alph*)]
+        \item If $\lim\limits_{h \to 0} \dfrac{f(c) - f(c - h)}{h}$ exists then $f$ is differentiable at $c$ and $f'(c) = \lim\limits_{h \to 0} \dfrac{f(c) - f(c - h)}{h}$.
+        \item If $\lim\limits_{\substack{n \to \infty \\ n \in \N}} n (f( c + \frac{1}{n}) - f(c))$ exists, then $f$ is differentiable at $c$.
+    \end{enumerate}
+\end{problem}
 (a) is just $h$ replaced with $-h$.
 Since $h$ could take any real values, including negative ones, it doesn't make any difference to negate it.
 Since we are replacing $h$ with $-h$, what we have is a composition.
@@ -24,72 +32,101 @@ Here, $f(x) = -x$, which clearly does not equal 0 anywhere except at 0. We will 
 
 In part (b), however, the points that we are checking are limited in two ways: only very few fixed points around $c$, as well as only points to the right.
 We can construct a counterexample exploiting either of these limitations.
-\begin{enumerate}[label=(\alph*)]
-    \item True. Let $g(x) = -x$ and $G(x) = \dfrac{f(c) - f(c - x)}{x} \;\forall\; x \in (a - c, 0) \cup (0, b - c)$. We have
-    \begin{align*}
-        \lim_{x \to 0} g(x) &= 0 & & & \lim_{x \to 0} G(x) &:= L \\
-        && g(x) \neq 0 \;\forall\; x \neq 0
-    \end{align*}
-    Thus by limit of compositions, we have
-    \begin{align*}
-        L &= \lim_{x \to 0} G(g(x)) \\
-        &= \lim_{x \to 0} \frac{f(c) - f(c - (-x))}{-x} \\
-        &= \lim_{x \to 0} \frac{f(c + x) - f(c)}{x} \\
-        &= f'(c)
-    \end{align*}
-    Thus $f'(c)$ exists and is equal to $L$.
-
-    \item False. Let $f: (-1, 1) \to \R$ such that \[
-        f(x) = 
-        \begin{cases}
-            0 & x \geq 0 \\
-            1 & x < 0
-        \end{cases}
-    \] Then the given limit exists for $c = 0$ as $n \paren{f\paren{\frac{1}{n}} - f(0)} = n - n = 0 \;\forall\; n \in \N$.
-    However, $f$ is not differentiable at 0 as it is not continuous at 0.
+\begin{proof}
+    \begin{enumerate}[label=(\alph*)]
+        \item True. Let $g(x) = -x$ and $G(x) = \dfrac{f(c) - f(c - x)}{x} \;\forall\; x \in (a - c, 0) \cup (0, b - c)$. We have
+        \begin{align*}
+            \lim_{x \to 0} g(x) &= 0 & & & \lim_{x \to 0} G(x) &:= L \\
+            && g(x) \neq 0 \;\forall\; x \neq 0
+        \end{align*}
+        Thus by limit of compositions, we have
+        \begin{align*}
+            L &= \lim_{x \to 0} G(g(x)) \\
+            &= \lim_{x \to 0} \frac{f(c) - f(c - (-x))}{-x} \\
+            &= \lim_{x \to 0} \frac{f(c + x) - f(c)}{x} \\
+            &= f'(c)
+        \end{align*}
+        Thus $f'(c)$ exists and is equal to $L$.
     
-    Alternatively, consider $f: (-1, 1) \to \R$ such that \[
-        f(x) = 
-        \begin{cases}
-            0 & x \in \Q \\
-            1 & x \in \R \setminus \Q
-        \end{cases}
-    \]
-\end{enumerate}
+        \item False. Let $f: (-1, 1) \to \R$ such that \[
+            f(x) = 
+            \begin{cases}
+                0 & x \geq 0 \\
+                1 & x < 0
+            \end{cases}
+        \] Then the given limit exists for $c = 0$ as $n \paren{f\paren{\frac{1}{n}} - f(0)} = n - n = 0 \;\forall\; n \in \N$.
+        However, $f$ is not differentiable at 0 as it is not continuous at 0.
+    
+        Alternatively, consider $f: (-1, 1) \to \R$ such that \[
+            f(x) = 
+            \begin{cases}
+                0 & x \in \Q \\
+                1 & x \in \R \setminus \Q
+            \end{cases}
+        \]
+    \end{enumerate}
+\end{proof}
 
-\section*{Problem 2}
-Since $\sin, x^{3}$ and $f$ are differentiable, we have by the chain rule and addition rule:
-\begin{enumerate}[label=(\alph*)]
-    \item 
-    \begin{align*}
-        g'(x) &= f'(x^{3}) (x^{3})' + \sin'(f(x)) f'(x) \\
-        &= 3x^{2} f'(x^{3}) + \cos(f(x)) f'(x)
-    \end{align*}
+% Problem 2
+\begin{problem}
+    Let $f : \R \to \R$ be a differentiable function.
+    In each of the following cases, argue that $g$ is differentiable on its domain (you may use any theorems stated in class),
+    and determine the derivative of $g$ in terms of $f'$.
+    \begin{enumerate}[label=(\alph*)]
+        \item $g(x) = f(x^{3}) + \sin(f(x))$.
+        \item $g(x) = (f \circ f)(x)$.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    Since $\sin, x^{3}$ and $f$ are differentiable, we have by the chain rule and addition rule:
+    \begin{enumerate}[label=(\alph*)]
+        \item 
+        \begin{align*}
+            g'(x) &= f'(x^{3}) (x^{3})' + \sin'(f(x)) f'(x) \\
+            &= 3x^{2} f'(x^{3}) + \cos(f(x)) f'(x)
+        \end{align*}
+    
+        \item 
+        \begin{align*}
+            g'(x) = f'(f(x)) f'(x)
+        \end{align*}
+    \end{enumerate}
+\end{proof}
 
-    \item 
-    \begin{align*}
-        g'(x) = f'(f(x)) f'(x)
-    \end{align*}
-\end{enumerate}
-
-\section*{Problem 3}
+% Problem 3
+\begin{problem}
+    Show that $f(x) = x^{1/3}, x \in \R$, is not differentiable at $x = 0$.
+\end{problem}
 \[
     \frac{f(0 + h) - f(0)}{h} = h^{-2/3} \;\forall\; h \neq 0
 \]
-We need to prove that this does not have a limit at 0. This is simple Archimedean,OR direct $\varepsilon-\delta$ contradiction similar to $(-1)^{n}$. I have given the Archimedean proof, you try $\varepsilon-\delta$. (Hint: Let $\varepsilon = 1$. Consider $x = \pm\min \set{\dfrac{\delta}{2}, 1}$.)
+We need to prove that this does not have a limit at 0.
+This is simple Archimedean, OR direct $\varepsilon-\delta$ contradiction similar to $(-1)^{n}$.
+I have given the Archimedean proof, you try $\varepsilon-\delta$.
+(Hint: Let $\varepsilon = 1$.
+Consider $x = \pm\min \set{\dfrac{\delta}{2}, 1}$.)
 
-Consider the sequence $\set{\frac{1}{n}}_{n \in \P}$.
-For any $R \in \R$, there exists $N \in \N$ such that $N \cdot 1 > R^{3/2} \implies N^{2/3} > R \implies \paren{\frac{1}{n}}^{-2/3} > R \;\forall\; n \geq N$.
-Thus, $\set{\frac{1}{n}}$ converges to 0 as $n \to \infty$ but $\set{\paren{\frac{1}{n}}^{-2/3}}$ is unbounded $\implies$ divergent.
-Thus limit of $h^{-2/3}$ does not exist at 0.
+\begin{proof}
+    Consider the sequence $\set{\frac{1}{n}}_{n \in \P}$.
+    For any $R \in \R$, there exists $N \in \N$ such that $N \cdot 1 > R^{3/2} \implies N^{2/3} > R \implies \paren{\frac{1}{n}}^{-2/3} > R \;\forall\; n \geq N$.
+    Thus, $\set{\frac{1}{n}}$ converges to 0 as $n \to \infty$ but $\set{\paren{\frac{1}{n}}^{-2/3}}$ is unbounded $\implies$ divergent.
+    Thus limit of $h^{-2/3}$ does not exist at 0.
+\end{proof}
 
-\section*{Problem 4}
+% Problem 4
+\begin{problem}
+    Suppose $f : \R \to \R$ is differentiable at $c$ and $f(c) = 0$.
+    Show that $g(x) = \abs{f(x)}$ is differentiable at $c$ if and only if $f'(c) = 0$.
+\end{problem}
 We want two things:
 \begin{enumerate}[label=(\roman*)]
     \item $f'(c) = 0 \implies g$ is differentiable at $c$.
     \item $g$ is differentiable at $c \implies f'(c) = 0$.
 \end{enumerate}
-Let us think about modulus. If $\lim_{x \to a} f(x)$ is known, can we say anything about $\lim_{x \to a} \abs{f(x)}$? The answer is yes, we have $\lim_{x \to a} \abs{f(x)} = \abs{\lim_{x \to a} f(x)}$. Here is a short proof.
+Let us think about modulus.
+If $\lim_{x \to a} f(x)$ is known, can we say anything about $\lim_{x \to a} \abs{f(x)}$?
+The answer is yes, we have $\lim_{x \to a} \abs{f(x)} = \abs{\lim_{x \to a} f(x)}$.
+Here is a short proof.
 \begin{proof}
     $\lim_{x \to a} f(x) = L \implies \;\forall\; \varepsilon > 0 \;\exists\; \delta > 0$ such that $\abs{f(x) - L} < \varepsilon$. But by the triangle inequality, $\abs{\abs{f(x)} - \abs{L}} < \abs{f(x) - L} < \varepsilon$. Thus the limit of $\abs{f(x)} = \abs{L}$ as $x \to a$.
 \end{proof}
@@ -100,19 +137,22 @@ Let us think about modulus. If $\lim_{x \to a} f(x)$ is known, can we say anythi
     But by the triangle inequality, $\abs{f(x) - L} \;\textcolor{red}{>}\; \abs{\abs{f(x)} - \abs{L}} \;\textcolor{red}{<}\; \varepsilon$.
     The signs of inequality are not helpful to us anymore.
 \end{proof}
-Your first thought might be that $f$ can have limit either $L$ or $-L$, but it may not have a limit at all. As an example, consider signum, with limit of $\abs{\mathrm{signum}} = 1$ at 0.
+Your first thought might be that $f$ can have limit either $L$ or $-L$, but it may not have a limit at all.
+As an example, consider signum, with limit of $\abs{\mathrm{signum}} = 1$ at 0.
 
-The \emph{essence} of why this is happening is that modulus is not an invertible function. We lose \emph{information} on passing a number through modulus. There is only one special case where we do NOT lose information. What is it? \[
+The \emph{essence} of why this is happening is that modulus is not an invertible function.
+We lose \emph{information} on passing a number through modulus.
+There is only one special case where we do NOT lose information.
+What is it? \[
     \vdots
-\] \[
-    \vdots
-\] $\abs{x} = 0 \implies x = 0$ with full certainty!  This is why the given statement is true, and this is how we will prove it. 
+\] $\abs{x} = 0 \implies x = 0$ with full certainty!
+This is why the given statement is true, and this is how we will prove it. 
 We will use the fact that $\lim_{x \to a} f(x) = 0 \iff \lim_{x \to a} \abs{f(x)} = 0$, which we will prove right now.
 \begin{proof}
     \begin{align*}
         \lim_{x \to a} f(x) &= 0 \\
-        \iff &\big(\;\forall\; \varepsilon > 0 \;\exists\; \delta > 0 \text{such that} \abs{x - a} < \delta \implies \abs{f(x) - 0} < \varepsilon \big) \\
-        \iff &\big(\;\forall\; \varepsilon > 0 \;\exists\; \delta > 0 \text{such that} \abs{x - a} < \delta \implies \abs{\abs{f(x)} - 0} < \varepsilon \big) \\
+        \iff &\;\forall\; \varepsilon > 0 \;\exists\; \delta > 0 \text{ such that} \abs{x - a} < \delta \implies \abs{f(x) - 0} < \varepsilon \\
+        \iff &\;\forall\; \varepsilon > 0 \;\exists\; \delta > 0 \text{ such that} \abs{x - a} < \delta \implies \abs{\abs{f(x)} - 0} < \varepsilon \\
         &\iff \lim_{x \to a} \abs{f(x)} = 0. \qedhere
     \end{align*}
 \end{proof}
@@ -120,12 +160,15 @@ We will use the fact that $\lim_{x \to a} f(x) = 0 \iff \lim_{x \to a} \abs{f(x)
 Note that the difference quotients of $f$ and $g$ have the same absolute value. Thus if the limit of either is zero, the limit of the other must also be zero.
 Thus,
 \begin{enumerate}[label=(\roman*)]
-    \item $f'(c) = 0 \implies$ \textcolor{red!80!black}{$g'(c) = 0$}.
-    \item \textcolor{red!80!black}{$g'(c) = 0$} $\implies f'(c) = 0$.
+    \item $f'(c) = 0 \implies$ \textcolor{exercise}{$g'(c) = 0$}.
+    \item \textcolor{exercise}{$g'(c) = 0$} $\implies f'(c) = 0$.
 \end{enumerate}
 Can you argue why $g'(c) = 0 \iff g$ is differentiable at $c$ to complete the proof?
 
-\section*{Problem 5}
+% Problem 5
+\begin{problem}
+    
+\end{problem}
 We know $f(x) = x^{n} \implies f'(x) = n x^{n-1}$.
 
 Let $g = f^{-1} \implies g(x) = x^{\frac{1}{n}}$.

@@ -42,8 +42,13 @@
     $b$ is said to be a (the) \emph{greatest lower bound} if $\forall\; b' > b$, $b'$ is not a lower bound of $S$, \textit{i.e.}, $\exists\; s \in S$ such that $s < b'$.
 \end{defn}
 \begin{proof}
-    ($\Z$ is unbounded) Suppose $b \in \R$ is an upper bound of $\Z$. By the Archimedean property, there exists $n \in \P \implies n \in \Z$ such that $n\cdot 1 = n > b$. Hence $b$ is not an upper bound. \\
-    Next suppose $b \in \R$ is a lower bound of $\Z$. By the Archimedean property, there exists $n \in \P \implies n \in \Z$ such that $n \cdot 1 = n > -b \implies -n < b$. Since the additive inverse of an integer is also an integer, $b$ is not a lower bound.
+    ($\Z$ is unbounded) Suppose $b \in \R$ is an upper bound of $\Z$.
+    By the Archimedean property, there exists $n \in \P \implies n \in \Z$ such that $n\cdot 1 = n > b$.
+    Hence $b$ is not an upper bound.
+    
+    Next suppose $b \in \R$ is a lower bound of $\Z$.
+    By the Archimedean property, there exists $n \in \P \implies n \in \Z$ such that $n \cdot 1 = n > -b \implies -n < b$.
+    Since the additive inverse of an integer is also an integer, $b$ is not a lower bound.
 
     Thus $\Z$ cannot have an upper bound, nor a lower bound.
 \end{proof}
@@ -54,6 +59,21 @@
     \] You may use Theorem 1.28 from Apostol (without proof), which says $\P$ is not bounded above.
     Other than the least upper bound property of $\R$, you need not specify which axioms you are using in your proof.
 \end{problem}
+\begin{lem} \label{thm:N:no_natural_between_0_and_1}
+    $1$ is the smallest positive natural number (where positive means non-zero).
+\end{lem}
+\begin{proof}
+    Let $n$ be a positive natural number.
+    From \cref{prob:peano:successor_range}, we know that $n$ has a predecessor $m$.
+    Thus $n = m + 1 \implies n \geq 1$.
+\end{proof}
+
+\begin{lem} \label{thm:N:difference_geq_1}
+    The symmetric difference between any two distinct integers is at least $1$.
+\end{lem}
+\begin{proof}
+    Say $m, n \in \Z$ with $m > n$.
+\end{proof}
 \begin{proof}
     By the Archimedean property, there exists an $m$ such that $m \cdot 1 = m > x$. Thus the set \[
         S = \set{n \in \Z : n \leq x}

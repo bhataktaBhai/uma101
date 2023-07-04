@@ -27,18 +27,26 @@
     Every convergent sequence is bounded.
 \end{thm}
 \begin{proof}
-    We know that every finite set of real numbers has a minimum and a maximum.
+    Suppose the sequence $\set{a_{n}}$ converges to a limit $L$.
+    Thus there exists an $n_{0} \in \N$ such that $\abs{a_{n} - L} < 1 \;\forall\; n \geq n_{0} \implies \abs{a_{n}} < \abs{L} + 1 \;\forall\; n \geq n_{0}$.
+    We know that the maximum of a finite number of numbers exists.
+    Let $M = \max\set{\abs{L}, \abs{a_{1}}, \abs{a_{2}}, \dots, \abs{a_{n_{0}}}} + 1$.
+
+    Let $n \in \N$.
+    If $n < n_{0}$, then $\abs{a_{n}} < M$ by the definition of $M$.
+    If $n \geq n_{0}$, then $\abs{a_{n}} < \abs{L} + 1 \leq M$ by the definition of $M$.
+    Thus $\abs{a_{n}} < M \;\forall\; n \in \N$ and so every convergent sequence is bounded.
 \end{proof}
 
 \begin{defn} \label{defn:sequence:monotone}
-    A sequence $\set{a_{n}} \subseteq \R$ is said to be \emph{monotonically increasing} if $a_{n} \leq a_{n+1} \,\forall\; n \in \N$.
+    A sequence $\set{a_{n}} \subseteq \R$ is said to be \emph{monotonically increasing} iff $a_{n} \leq a_{n+1} \,\forall\; n \in \N$.
 
-    A sequence $\set{a_{n}} \subseteq \R$ is said to be \emph{monotonically decreasing} if $a_{n} \geq a_{n+1} \,\forall\; n \in \N$.
+    A sequence $\set{a_{n}} \subseteq \R$ is said to be \emph{monotonically decreasing} iff $a_{n} \geq a_{n+1} \,\forall\; n \in \N$.
 
-    A sequence $\set{a_{n}} \subseteq \R$ is said to be \emph{monotone} if it is either monotonically increasing or monotonically decreasing.
+    A sequence $\set{a_{n}} \subseteq \R$ is said to be \emph{monotone} iff it is either monotonically increasing or monotonically decreasing.
 \end{defn}
 
-\begin{thm}[Monotone convergence theorem] \label{thm:sequence:MCT}
+\begin{thm}[monotone convergence theorem] \label{thm:sequence:MCT}
     A monotone sequence is convergent iff it is bounded.
 \end{thm}
 \begin{proof}
@@ -46,8 +54,8 @@
 
     Let $S = \set{a_{n} : n \in \N}$.
     $S$ is nonempty. $S$ is bounded above.
-    Thus, by LUB, there exists \[
-        b = \sup S
+    Thus, by the LUB property, there exists \[
+        b \coloneqq \sup S
     \] Let $\varepsilon > 0$.
     Since $a_{n} \leq b \,\forall\; n \in \N$, we have $a_{n} < b + \varepsilon$.
 
