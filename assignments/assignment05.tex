@@ -90,7 +90,12 @@ You may freely use (without proof):
 \end{problem}
 \begin{proof}
     \emph{NO.}
-    Let $f(x) = 0$, $g(x) = \begin{cases} 0 & x \neq 0 \\ 1 & x = 0 \end{cases}$.
+    Let \[
+        f(x) = 0,\quad g(x) = \begin{cases}
+            0 & x \neq 0 \\
+            1 & x = 0
+        \end{cases}.
+    \]
     Then $\lim_{x \to 0} f(x) = 0$ and $\lim_{x \to 0} g(x) = 0$, but $\lim_{x \to 0} g \circ f (x) = 1$.
     
     This arises from the fact that $\abs{f(x) - L} < \varepsilon$ does not imply $0 < \abs{f(x) - L}$, so it doesn't guarantee $0 < \abs{y - L} < \delta$.

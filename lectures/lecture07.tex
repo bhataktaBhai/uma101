@@ -42,20 +42,19 @@ We will now assume \emph{everything} about real numbers: multiplication, divisio
     % $\abs{ a_{n} - L_{1} } = \abs{ a_{n} - L_{2} + L_{2} - L_{1} } \leq \abs{ a_{n} - L_{2} } + \abs{ L_{2} - L_{1} }$
 \end{proof}
 
-\begin{example} \leavevmode
-    \begin{enumerate}[label=(\alph*)]
-        \item Let $\set{a_{n}} = \frac{1}{n^{p}} \,\forall\; n \in \P$, where $p > 0$. \[
-            \lim_{n \to \infty} a_{n} = 0
+\begin{examples}
+    \item Let $\set{a_{n}} = \frac{1}{n^{p}} \,\forall\; n \in \P$, where $p > 0$. \[
+        \lim_{n \to \infty} a_{n} = 0
+    \]
+    \begin{proof}
+        Let $\varepsilon > 0$. \\
+        By the \nameref{thm:R:archimedean} applied to $x = \varepsilon^{\frac{1}{p}}$ and $y = 1$, $\exists\; N \in \P$ such that: \[
+            N \varepsilon^{\frac{1}{p}} > 1 \implies \varepsilon^{\frac{1}{p}} > \frac{1}{N} \implies \varepsilon > \frac{1}{N^{p}}
         \]
-        \begin{proof}
-            Let $\varepsilon > 0$. \\
-            By the \nameref{thm:R:archimedean} applied to $x = \varepsilon^{\frac{1}{p}}$ and $y = 1$, $\exists\; N \in \P$ such that: \[
-                N \varepsilon^{\frac{1}{p}} > 1 \implies \varepsilon^{\frac{1}{p}} > \frac{1}{N} \implies \varepsilon > \frac{1}{N^{p}}
-            \]
-            Let $n \geq N$. Then
-            \begin{align*}
-                \abs{\frac{1}{n^{p}} - 0} &= \frac{1}{n^{p}} \\
-                &\leq \frac{1}{N^{p}} \\
-                &< \varepsilon \qedhere
-            \end{align*}
-        \end{proof}
+        Let $n \geq N$. Then
+        \begin{align*}
+            \abs{\frac{1}{n^{p}} - 0} &= \frac{1}{n^{p}} \\
+            &\leq \frac{1}{N^{p}} \\
+            &< \varepsilon \qedhere
+        \end{align*}
+    \end{proof}

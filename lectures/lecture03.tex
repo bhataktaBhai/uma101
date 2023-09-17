@@ -52,7 +52,8 @@
 \end{axiom}
 
 \begin{lem} \label{thm:zfc:inductive_intersection}
-    Let $\mathscr{F}$ be a nonempty set of inductive sets. (This exists by \nameref{zfc:infinity} and \nameref{zfc:pairing}). Then \[
+    Let $\mathscr{F}$ be a nonempty set of inductive sets.
+    Then \[
         \bigcap_{A \in \mathscr{F}}{A} \text{ is inductive.}
     \]
 \end{lem}
@@ -67,15 +68,49 @@
         \omega = \omega'
     \]
 \end{thm}
-\begin{proof}[Proof under construction]
-    Suppose there is no minimal inductive set. Then for any inductive set $\omega$, we have $ \omega \not\subseteq S$ for some inductive $S$. \\
-    Thus there exists a set $\mathscr{F}$ of inductive sets, which contains $S$, such that $\bigcup_{A \in \mathscr{F}} A$ does not have $\omega$ as a subset.
+\begin{proof}
+    By \nameref{zfc:infinity}, there exists an inductive set $I$.
+    Let $\iota$ be the set of inductive subsets of $I$.
+    That is \[
+        \iota = \set{X \in \mathscr{P}(I) \mid
+        X \text{ is inductive}}
+    \] and let $\omega = \bigcap_{X \in \iota}{X}$.
+
+    Let $J$ be an inductive set.
+    We have $\omega \cap J \subseteq \omega \subseteq I$.
+    Moreover, by \cref{thm:zfc:inductive_intersection}, $\omega \cap J$
+    is inductive.
+    Thus $\omega \cap J \in \iota$ and so $\omega \subseteq \omega \cap J$.
+
+    Thus, $\omega = \omega \cap J$ and therefore $\omega \subseteq J$.
 \end{proof}
 
-
-\begin{thm} \label{thm:zfc:omega_is_peano}
-    The $\omega$ in \cref{thm:zfc:omega} is a Peano set with successor function $a \mapsto a^{+}$.
+\begin{thm}
+    The minimal inductive set is a Peano set under the successor function
+    $a \mapsto a^{+}$.
 \end{thm}
+\begin{proof} \leavevmode
+    \begin{enumerate}[label=(P\arabic*)]
+        \item $\O \in \omega$.
+        \item If $a \in \omega$, then $a^{+} \in \omega$.
+        \item Suppose there exists $a \in \omega$ such that $\O = a^{+}$.
+            Then $\O = a \cup \set{a}$ and so $a \in \O$, a contradiction.
+        \item Suppose $a, b \in \omega$ such that $a^{+} = b^{+}$.
+            Then $a \cup \set{a} = b \cup \set{b}$ and so
+            $a \in b$ or $a = b$.
+            Similarly, $b \in a$ or $b = a$.
+
+            If $a \neq b$ then $a \in b$ and $b \in a$.
+            This contradicts \nameref{zfc:regularity},
+            by applying it on the set $\set{a, b}$.
+
+            Thus $a = b$.
+        \item For any set $o \subseteq \omega$, if $\phi \in o$ and
+            $a^{+} \in o$ for all $a \in o$, then $o$ is an inductive set.
+            By \cref{thm:zfc:omega}, $\omega \subseteq o$ and so $o = \omega$.
+            \qedhere
+    \end{enumerate}
+\end{proof}
 
 \begin{thm}[principle of recursion] \label{thm:zfc:recursion}
     Let $A$ be a set, and $f: A \to A$ be a function. Let $a \in A$. Then, there exists a function $F: \omega \to A$ such that
@@ -84,5 +119,13 @@
         \item For some $b \in \omega$, we have $F(b^{+}) = f(F(b))$
     \end{enumerate}
 \end{thm}
+\begin{proof}
+    Define $F$ as \[
+        F \coloneqq \set{(x, y) \in \omega \times A \mid
+            (x = \O \land y = a) \lor
+            (\exists\; x_{0} \in \omega (x = x_{0}^{+} \land y = f(F(x_{0}))))}.
+            \qedhere
+    \]
+\end{proof}
 
 \textbf{Back to natural numbers!}

@@ -1,29 +1,28 @@
 \lecture{8}{fri 4 nov 2022}{Sequences Continued}
-        \item $\set{(-1)^{n}}_{n \in \P}$ is divergent.
-        \begin{proof}
-            Suppose there exists a limit $L$.
+    \item $\set{(-1)^{n}}_{n \in \P}$ is divergent.
+    \begin{proof}
+        Suppose there exists a limit $L$.
 
-            Let $\varepsilon = 1$.
-            Then $\exists\; N \in \P$ such that $\abs{a_{n} - L} < \varepsilon$ for all $n \geq N$.
-            \begin{align*}
-                \abs{a_{2N} - L} < 1 \quad\implies\quad \abs{L - 1} &< 1 \\
-                \abs{a_{2N + 1} - L} < 1 \quad\implies\quad \abs{L + 1} &< 1
-            \end{align*}
-            Thus,
-            \begin{align*}
-                \abs{1 - L + L + 1} &\leq \abs{L - 1} + \abs{L + 1} \\
-                2 &< 2
-            \end{align*}
-            Contradiction.
-        \end{proof}
-    \end{enumerate}
-\end{example}
+        Let $\varepsilon = 1$.
+        Then $\exists\; N \in \P$ such that $\abs{a_{n} - L} < \varepsilon$ for all $n \geq N$.
+        \begin{align*}
+            \abs{a_{2N} - L} < 1 \quad\implies\quad \abs{L - 1} &< 1 \\
+            \abs{a_{2N + 1} - L} < 1 \quad\implies\quad \abs{L + 1} &< 1
+        \end{align*}
+        Thus,
+        \begin{align*}
+            \abs{1 - L + L + 1} &\leq \abs{L - 1} + \abs{L + 1} \\
+            2 &< 2
+        \end{align*}
+        Contradiction.
+    \end{proof}
+\end{examples}
 
 \begin{defn} \label{defn:sequence:bounded}
     A sequence $\set{a_{n}}_{n \in \N}$ is said to be \emph{bounded} if $\exists\; M > 0$ such that $\abs{a_{n}} < M \,\forall\; n \in \N$.
 \end{defn}
 
-\begin{thm} \label{thm:sequence:convergent=>bounded}
+\begin{thm} \label{thm:sequence:bounded_if_convergent}
     Every convergent sequence is bounded.
 \end{thm}
 \begin{proof}
@@ -47,7 +46,7 @@
 \end{defn}
 
 \begin{thm}[monotone convergence theorem] \label{thm:sequence:MCT}
-    A monotone sequence is convergent iff it is bounded.
+    A monotone sequence is convergent if and only if it is bounded.
 \end{thm}
 \begin{proof}
     Assume $\set{a_{n}}$ is increasing and $\exists\; M > 0$ such that $\abs{a_{n}} < M \,\forall\; n \in \N$.
@@ -63,7 +62,7 @@
     Since $\set{a_{n}}$ is monotonically increasing, $b + \varepsilon > a_{n} \geq a_{N} > b - \varepsilon \;\forall\; n \geq N$.
     $\abs{a_{n} - b} < \varepsilon \;\forall\; n \geq N$. Thus the given sequence is convergent, with limit $b$.
 
-    A monotone sequence which is unbouded is divergent, as all convergent sequences are bounded (\cref{thm:sequence:convergent=>bounded}).
+    A monotone sequence which is unbouded is divergent, as all convergent sequences are bounded (\cref{thm:sequence:bounded_if_convergent}).
 \end{proof}
 
 \begin{rem}[Warning!]

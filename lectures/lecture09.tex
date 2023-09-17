@@ -37,45 +37,43 @@
     We say that $\sum a_{n}$ is \emph{convergent} with sum $s$ if $\lim_{n \to \infty} s_{n} = s$. Otherwise, we say that $\sum a_{n}$ is divergent.
 \end{defn}
 
-\begin{example} \leavevmode
-    \begin{enumerate}[label=(\alph*)]
-        \item (Harmonic series) $\sum_{n=1}^{\infty} \frac{1}{n}$ is divergent.
-        \begin{proof}
-            $\set{s_{n}}$ is a monotonically increasing sequence.
-            \begin{align*}
-                s_{1} &= 1 \\
-                s_{2} &= 1 + \frac{1}{2} \\
-                s_{4} &= 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} > 1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{4} \\
-                s_{8} &= 1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{8} \\
-                   &> 1 + \frac{1}{2} + 2 \cdot \frac{1}{4} + 4 \cdot \frac{1}{8} \\
-                s_{2^{k}} &= 1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{2^{k}} \\
-                   &> 1 + \frac{1}{2} + 2 \cdot \frac{1}{4} + \dots + 2^{k-1} \cdot \frac{1}{2^{k}} \\
-                   &= 1 + \frac{k}{2}
-            \end{align*}
-            Thus, given any $R \in \R, \;\exists\; k \in \N$ such that $s_{2^{k}} > R$. \\
-            $\implies \set{s_{n}}$ is divergent as it is unbounded (\cref{thm:sequence:convergent=>bounded}).
-        \end{proof}
-        \item $\sum_{n=1}^{\infty} \frac{1}{n^{2}}$ is convergent.
-        \begin{proof}
-            \begin{align*}
-                s_{1} &= 1 \\
-                s_{n} &= 1 + \sum_{k=2}^{n} \frac{1}{k^{2}} \\
-                &< 1 + \sum_{k=2}^{n} \frac{1}{k(k-1)} \\
-                &= 1 + \sum_{k=2}^{n} \paren{\frac{1}{k-1} - \frac{1}{k}} \\
-                &= 1 + 1 - \frac{1}{n} \\
-                &< 2 \;\forall\; n \in \N
-            \end{align*}
-            So $\set{s_{n}}$ is a monotonically increasing sequence that is bounded above. \\
-            $\implies \set{s_{n}}$ is convergent.
-        \end{proof}
-    \end{enumerate}
-\end{example}
+\begin{examples}
+    \item (Harmonic series) $\sum_{n=1}^{\infty} \frac{1}{n}$ is divergent.
+    \begin{proof}
+        $\set{s_{n}}$ is a monotonically increasing sequence.
+        \begin{align*}
+            s_{1} &= 1 \\
+            s_{2} &= 1 + \frac{1}{2} \\
+            s_{4} &= 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} > 1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{4} \\
+            s_{8} &= 1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{8} \\
+               &> 1 + \frac{1}{2} + 2 \cdot \frac{1}{4} + 4 \cdot \frac{1}{8} \\
+            s_{2^{k}} &= 1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{2^{k}} \\
+               &> 1 + \frac{1}{2} + 2 \cdot \frac{1}{4} + \dots + 2^{k-1} \cdot \frac{1}{2^{k}} \\
+               &= 1 + \frac{k}{2}
+        \end{align*}
+        Thus, given any $R \in \R, \;\exists\; k \in \N$ such that $s_{2^{k}} > R$. \\
+        $\implies \set{s_{n}}$ is divergent as it is unbounded (\cref{thm:sequence:bounded_if_convergent}).
+    \end{proof}
+    \item $\sum_{n=1}^{\infty} \frac{1}{n^{2}}$ is convergent.
+    \begin{proof}
+        \begin{align*}
+            s_{1} &= 1 \\
+            s_{n} &= 1 + \sum_{k=2}^{n} \frac{1}{k^{2}} \\
+            &< 1 + \sum_{k=2}^{n} \frac{1}{k(k-1)} \\
+            &= 1 + \sum_{k=2}^{n} \paren{\frac{1}{k-1} - \frac{1}{k}} \\
+            &= 1 + 1 - \frac{1}{n} \\
+            &< 2 \;\forall\; n \in \N
+        \end{align*}
+        So $\set{s_{n}}$ is a monotonically increasing sequence that is bounded above. \\
+        $\implies \set{s_{n}}$ is convergent.
+    \end{proof}
+\end{examples}
 
 \begin{rem}
     (Telescoping sum)
 \end{rem}
 
-\begin{thm} \label{thm:series:convergent=>limit=0}
+\begin{thm} \label{thm:series:vanishing_test}
     Suppose $\sum a_{n}$ is convergent. Then \[
         \lim_{n \to \infty} a_{n} = 0
     \]

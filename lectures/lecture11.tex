@@ -53,7 +53,7 @@
 \begin{defn} \label{defn:series:absolute_convergence}
     A series $\sum a_{n}$ of real numbers is said to \emph{converge absolutely} if $\sum \abs{a_{n}}$ converges. A series $\sum a_{n}$ of real numbers is said to \emph{converge conditionally} if $\sum \abs{a_{n}}$ diverges but $\sum a_{n}$ converges.
 \end{defn}
-\begin{thm} \label{thm:series:absolute=>conditional}
+\begin{thm} \label{thm:series:conditional_if_absolute}
     If $\sum a_{n}$ converges absolutely, it must converge. Moreover, $\abs{\sum a_{n}} \leq \sum \abs{a_{n}}$.
 \end{thm}
 \begin{proof}
@@ -128,7 +128,7 @@
     \end{paracol}
     Thus $\set{s_{2k}}$ and $\set{s_{2k + 1}}$ are bounded and monotone, and convergent by \nameref{thm:sequence:MCT}.
 
-    Since $\set{s_{2k + 1}}$ converges, we have by \cref{thm:series:convergent=>limit=0} that $a_{2k + 1} \to 0$.
+    Since $\set{s_{2k + 1}}$ converges, we have by \cref{thm:series:vanishing_test} that $a_{2k + 1} \to 0$.
     Since $s_{2k + 1} = s_{2k} - a_{2k + 1}$, by limit laws we have $\lim s_{2k} = \lim s_{2k + 1}$.
 
     Thus the sequence converges.

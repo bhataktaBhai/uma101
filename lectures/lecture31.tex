@@ -1,5 +1,5 @@
 \lecture{31}{fri 6 jan '23}{}
-\begin{thm}[Integral Triangle Inequality] \label{thm:integral triangle}
+\begin{thm}[Integral Triangle Inequality] \label{thm:integration:triangle}
     Let $f : [a, b] \to \R$ be Riemann integrable.
     Then $\abs{f} : x \in [a, b] \mapsto \abs{f(x)} \in \R$ is Riemann integrable and \[
         \abs{\int_{a}^{b} f(x) \dd x} \leq \int_{a}^{b} \abs{f(x)} \dd x.
@@ -38,7 +38,7 @@
     \end{enumerate}
 \end{example}
 
-\begin{thm}[The Second Fundamental Theorem of Calculus] \label{thm:second ftoc}
+\begin{thm}[The Second Fundamental Theorem of Calculus] \label{thm:integration:IIFTOC} ~\\
     Let $f : (c, d) \to \R$ be a function such that $f_{[a, b]}$ ($[a, b] \subset (c, d)$) is Riemann integrable. Let $F$ be a primitive of $f$ on $(c, d)$. Then \[
         \int_{a}^{b} f(x) \dd x = F(b) - F(a).
     \]

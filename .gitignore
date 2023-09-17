@@ -6,5 +6,6 @@
 *.synctex.gz
 *.aux
 *.dvi
-*.pdf
+# *.pdf
 *.synctex.gz*
+*.DS_Store

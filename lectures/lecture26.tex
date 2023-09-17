@@ -17,14 +17,16 @@ We always integrate functions on closed intervals $[a, b]$.
     
 \end{defn}
 
-\begin{defn}[Common refinement] \label{defn:common refinement}
+\begin{defn}[Common refinement] \label{defn:common refinement} ~\\
     Given two partitions $P$ and $Q$ of $[a, b]$, the \emph{common refinement} of $P$ and $Q$ is the smallest refinement of both $P$ and $Q$ simultaneously. Thus, \[
         R = P \cup Q
     \] is the common refinement of $P$ and $Q$.
 \end{defn}
 
 \begin{defn}[Step function] \label{defn:step fn}
-    Given an interval $[a, b]$, a function $S : [a, b] \to \R$ is called a \emph{step function} is there is some partition $P = \set{x_{0} < x_{1} < \dots < x_{n}}$ of $[a, b]$ such that for each $j \in [1 .. n], \;\exists\; s_{j} \in \R$ such that \[
+    Given an interval $[a, b] \subseteq \R$, a function $S : [a, b] \to \R$ is called a \emph{step function} is there is some partition \[
+        P = \set{x_{0} < x_{1} < \dots < x_{n}}
+    \] of $[a, b]$ such that for each $j \in [1 .. n], \;\exists\; s_{j} \in \R$ such that \[
         s(x) = s_{j} \quad \;\forall\; x \in (x_{j-1}, x_{j}).
     \]
 \end{defn}
@@ -60,12 +62,7 @@ We always integrate functions on closed intervals $[a, b]$.
 \begin{defn}[Step Integration] \label{defn:step int}
     Given a step function $s : [a, b] \to \R$ corresponding to $P = \set{x_{0} < x_{1} < \dots < x_{n}}$, define \[
         \int_{a}^{b} s(x) \dd x = \sum_{j=1}^{n} s_{j} (x_{j} - x_{j-1}).
-\] We also define \[
-    \int_{b}^{a} s(x) \dd x = - \int_{a}^{b} s(x) \dd x.
-\]
+    \] We also define \[
+        \int_{b}^{a} s(x) \dd x = - \int_{a}^{b} s(x) \dd x.
+    \]
 \end{defn}
-
-
-
-
-

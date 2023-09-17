@@ -19,11 +19,11 @@ This $\N$ is the minimal inductive set $\omega$.
         \item\label{defn:N:addition:recursion} $\psum{m}{n^{+}} = (\psum{m}{n})^{+}$.
     \end{enumerate}
     Define \[
-        m + n := \psum{m}{n}
+        m + n := \psum{n}{m}
     \]
 \end{defn}
 
-\begin{prop} \label{thm:N:2+3=5}
+\begin{prop}
     $2 + 3 = 5$
 \end{prop}
 \begin{proof}
@@ -78,9 +78,9 @@ This $\N$ is the minimal inductive set $\omega$.
         \item\label{thm:N:distributivity} (distributivity) \[
             m \cdot (n + k) = (m \cdot n) + (m \cdot k)
         \] for all natural numbers $m, n, k$.
-        \item\label{thm:N:m+n=0=>m=n=0} $m + n = 0 \iff m = n = 0$ for any $m, n \in \N$
+        \item\label{thm:N:zero_sum} $m + n = 0 \iff m = n = 0$ for any $m, n \in \N$
 
-        \item\label{thm:N:m.n=0=>m=0|n=0} $m \cdot n = 0 \iff m = 0$ or $n = 0$ for any $m, n \in \N$
+        \item\label{thm:N:zero_product} $m \cdot n = 0 \iff m = 0$ or $n = 0$ for any $m, n \in \N$
 
         \item\label{thm:N:cancellation} (cancellation) $m + k = n + k \iff m = n$ for any $m, n, k \in \N$ and if $m \cdot k = n \cdot k$ and $k \neq 0$, then $m = n$.
     \end{enumerate}
@@ -97,7 +97,7 @@ This $\N$ is the minimal inductive set $\omega$.
 \end{proof}
 
 \subsubsection{Tao} \vskip 0.5cm
-\begin{lem} \label{thm:N:Tao:n+0=n}
+\begin{lem} \label{thm:N:Tao:zero}
 For any natural number $n$, $n+0=n$.
 \end{lem}
 
@@ -105,7 +105,7 @@ For any natural number $n$, $n+0=n$.
     Let $P(n)$ be the property that $n+0=n$. From \labelcref{defn:N:addition:zero}, we have $0+0=0$, \emph{i.e.}, $P(0)$ is true. Suppose $P(n)$ is true for some natural number $n$. Then $n_{++}+0=(n+0)_{++}=n_{++}$, \emph{i.e.}, $P(n_{++})$ is true. By P5, we have $P(n)$ true for every natural number $n$.
 \end{proof}
 
-\begin{lem} \label{thm:N:Tao:n+S(m)=S(n+m)}
+\begin{lem} \label{thm:N:Tao:recursion}
 For any natural numbers $n$ and $m$, $n+m_{++}=(n+m)_{++}$
 \end{lem}
 
@@ -124,12 +124,12 @@ For any natural numbers $n$ and $m$, $n+m_{++}=(n+m)_{++}$
     Therefore $P(n_{++}, m)$ holds. Since we made no assumptions on m, $P(n, m)$ holds for all $n, m$ by \labelcref{defn:peano:induction}
 \end{proof}
 
-\begin{cor} \label{thm:N:Tao:S(n)=n+1}
+\begin{cor}
     $n_{++} = n + 1$.
 \end{cor}
 
 \begin{proof}
-    From \cref{thm:N:Tao:n+0=n,thm:N:Tao:n+S(m)=S(n+m)}, $n + 1 = n + 0_{++} = (n + 0)_{++} = n_{++}$.
+    From \cref{thm:N:Tao:zero,thm:N:Tao:recursion}, $n + 1 = n + 0_{++} = (n + 0)_{++} = n_{++}$.
 \end{proof}
 
 \begin{prop}[addition is commutative] \label{thm:N:Tao:addition_is_commutative}
@@ -141,7 +141,7 @@ For any natural numbers $n$ and $m$, $n + m = m + n$
     \begin{align*}
         n_{++} + m &= (n + m)_{++} \tag{\labelcref{defn:N:addition:recursion}} \\
                    &= (m + n)_{++} \tag{induction hypothesis} \\
-                   &= m + n_{++}   \tag{\cref{thm:N:Tao:n+S(m)=S(n+m)}}
+                   &= m + n_{++}   \tag{\cref{thm:N:Tao:recursion}}
     \end{align*}
     Thus $P(n, m) \implies P(n_{++}, m)$ and we know $P(0, m)$ to be true by \labelcref{defn:N:addition:zero}.
 

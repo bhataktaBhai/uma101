@@ -18,8 +18,23 @@
     \end{enumerate}
 \end{problem}
 
-\begin{proof}
+\begin{proof} \leavevmode
     \begin{enumerate}[label=(\alph*)]
+        \item
+        \begin{align*}
+            \frac{4n^{2} - 1 + 3^{n-1}}{3^{n} (2n + 1)(2n - 1)} &= \frac{1}{3^{n}} + \frac{1}{3} \cdot \frac{1}{(2n + 1)(2n - 1)} \\
+            &= \frac{1}{3^{n}} + \frac{1}{6} \cdot \paren{\frac{1}{2n-1} - \frac{1}{2n+1}} \\
+            \\
+            \sum_{n=1}^{\infty} \frac{1}{3^{n}} = \frac{1}{3} \sum_{n=0}^{\infty} \frac{1}{3^{n}} &= \frac{1 / 3}{1-\frac{1}{3}} = \frac{1}{2} \\
+            \sum_{n=1}^{\infty} \frac{1}{2n-1} - \frac{1}{2n+1} &= \frac{1}{2n-1} - \frac{1}{2(n+1) - 1} \\
+            &= \frac{1}{1} - \frac{1}{3} + \frac{1}{3} - \frac{1}{5} + \frac{1}{5} - \dots \\
+            &= 1
+        \end{align*}
+        Thus by the limit laws,
+        \begin{align*}
+            \sum_{n=1}^{\infty} \frac{4n^{2} - 1 + 3^{n-1}}{3^{n} (2n + 1)(2n - 1)} &= \frac{1}{2} + \frac{1}{6} \cdot 1 \\
+            &= \frac{2}{3}
+        \end{align*}
         \item For $r > 1$: By the Archimedean property, there exists $n_{0} \in \P$ such that $n_{0} \varepsilon > r - 1$ for all $\varepsilon > 0$.
         Thus for all $n \geq n_{0}$, $n \varepsilon > r - 1 \implies r < 1 + n \varepsilon \leq (1 + \varepsilon)^{n} \implies r^{1/n} < 1 + \varepsilon$.
         $r > 1 \implies r^{1/n} > 1 > 1 - \varepsilon$.
@@ -60,7 +75,7 @@
     \end{enumerate}
 \end{problem}
 
-\begin{proof}
+\begin{proof} \leavevmode
     \begin{enumerate}[label=(\alph*)]
         \item Since $\sum_{n=1}^{\infty} a_{n}$ converges, $\lim\limits_{n \to \infty} a_{n} = 0$. Thus there exists $N \in \P$ such that $a_{n} < 1 \;\forall\; n \geq N \implies a_{n}^{2} < a_{n} \;\forall\; n \geq N$. By the comparison test, $\sum_{n=1}^{\infty} a_{n}^{2}$ converges.
 
@@ -123,10 +138,12 @@
         \end{align*}
         Let $s_{n}$ and $t_{n}$ be the sops of $\set{\frac{1}{n+2} - \frac{1}{n+3}}$ and $\set{\frac{1}{n+1} - \frac{1}{n+2}}$.
         \begin{align*}
-            s_{n} &= \frac{1}{3} - \frac{1}{4} + \frac{1}{4} - \frac{1}{5} + \dots + \frac{1}{n} - \frac{1}{n+1} + \frac{1}{n+1} - \frac{1}{n+2} \\
+            s_{n} &= \frac{1}{3} - \frac{1}{4} + \frac{1}{4} - \frac{1}{5} + \dots \\
+                  &\quad+ \frac{1}{n} - \frac{1}{n+1} + \frac{1}{n+1} - \frac{1}{n+2} \\
             s_{n} &= \frac{1}{3} - \frac{1}{n+2} \\
             \lim_{n \to \infty} s_{n} &= \frac{1}{3} \\
-            t_{n} &= \frac{1}{2} - \frac{1}{3} + \frac{1}{3} -\frac{1}{4} + \dots + \frac{1}{n + 1} - \frac{1}{n + 2} + \frac{1}{n + 2} - \frac{1}{n + 3}\\
+            t_{n} &= \frac{1}{2} - \frac{1}{3} + \frac{1}{3} -\frac{1}{4} + \dots \\
+                  &\quad+ \frac{1}{n + 1} - \frac{1}{n + 2} + \frac{1}{n + 2} - \frac{1}{n + 3}\\
             t_{n} &= \frac{1}{2} - \frac{1}{n + 3} \\
             \lim_{n \to \infty} t_{n} &= \frac{1}{2} \\
             \\

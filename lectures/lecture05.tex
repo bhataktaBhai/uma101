@@ -34,14 +34,14 @@ We cannot solve
     \end{enumerate}
 \end{defn}
 \begin{rem}
-    We are tempted to call $y$ in \labelcref{defn:field:negative} ``-x'' and $z$ in \labelcref{defn:field:reciprocal} ``$\frac{1}{x}$'' but $y, z$ haven't been proven to be unique yet.
+    We are tempted to call $y$ in \labelcref{defn:field:negative} ``$-x$'' and $z$ in \labelcref{defn:field:reciprocal} ``$\frac{1}{x}$'' but $y, z$ haven't been proven to be unique yet.
     \textcolor{exercise}{Prove this}.
     \textcolor{solved}{Proved as \cref{thm:field:unique_inverses}}.
 
     Once we have proven this, we can also define $a - b := a + (-b)$ and $a/b = a \cdot \frac{1}{b}$.
 \end{rem}
 
-\begin{thm} \label{thm:field:0x=0}
+\begin{thm} \label{thm:field:zero_product}
     $(F, +, \cdot)$ is a field. Then for all $x$, \[
         0 \cdot x = x \cdot 0 = 0
     \]
@@ -81,7 +81,7 @@ We cannot solve
     $\N$ with $a < b$ iff $b = a + k$ for some non-zero $k$.
 \end{example}
 
-\begin{defn} \label{defn:ordered field}
+\begin{defn} \label{defn:ordered_field}
     An \emph{ordered field} is a set that admits two operations $+$ and $\cdot$ and relation $<$ so that $(F, +, \cdot)$ is a field and $(F, <)$ is an ordered set and:
     \begin{enumerate}[label=(O\arabic*)]
         \setcounter{enumi}{\value{temp}}
@@ -109,7 +109,7 @@ We cannot solve
     $aa^{-1} = 1$, so the multiplicative inverse of $a^{-1}$ is $a$.
 \end{proof}
 
-\begin{lem} \label{thm:field:(-a)b=-(ab)}
+\begin{lem} \label{thm:field:negative_product}
     For any field $(F, +, \cdot)$, $(-a)b = -(ab)$ and $(-a)(-b) = ab$.
 \end{lem}
 \begin{proof}

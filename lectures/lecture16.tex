@@ -18,7 +18,7 @@
     By the sequential character of continuity, \[
         \lim_{n \to \infty} f(x_{n}) = f(c)
     \] But $f(x_{n}) < y \;\forall\; n \in \N$.
-    By \cref{lem:seq:comparison}, $\lim_{n \to \infty} f(x_{n}) \leq y \implies f(c) \leq y$.
+    By \cref{thm:sequence:comparison}, $\lim_{n \to \infty} f(x_{n}) \leq y \implies f(c) \leq y$.
 
     Similarly, defining $x_{n} = c + \frac{1}{n}$ yields $f(c) \geq y$. And thus we have \[
         f(c) = y. \qedhere
@@ -47,7 +47,7 @@
     $f$ is said to be \emph{bounded} if $\exists\; M > 0$ such that $\abs{f(x)} < M \;\forall\; x \in S$.
 \end{defn}
 
-\begin{thm}[Continuous functions on compact intervals are bounded] \label{thm:cont:compact->bounded}
+\begin{thm}[Continuous functions on compact intervals are bounded] \label{thm:cont:compact->bounded} ~\\
     Let $f : [a, b] \to \R$ be continuous on $[a, b]$. Then $f$ is a bounded function.
 \end{thm}
 \begin{proof}[Proof by contradiction \textcolor{self_proof}{(morphed)}]
@@ -74,5 +74,6 @@
     Choose $N$ such that $\frac{b - a}{2^{n}} = \norm{I_{n}} < \delta \;\forall\; n \geq N$.
 
     Letting $n_{0} = \max \set{k, N}$, we get $a_{\infty} - \delta < a_{n_{0}} \leq b_{n_{0}} < a_{\infty} + \delta$.
-    Thus $[a_{n_{0}}, b_{n_{0}}] \subseteq N_{\delta}(a_{\infty}) \cap [a, b] \implies I_{n_{0}}$ is bounded, a contradiction.
+
+    Thus $[a_{n_{0}}, b_{n_{0}}] \subseteq N_{\delta}(a_{\infty}) \cap [a, b]$ and so $I_{n_{0}}$ is bounded, a contradiction.
 \end{proof}

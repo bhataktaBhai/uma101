@@ -4,7 +4,7 @@ Assume WLOG that $f$ attains a local maximum at $c$, and is differentiable at $c
 Thus there exists a $\delta > 0$ such that $\abs{x - c} < \delta \implies f(x) < f(c)$.
 Let $\set{a_{n}}_{n \geq N}$ be a sequence, $a_{n} = c + \frac{1}{n}$, where $N > \frac{1}{\delta}$. \[
     \frac{f(a_{n}) - f(c)}{a_{n} - c} = n \cdot (f(a_{n}) - f(c)) < 0
-\] Thus by \nameref{thm:seq:comparison}, $\lim\limits_{n \to \infty} \dfrac{f(a_{n}) - f(c)}{a_{n} - c} \leq 0$.
+\] Thus by \cref{thm:sequence:comparison}, $\lim\limits_{n \to \infty} \dfrac{f(a_{n}) - f(c)}{a_{n} - c} \leq 0$.
 By the sequential characterisation of limits, this limit is equal to $\lim\limits_{x \to c} \dfrac{f(x) - f(c)}{x - c} = f'(c)$.
 
 Similarly, considering $b_{n} = c - \frac{1}{n}$, we get $f'(c) \geq 0$.

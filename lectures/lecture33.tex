@@ -17,7 +17,7 @@ Heuristics: Suppose $z = ``\log_{b}(x)''$ and $w = ``\log_{b}(y)''$, \textit{i.e
 We will call this function $l$ for the moment.
 Suppose $0 \in \dom(\log)$. Then taking $x = 0$ in the above equation, we get \[
     l(0) + l(y) = l(0y) = l(0) \;\forall\; y \in \dom(\log).
-\] Thus $l(y) = 0$ for all $y \in \dom(\log)$. \\
+\] Thus $l(y) = 0$ for all $y \in \dom(\log)$.
 
 Thus we will exclude $0$ from the domain. Let's calculate $l(1)$. \[
     l(1) + l(1) = l(1) = 0.
@@ -45,7 +45,7 @@ By the second fundamental theorem of calculus, \[
     \]
 \end{defn}
 
-\begin{thm}[] \label{thm:}
+\begin{thm}[]
     The function $\ln : \R^{+} \to \R$ has the following properties:
     \begin{enumerate}[label=(\alph*)]
         \item $\ln(1) = 0$.
@@ -86,18 +86,14 @@ By the second fundamental theorem of calculus, \[
 
 Hard exercise: Prove that this definition of $e$ is identical to the infinite series definiton.
 
-\begin{thm}[] \label{thm:}
+\begin{thm}[]
     $\exp : \R \to \R^{+}$ has the following properties:
     \begin{enumerate}[label=(\alph*)]
         \item $\exp(0) = 1$.
         \item $\exp(x + y) = \exp(x) \exp(y)$.
         \item $\exp$ is continuous and strictly increasing.
-        \item $\exp$ is differentiable and \[
-            \exp'(x) = \exp(x) \;\forall\; x \in \R.
-        \]
-        \item \[
-            \int \exp(x) \dd x = \exp(x) + C.
-        \]
+        \item $\exp$ is differentiable and $\exp'(x) = \exp(x) \;\forall\; x \in \R$.
+        \item $\int \exp(x) \dd x = \exp(x) + C.$
         \item $\exp$ is bijective.
         \item $\exp(r) = e^{r} \;\forall\; r \in \Q$.
     \end{enumerate}

@@ -24,8 +24,9 @@
     \end{align}
 \end{thm}
 \begin{proof}
-    Scrapwork: $\abs{f(x) g(x) - ab} = \abs{f(x)g(x) - f(x) b + f(x) b - ab} \leq \abs{f(x)} \abs{g(x) - b} + \abs{b} \abs{f(x) - a}$.
-
+    Scrapwork: \[
+        \abs{f(x) g(x) - ab} = \abs{f(x)g(x) - f(x) b + f(x) b - ab} \leq \abs{f(x)} \abs{g(x) - b} + \abs{b} \abs{f(x) - a}.
+    \]
     Let $\varepsilon > 0$. Since $\lim_{x \to p} f(x) = a$, corresponding to $\varepsilon_{1} = \frac{\varepsilon}{2(\abs{ b } + 1)} \;\exists\; \delta_{1} > 0 $ such that if $0 < \abs{ x - p } < \delta_{1}$, we have $\abs{ f(x) - a } < \frac{\varepsilon}{2(\abs{ b } + 1)}$. \\
     Also, \begin{align*}
         \abs{ f(x) } - \abs{ a} &\leq  \abs{ f(x) - a } \\

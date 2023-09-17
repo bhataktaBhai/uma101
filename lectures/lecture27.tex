@@ -8,7 +8,7 @@
     \]
 \end{rem}
 
-\begin{thm}[Properties] \label{thm:int properties} \hfill
+\begin{thm}[Properties] \label{thm:integration:properties} \leavevmode
     \begin{enumerate}[label=(\alph*)]
         \item $\int_{a}^{b} (c_{1}s(x) + c_{2}t(x)) \dd x = c_{1} \int_{a}^{b} s(x) \dd x + c_{2} \int_{a}^{b} t(x) \dd x$.
         \item If $s \leq t$ on $[a, b]$, then $\int_{a}^{b} s(x) \dd x \leq \int_{a}^{b} t(x) \dd x$.
@@ -16,7 +16,7 @@
     \end{enumerate}
 \end{thm}
 
-\begin{defn}[] \label{defn:}
+\begin{defn}[]
     Let $f : [a, b] \to \R$ be a bounded function. Let \[
         S_{f} = \set{s : [a, b] \to \R : s \text{ is a step function and } s \leq f \text{ on } [a, b]}
     \] and \[
@@ -24,7 +24,7 @@
     \]
 \end{defn}
 
-\begin{lem}[] \label{lem:}
+\begin{lem}[]
     Let $f : [a, b] \to \R$ be bounded, \textit{i.e.}, $\exists\; M > 0$ such that \[
         -M \leq f(x) \leq M \;\forall\; x \in [a, b].
     \] Then $\sup s_{f}$ and $\inf t_{f}$ exist and \[
@@ -54,7 +54,7 @@
     \end{align*}
 \end{proof}
 
-\begin{defn}[] \label{defn:}
+\begin{defn}[] \label{defn:integration:Riemann}
     Given a bounded function $f : [a, b] \to \R$, its \emph{lower integral} is \[
         \ubar{I}(f) = \sup \set{\int_{a}^{b} s(x) \dd x : s \in S_{f}}
     \] and its \emph{upper integral} is \[

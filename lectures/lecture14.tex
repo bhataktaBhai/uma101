@@ -31,20 +31,23 @@
             \abs{(f \pm g)(x) - (f \pm g)(p)} \leq \abs{f(x) - f(p)} + \abs{g(x) - g(p)} < \varepsilon.
         \] 
         \item[$(fg)$] there exist $\delta_{f}, \delta_{g}$ such that for all $\abs{x - p} < \min \set{\delta_{f}, \delta_{g}} \;\land\; x \in S$ we have \[
-            \abs{f(x) - f(p)}, \abs{g(x) - g(p)} < \min\set{\frac{\varepsilon}{3g(p)}, \frac{\varepsilon}{3f(p)}, \sqrt{\frac{\varepsilon}{3}}}
+            \abs{f(x) - f(p)}, \abs{g(x) - g(p)} < \min\set{\frac{\varepsilon}{3\abs{g(p)}}, \frac{\varepsilon}{3\abs{f(p)}}, \sqrt{\frac{\varepsilon}{3}}}
         \]
         (handle $f(p) = 0$ and $g(p) = 0$ separately). Then we have
         \begin{align*}
-            \abs{fg (x) - fg (p)} &= \abs{(f(p) + f(x) - f(p))(g(p) + g(x) - g(p)) - fg(p)} \\
-            &= \abs{f(p) (g(x) - g(p)) + g(p) (f(x) - f(p)) + (f(x) - f(p))(g(x) - g(p))} \\
-            &\leq \abs{f(p)} \abs{g(x) - g(p)} + \abs{g(p)} \abs{f(x) - f(p)} + \abs{f(x) - f(p)} \abs{g(x) - g(p)} \\
+            \abs{fg (x) - fg (p)} &= \abs{(fp + fx - fp)(gp + gx - gp) - fg(p)} \\
+            &= \abs{fp (gx - gp) + gp (fx - fp) + (fx - fp)(gx - gp)} \\
+            &\leq \abs{fp} \abs{gx - gp} + \abs{gp} \abs{fx - fp} + \abs{fx - fp} \abs{gx - gp} \\
             &< \frac{\varepsilon}{3} + \frac{\varepsilon}{3} + \frac{\varepsilon}{3} \\
             &= \varepsilon.
         \end{align*}
 
-        \item[$(f/g)$] Let $h = \frac{1}{g}$ wherever $g$ is non-zero. Since $g$ is continuous and $g(p) \neq 0$, it is non-zero in some neighbourhood $\delta_{2}$ around it.
+        \item[$(f/g)$] Let $h = \frac{1}{g}$ wherever $g$ is non-zero.
+            Since $g$ is continuous and $g(p) \neq 0$, it is non-zero in some
+            neighbourhood $\delta_{2}$ around it.
 
-        Since $g$ is continuous, $\exists\; \delta_{0}$ such that for all $\abs{x - p} < \delta_{0} \;\land\; x \in S$, we have \[
+        Since $g$ is continuous, $\exists\; \delta_{0}$ such that for all
+        $\abs{x - p} < \delta_{0} \;\land\; x \in S$, we have \[
             \abs{g(x) - g(p)} < \frac{1}{2} \abs{g(p)} \implies \abs{g(x)} > \frac{1}{2} \abs{g(p)}
         \] For all $\varepsilon > 0$ there exists $\delta_{1} > 0$ such that for all $\abs{x - p} < \delta_{1} \;\land\; x \in S$, we have \[
             \abs{g(x) - g(p)} < \frac{1}{2} \abs{g(p)}^{2} \varepsilon.
@@ -55,6 +58,6 @@
             &< \frac{1}{2} \abs{g(p)}^{2} \varepsilon \cdot \frac{1}{\frac{1}{2} \abs{g(p)}^{2}} \\
             &= \varepsilon.
         \end{align*}
-        Thus $\frac{1}{h}$ is continuous at $p$ and so is $f \cdot h = f / g$.
+        Thus $\frac{1}{h}$ is continuous at $p$ and so is $f \cdot h = f / g$. \qedhere
     \end{enumerate}
 \end{proof}

@@ -127,7 +127,10 @@
 \theoremstyle{remark}
 \newtheorem*{rem}{Remarks}
 \newtheorem*{example}{Example}
+\newtheorem*{examplex}{Examples}
 
+\newenvironment{examples}
+{\begin{examplex}\leavevmode\begin{itemize}}{\end{itemize}\end{examplex}}
 % <cref>
 \crefname{thm}{theorem}{theorems}
 \crefname{prop}{proposition}{propositions}
@@ -159,13 +162,13 @@
         \def\@lecture{Lecture #1: #3}%
     }%
     \subsection*{\@lecture}
-    \marginpar{\small\textsf{\vbox{#2}}}
+    \marginpar{\raggedright\small\textsf{#2}}
     \vskip 6pt
 }
 \newcommand*{\assignment}[2]{%
     \stepcounter{assignment}%
-    \subsection*{Assignment #1}
-    \marginpar{\small\vbox{due #2}}
+    \subsection{Assignment #1}
+    \marginpar{\raggedright\small{due #2}}
     \vskip 6pt
 }
 \makeatletter
@@ -181,15 +184,3 @@
 
 \newcommand{\psum}[2]{\ensuremath{\mathrm{sum}_{#1}({#2})}}
 \newcommand{\pprod}[2]{\ensuremath{\mathrm{prod}_{#1}({#2})}}
-
-\newlist{examples}{enumerate}{1}
-\setlist[examples]{label*=(\alph*)~,ref=(\alph*)}
-\makeatletter
-\newcommand\myitem[1][]{%
-  \if\relax\detokenize{#1}\relax
-    \item\relax
-  \else
-    \protected@edef\@currentlabel{#1}%
-    \item[(#1)~]
-  \fi}
-\makeatother
